@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ButtonIcon from './ButtonIcon';
-
-import DarkModeToggle from './DarkModeToggle';
+import { FiHeart, FiSearch, FiShoppingCart } from 'react-icons/fi';
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -17,14 +16,22 @@ function Headermenu() {
   return (
     <StyledHeaderMenu>
       <li>
-        <ButtonIcon onClick={() => navigate('/account')}>
+        <ButtonIcon onClick={() => navigate('/')}>
           <HiOutlineUser />
         </ButtonIcon>
+
+        <ButtonIcon onClick={() => navigate('/')}>
+          <FiShoppingCart />
+        </ButtonIcon>
+
+        <ButtonIcon onClick={() => navigate('/')}>
+          <FiHeart />
+        </ButtonIcon>
+
+        <ButtonIcon onClick={() => navigate('/')}>
+          <FiSearch />
+        </ButtonIcon>
       </li>
-      <li>
-        <DarkModeToggle />
-      </li>
-      <li></li>
     </StyledHeaderMenu>
   );
 }

@@ -1,10 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import Header from '../ui/Header';
+
+const StyledHeader = styled.header`
+  height: 100vh;
+  color: var(--color-grey-50);
+`;
 
 function homepage() {
   return (
     <>
-      <div>Hello World</div>
-      <Outlet />
+      <StyledHeader>
+        <Header />
+      </StyledHeader>
     </>
   );
 }

@@ -1,22 +1,42 @@
 import styled from 'styled-components';
+import HeaderNav from './HeaderNav';
 import HeaderMenu from './HeaderMenu';
+import HeaderMain from './HeaderMain';
+import Logo from './Logo';
+import Row from './Row';
+
+const GradientWrapper = styled.div`
+  background: radial-gradient(
+      circle at center top,
+      var(--color-brand-500),
+      var(--color-brand-900) 70%
+    ),
+    linear-gradient(to bottom, var(--color-brand-900), var(--color-brand-900));
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+`;
 
 const StyledHeader = styled.header`
-  background-color: var(--color-grey-0);
   padding: 1.2rem 4.8rem;
-  border-bottom: 1px solid var(--color-grey-100);
 
-  display: flex;
-  gap: 2.4rem;
-  align-items: center;
-  justify-content: flex-end;
+  width: 120rem;
 `;
 
 function Header() {
   return (
-    <StyledHeader>
-      <HeaderMenu />
-    </StyledHeader>
+    <GradientWrapper>
+      <StyledHeader>
+        <Row type="vertical">
+          <Row type="horizontal">
+            <Logo />
+            <HeaderNav />
+            <HeaderMenu />
+          </Row>
+          <HeaderMain />
+        </Row>
+      </StyledHeader>
+    </GradientWrapper>
   );
 }
 

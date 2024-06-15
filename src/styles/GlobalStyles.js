@@ -43,36 +43,38 @@ const GlobalStyles = createGlobalStyle`
 
  /* Purple Color */
 
-   --color-brand-50: #f6f2ff,
-   --color-brand-100: #eee6ff,
-   --color-brand-200: #e0d1ff,
-   --color-brand-300: #caacff,
-   --color-brand-400: #b27dff,
-   --color-brand-500: #9d49ff,
-   --color-brand-600: #9424ff,
-   --color-brand-700: #8612ef,
-   --color-brand-800: #700fc8,
-   --color-brand-900: #630fae,
-   --color-brand-950: #3a0570,
+   --color-brand-50: #f6f2ff;
+   --color-brand-100: #eee6ff;
+   --color-brand-100-opacity:  rgba(238, 230, 255, 0.3);
+   --color-brand-200: #e0d1ff;
+   --color-brand-300: #caacff;
+   --color-brand-400: #b27dff;
+   --color-brand-500: #9d49ff;
+   --color-brand-600: #9424ff;
+   --color-brand-700: #8612ef;
+   --color-brand-800: #700fc8;
+   --color-brand-900: #630fae;
+   --color-brand-950: #3a0570;
 
   /* Golden Dream Color */
 
-  --color-gold-50: #fcfbea,
-  --color-gold-100: #f9f6c8,
-  --color-gold-200: #f4eb94,
-  --color-gold-300: #ecd444,
-  --color-gold-400: #e7c428,
-  --color-gold-500: #d7ac1b,
-  --color-gold-600: #ba8714,
-  --color-gold-700: #946214,
-  --color-gold-800: #7b4e18,
-  --color-gold-900: #69401a,
-  --color-gold-950: #3d220b,
+  --color-gold-50: #fcfbea;
+  --color-gold-100: #f9f6c8;
+  --color-gold-200: #f4eb94;
+  --color-gold-300: #ecd444;
+  --color-gold-400: #e7c428;
+  --color-gold-500: #d7ac1b;
+  --color-gold-600: #ba8714;
+  --color-gold-700: #946214;
+  --color-gold-800: #7b4e18;
+  --color-gold-900: #69401a;
+  --color-gold-950: #3d220b;
 
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
+  --border-radius-full: 50px;
 }
 
 
