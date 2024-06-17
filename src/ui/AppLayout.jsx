@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Header from './Header';
+import Header from '../features/homepage/Header';
 import styled from 'styled-components';
 
 const StyledAppLayout = styled.div`
