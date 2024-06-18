@@ -52,7 +52,7 @@ const variations = {
     text-decoration-color: var(--color-gold-400);
 
     &:hover {
-      outline: 2px solid var(--color-gold-400); /* Apply outline instead of border */
+      outline: 2px solid var(--color-gold-400);
       outline-offset: -2px;
       text-decoration-color: transparent;
     }
@@ -64,6 +64,10 @@ const Button = styled.button`
   border-radius: var(--border-radius-full);
   box-shadow: var(--shadow-sm);
   margin-right: 0.5rem;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}

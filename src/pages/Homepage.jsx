@@ -27,6 +27,7 @@ const WhiteWrapper = styled.div`
   background-color: var(--color-brand-50);
   color: var(--color-brand-950);
   height: 100vh;
+  padding: 1.2rem 4.8rem;
 
   display: flex;
   justify-content: center;
@@ -42,7 +43,9 @@ function Homepage() {
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
-        <Benefits />
+        <Container>
+          <Benefits />
+        </Container>
       </WhiteWrapper>
     </>
   );

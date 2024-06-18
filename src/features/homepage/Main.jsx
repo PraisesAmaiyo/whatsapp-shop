@@ -5,6 +5,15 @@ import headerImage from '../../assets/images/header-image.jpeg';
 
 import Tag from '../../ui/Tag';
 import Row from '../../ui/Row';
+import { FiArrowRight, FiArrowRightCircle } from 'react-icons/fi';
+import {
+  HiOutlineArrowCircleRight,
+  HiOutlineArrowNarrowRight,
+} from 'react-icons/hi';
+import { IoArrowForwardOutline } from 'react-icons/io5';
+import { AiOutlineArrowRight } from 'react-icons/ai';
+import { MdOutlineArrowForward } from 'react-icons/md';
+import { FaArrowRight } from 'react-icons/fa';
 
 const StyledMain = styled.main`
   display: grid;
@@ -56,6 +65,7 @@ const MainRight = styled.div`
 
 const ButtonDiv = styled.div`
   margin-top: 2rem;
+  display: flex;
 `;
 
 function Main() {
@@ -77,6 +87,7 @@ function Main() {
             <ButtonDiv>
               <Button variation="primary" size="medium">
                 Shop Now
+                <HiOutlineArrowCircleRight />
               </Button>
 
               <Button variation="text" size="medium">
