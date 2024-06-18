@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Header from '../features/homepage/Header';
 import Main from '../features/homepage/Main';
 import Benefits from '../features/homepage/Benefits';
+import Recommended from '../features/homepage/Recommended';
 
 const Container = styled.div`
   height: 100vh;
@@ -45,6 +46,7 @@ function Homepage() {
       <WhiteWrapper>
         <Container>
           <Benefits />
+          <Recommended />
         </Container>
       </WhiteWrapper>
     </>

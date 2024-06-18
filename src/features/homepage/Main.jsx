@@ -5,15 +5,8 @@ import headerImage from '../../assets/images/header-image.jpeg';
 
 import Tag from '../../ui/Tag';
 import Row from '../../ui/Row';
-import { FiArrowRight, FiArrowRightCircle } from 'react-icons/fi';
-import {
-  HiOutlineArrowCircleRight,
-  HiOutlineArrowNarrowRight,
-} from 'react-icons/hi';
-import { IoArrowForwardOutline } from 'react-icons/io5';
-import { AiOutlineArrowRight } from 'react-icons/ai';
-import { MdOutlineArrowForward } from 'react-icons/md';
-import { FaArrowRight } from 'react-icons/fa';
+
+import { HiOutlineArrowCircleRight } from 'react-icons/hi';
 
 const StyledMain = styled.main`
   display: grid;
