@@ -5,13 +5,17 @@ const type = {
     color: var(--color-brand-100);
     background-color: var(--color-brand-100-opacity);
   `,
+  dark: css`
+    color: var(--color-grey-50);
+    background-color: var(--color-brand-500);
+  `,
 };
 
 const Tag = styled.span`
   width: fit-content;
   text-transform: uppercase;
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0.4rem 1.2rem;
   border-radius: 100px;
 

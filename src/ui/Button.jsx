@@ -45,6 +45,7 @@ const variations = {
       background-color: var(--color-red-800);
     }
   `,
+
   text: css`
     color: var(--color-grey-100);
     background-color: transparent;
@@ -53,6 +54,19 @@ const variations = {
 
     &:hover {
       outline: 2px solid var(--color-gold-400);
+      outline-offset: -2px;
+      text-decoration-color: transparent;
+    }
+  `,
+
+  textDark: css`
+    color: var(--color-brand-900);
+    background-color: transparent;
+    text-decoration: 2px underline;
+    text-decoration-color: var(--color-brand-400);
+
+    &:hover {
+      outline: 2px solid var(--color-brand-400);
       outline-offset: -2px;
       text-decoration-color: transparent;
     }

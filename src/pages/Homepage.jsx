@@ -5,8 +5,9 @@ import Benefits from '../features/homepage/Benefits';
 import Recommended from '../features/homepage/Recommended';
 
 const Container = styled.div`
-  height: 100vh;
-  width: 120rem;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
   padding: 1.2rem 4.8rem;
 `;
 
@@ -18,20 +19,11 @@ const GradientWrapper = styled.div`
     ),
     linear-gradient(to bottom, var(--color-brand-900), var(--color-brand-900));
   color: var(--color-grey-50);
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
 `;
 
 const WhiteWrapper = styled.div`
   background-color: var(--color-brand-50);
   color: var(--color-brand-950);
-  height: 100vh;
-  padding: 1.2rem 4.8rem;
-
-  display: flex;
-  justify-content: center;
 `;
 
 function Homepage() {
