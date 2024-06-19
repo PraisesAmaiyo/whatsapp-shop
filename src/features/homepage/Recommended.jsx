@@ -11,11 +11,6 @@ import recommendedImage4 from '../../assets/images/recommended-img-4.png';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 
-const RecommendedProductsContainer = styled.div`
-  padding: 2rem;
-  /* text-align: center; */
-`;
-
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
@@ -24,10 +19,8 @@ const ProductGrid = styled.div`
 `;
 
 const ProductCard = styled.div`
-  padding: 1rem;
-  /* background-color: red; */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-lg);
   /* transition: transform 0.2s;
 
   &:hover {
@@ -48,11 +41,43 @@ const RightCard = styled(ProductCard)`
   grid-template-rows: auto auto;
 `;
 
-const FullWidthCardLeft = styled(ProductCard)`
+const FullWidthCardLeftTop = styled(ProductCard)`
   grid-column: 1 / 3;
   grid-row: 1 / 2;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: min-content;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-gold-50);
+
+  img {
+    grid-column: 2/3;
+    grid-row: 1/-1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  div.recommended-cta {
+    grid-column: 1/2;
+    grid-row: 1/-1;
+    padding: 2rem 0 2rem 2rem;
+  }
+  ul {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+  }
+`;
+
+const FullWidthCardLeftBottom = styled(ProductCard)`
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  display: grid;
+  grid-template-columns: 50% 50%;
   grid-template-rows: 1fr;
   justify-content: center;
   align-items: center;
@@ -61,9 +86,10 @@ const FullWidthCardLeft = styled(ProductCard)`
   img {
     grid-column: 2/3;
     grid-row: 1/-1;
-    /* height: 50%;
-
-    width: 50%; */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
   }
   div.recommended-cta {
     grid-column: 1/2;
@@ -96,9 +122,10 @@ const FullWidthCardRight = styled(ProductCard)`
 
   img {
     grid-row: 2/3;
-    /* height: 50%;
-
-    width: 50%; */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
   }
   div.recommended-cta {
     grid-row: 3/4;
@@ -134,10 +161,11 @@ const HalfWidthCardLeft = styled(ProductCard)`
   }
 
   img {
-    grid-row: 2/3;
-    /* height: 50%;
-
-    width: 50%; */
+    /* grid-row: 2/3; */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
   }
   div.recommended-cta {
     grid-row: 3/4;
@@ -173,10 +201,11 @@ const HalfWidthCardRight = styled(ProductCard)`
   }
 
   img {
-    grid-row: 2/3;
-    /* height: 50%;
-
-    width: 50%; */
+    /* grid-row: 2/3; */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
   }
   div.recommended-cta {
     grid-row: 3/4;
@@ -203,21 +232,37 @@ const ProductImage = styled.img`
   object-position: center;
 `;
 
-const ProductName = styled.h3`
-  font-size: 1.2rem;
-  margin: 1rem 0;
-  color: #333;
-`;
-
 const RecommendedProducts = () => {
   return (
-    <RecommendedProductsContainer>
-      <h2>recommended Products</h2>
+    <>
       <ProductGrid>
         <LeftCard>
-          <FullWidthCardLeft>
+          <FullWidthCardLeftTop>
+            <div className="recommended-cta">
+              <Tag type="dark">Recommended</Tag>
+
+              <Heading as="h2">Leather Shoes</Heading>
+
+              <ul>
+                <li>Strong leather</li>
+                <li>Durable</li>
+                <li>Great sole</li>
+                <li>Comfortable fit</li>
+              </ul>
+
+              <Button variation="textDark" size="medium">
+                View All <HiOutlineArrowCircleRight />
+              </Button>
+            </div>
             <ProductImage
               src={recommendedImage5}
+              alt="Leather male corporate shoe"
+            />
+          </FullWidthCardLeftTop>
+
+          <FullWidthCardLeftBottom>
+            <ProductImage
+              src={recommendedImage2}
               alt="Leather male corporate shoe"
             />
             <div className="recommended-cta">
@@ -236,9 +281,9 @@ const RecommendedProducts = () => {
                 View All <HiOutlineArrowCircleRight />
               </Button>
             </div>
-          </FullWidthCardLeft>
+          </FullWidthCardLeftBottom>
 
-          <HalfWidthCardLeft>
+          {/* <HalfWidthCardLeft>
             <Tag type="dark">Recommended</Tag>
             <ProductImage src={recommendedImage3} alt="Vintage shirts" />
             <div className="recommended-cta">
@@ -277,7 +322,7 @@ const RecommendedProducts = () => {
                 View All <HiOutlineArrowCircleRight />
               </Button>
             </div>
-          </HalfWidthCardRight>
+          </HalfWidthCardRight> */}
         </LeftCard>
 
         <RightCard>
@@ -304,7 +349,7 @@ const RecommendedProducts = () => {
           </FullWidthCardRight>
         </RightCard>
       </ProductGrid>
-    </RecommendedProductsContainer>
+    </>
   );
 };
 
