@@ -8,7 +8,7 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { MdOutlineLocalShipping } from 'react-icons/md';
 import styled from 'styled-components';
 
-const BenefitsContainer = styled.div`
+const BenefitsContainer = styled.section`
   display: flex;
   justify-content: space-between;
   padding: 4rem 0;

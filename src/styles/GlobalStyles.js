@@ -75,6 +75,7 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 15px;
   --border-radius-full: 50px;
+  --border-radius-round: 100%;
 }
 
 

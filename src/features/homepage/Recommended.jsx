@@ -10,11 +10,12 @@ import recommendedImage4 from '../../assets/images/recommended-img-4.png';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 
-const ProductGrid = styled.div`
+const ProductGrid = styled.section`
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: auto auto;
   gap: 2rem;
+  padding: 4rem 0;
 `;
 
 const ProductCard = styled.div`
@@ -252,56 +253,52 @@ const ProductImage = styled.img`
 
 const RecommendedProducts = () => {
   return (
-    <>
-      <ProductGrid>
-        <LeftCard>
-          <FullWidthCardLeftTop>
-            <div className="recommended-cta">
-              <Tag type="dark">Recommended</Tag>
+    <ProductGrid>
+      <LeftCard>
+        <FullWidthCardLeftTop>
+          <div className="recommended-cta">
+            <Tag type="dark">Recommended</Tag>
 
-              <Heading as="h2">Leather Shoes</Heading>
+            <Heading as="h2">Leather Shoes</Heading>
 
-              <ul>
-                <li>Strong leather</li>
-                <li>Durable</li>
-                <li>Great sole</li>
-                <li>Comfortable fit</li>
-              </ul>
+            <ul>
+              <li>Strong leather</li>
+              <li>Durable</li>
+              <li>Great sole</li>
+              <li>Comfortable fit</li>
+            </ul>
 
-              <Button variation="textDark" size="medium">
-                View All <HiOutlineArrowCircleRight />
-              </Button>
-            </div>
-            <ProductImage
-              src={recommendedImage5}
-              alt="Leather male corporate shoe"
-            />
-          </FullWidthCardLeftTop>
+            <Button variation="textDark" size="medium">
+              View All <HiOutlineArrowCircleRight />
+            </Button>
+          </div>
+          <ProductImage
+            src={recommendedImage5}
+            alt="Leather male corporate shoe"
+          />
+        </FullWidthCardLeftTop>
 
-          <FullWidthCardLeftBottom>
-            <ProductImage
-              src={recommendedImage2}
-              alt="Leather male corporate shoe"
-            />
-            <div className="recommended-cta">
-              <Tag type="dark">Recommended</Tag>
+        <FullWidthCardLeftBottom>
+          <ProductImage src={recommendedImage2} alt="Male round necck polo" />
+          <div className="recommended-cta">
+            <Tag type="dark">Recommended</Tag>
 
-              <Heading as="h2">Round Neck Polo</Heading>
+            <Heading as="h2">Round Neck Polo</Heading>
 
-              <ul>
-                <li>Soft fabric</li>
-                <li>Breathable</li>
-                <li>Vibrant Colours</li>
-                <li>Easy care</li>
-              </ul>
+            <ul>
+              <li>Soft fabric</li>
+              <li>Breathable</li>
+              <li>Vibrant Colours</li>
+              <li>Easy care</li>
+            </ul>
 
-              <Button variation="textDark" size="medium">
-                View All <HiOutlineArrowCircleRight />
-              </Button>
-            </div>
-          </FullWidthCardLeftBottom>
+            <Button variation="textDark" size="medium">
+              View All <HiOutlineArrowCircleRight />
+            </Button>
+          </div>
+        </FullWidthCardLeftBottom>
 
-          {/* <HalfWidthCardLeft>
+        {/* <HalfWidthCardLeft>
             <Tag type="dark">Recommended</Tag>
             <ProductImage src={recommendedImage3} alt="Vintage shirts" />
             <div className="recommended-cta">
@@ -341,33 +338,32 @@ const RecommendedProducts = () => {
               </Button>
             </div>
           </HalfWidthCardRight> */}
-        </LeftCard>
+      </LeftCard>
 
-        <RightCard>
-          <FullWidthCardRight>
-            <Tag type="dark">Recommended</Tag>
-            <ProductImage
-              src={recommendedImage4}
-              alt="Leather male corporate shoe"
-            />
-            <div className="recommended-cta">
-              <Heading as="h2">Shirts and Shorts</Heading>
+      <RightCard>
+        <FullWidthCardRight>
+          <Tag type="dark">Recommended</Tag>
+          <ProductImage
+            src={recommendedImage4}
+            alt="Male wearing a matcehd shirt and short"
+          />
+          <div className="recommended-cta">
+            <Heading as="h2">Shirts and Shorts</Heading>
 
-              <ul>
-                <li>Unique design</li>
-                <li>High-quality</li>
-                <li>Comfortable fit</li>
-                <li>Timeless style</li>
-              </ul>
+            <ul>
+              <li>Unique design</li>
+              <li>High-quality</li>
+              <li>Comfortable fit</li>
+              <li>Timeless style</li>
+            </ul>
 
-              <Button variation="textDark" size="medium">
-                View All <HiOutlineArrowCircleRight />
-              </Button>
-            </div>
-          </FullWidthCardRight>
-        </RightCard>
-      </ProductGrid>
-    </>
+            <Button variation="textDark" size="medium">
+              View All <HiOutlineArrowCircleRight />
+            </Button>
+          </div>
+        </FullWidthCardRight>
+      </RightCard>
+    </ProductGrid>
   );
 };
 
