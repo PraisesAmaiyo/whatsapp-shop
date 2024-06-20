@@ -4,7 +4,6 @@ import { HiOutlineArrowCircleRight } from 'react-icons/hi';
 import Tag from '../../ui/Tag';
 
 import recommendedImage5 from '../../assets/images/recommended-img-5.png';
-import recommendedImage3 from '../../assets/images/recommended-img-3.png';
 import recommendedImage2 from '../../assets/images/recommended-img-2.png';
 import recommendedImage4 from '../../assets/images/recommended-img-4.png';
 
@@ -21,11 +20,7 @@ const ProductGrid = styled.div`
 const ProductCard = styled.div`
   box-shadow: var(--shadow-sm);
   border-radius: var(--border-radius-lg);
-  /* transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.05);
-  } */
+  transition: transform 0.2s;
 `;
 
 const LeftCard = styled(ProductCard)`
@@ -50,6 +45,12 @@ const FullWidthCardLeftTop = styled(ProductCard)`
   justify-content: center;
   align-items: center;
   background-color: var(--color-gold-50);
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+  }
 
   img {
     grid-column: 2/3;
@@ -82,6 +83,16 @@ const FullWidthCardLeftBottom = styled(ProductCard)`
   justify-content: center;
   align-items: center;
   background-color: var(--color-gold-50);
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+  }
+
+  span {
+    margin-bottom: 0.5rem;
+  }
 
   img {
     grid-column: 2/3;
@@ -116,16 +127,23 @@ const FullWidthCardRight = styled(ProductCard)`
   background-color: var(--color-gold-50);
   padding: 2rem;
 
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+  }
+
   span {
     margin-bottom: 0.5rem;
   }
 
   img {
     grid-row: 2/3;
-    width: 100%;
+    width: 55%;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
+    margin: 0 auto;
   }
   div.recommended-cta {
     grid-row: 3/4;
@@ -268,13 +286,13 @@ const RecommendedProducts = () => {
             <div className="recommended-cta">
               <Tag type="dark">Recommended</Tag>
 
-              <Heading as="h2">Leather Shoes</Heading>
+              <Heading as="h2">Round Neck Polo</Heading>
 
               <ul>
-                <li>Strong leather</li>
-                <li>Durable</li>
-                <li>Great sole</li>
-                <li>Comfortable fit</li>
+                <li>Soft fabric</li>
+                <li>Breathable</li>
+                <li>Vibrant Colours</li>
+                <li>Easy care</li>
               </ul>
 
               <Button variation="textDark" size="medium">
