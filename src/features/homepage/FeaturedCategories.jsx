@@ -22,10 +22,7 @@ const FeaturedCategoriesContainer = styled.div`
 `;
 
 const FeaturedCategory = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin: 0 auto;
   height: 15rem;
   width: 15rem;
 
@@ -33,9 +30,9 @@ const FeaturedCategory = styled.div`
     border-radius: var(--border-radius-round);
     padding: 2rem;
     background-color: var(--color-gold-50);
-    display: flex; /* Ensure flexbox is used */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   span {
