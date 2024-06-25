@@ -3,15 +3,8 @@ import styled from 'styled-components';
 import Button from '../../ui/Button';
 
 import headerImage from '../../assets/images/header-image.jpeg';
-import { MdArrowRightAlt, MdKeyboardArrowRight } from 'react-icons/md';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { FiArrowLeft } from 'react-icons/fi';
-import {
-  FaAngleDoubleLeft,
-  FaAngleDoubleRight,
-  FaArrowLeft,
-  FaArrowRight,
-} from 'react-icons/fa';
+
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const AccordionContainer = styled.div`
   width: 100%;
@@ -45,6 +38,10 @@ const AccordionItem = styled.li`
     flex: 0 1 35rem;
     z-index: 10;
     opacity: 1;
+
+    img {
+      filter: none;
+    }
 
     .content {
       opacity: 1;
@@ -81,9 +78,10 @@ const AccordionItem = styled.li`
     padding: 1.5rem;
     background: linear-gradient(
       0deg,
-      rgb(0 0 0 / 70%) 10%,
+      rgb(0 0 0 / 70%) 5%,
       rgb(255 255 255 / 0%) 100%
     );
+
     opacity: ${({ active }) => (active ? 1 : 0)};
     visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
     transition: 0.3s;
@@ -112,23 +110,23 @@ function MainSwiper() {
   const items = [
     {
       img: headerImage,
-      title: 'Carmen Rios',
-      description: 'Frontend',
+      title: 'Male Clothings',
+      description: 'Unique Designers',
     },
     {
       img: headerImage,
-      title: 'Lisa Scott',
-      description: 'Backend',
+      title: 'Smart Baddies',
+      description: 'Slick Wears',
     },
     {
       img: headerImage,
-      title: 'Pavel Dvorak',
-      description: 'Backend',
+      title: 'Sharp Kicks',
+      description: 'Rock Your Swag',
     },
     {
       img: headerImage,
-      title: 'Kelly Cox',
-      description: 'Designer',
+      title: 'Classy Wears',
+      description: 'Premium or Nothing',
     },
   ];
 

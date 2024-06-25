@@ -12,7 +12,7 @@ import MainSwiper from './MainSwiper';
 const StyledMain = styled.main`
   display: grid;
   grid-template-columns: 40% 60%;
-  min-height: 60vh;
+  min-height: 90vh;
   gap: 2rem;
   padding: 5rem 0;
 `;
