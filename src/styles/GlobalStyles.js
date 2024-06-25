@@ -47,6 +47,7 @@ const GlobalStyles = createGlobalStyle`
    --color-brand-100: #eee6ff;
    --color-brand-100-opacity:  rgba(238, 230, 255, 0.2);
    --color-brand-200: #e0d1ff;
+   --color-brand-200-opacity: rgba(224, 209, 255, 0.3);;
    --color-brand-300: #caacff;
    --color-brand-400: #b27dff;
    --color-brand-500: #9d49ff;

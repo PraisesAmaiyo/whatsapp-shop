@@ -7,13 +7,20 @@ import Tag from '../../ui/Tag';
 import Row from '../../ui/Row';
 
 import { HiOutlineArrowCircleRight } from 'react-icons/hi';
+import MainSwiper from './MainSwiper';
 
 const StyledMain = styled.main`
   display: grid;
-  grid-template-columns: 45% 55%;
-  grid-template-rows: 60vh;
+  grid-template-columns: 40% 60%;
+  min-height: 60vh;
   gap: 2rem;
   padding: 5rem 0;
+`;
+
+const MainLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const MainSummary = styled.div`
@@ -35,30 +42,24 @@ const MainSummary = styled.div`
   }
 `;
 
-const MainLeft = styled.div`
+const ContentWrapper = styled.div`
+  flex-grow: 1; /* Push MainSummary to the bottom */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* gap: 1rem; */
 `;
 
 const MainRight = styled.div`
   width: 100%;
   overflow: hidden;
-  padding: 0 2rem;
-
-  & img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: var(--border-radius-lg);
-  }
+  padding: 2rem 2rem 0 2rem;
+  display: flex;
 `;
 
 const ButtonDiv = styled.div`
   margin-top: 2rem;
   display: flex;
+  gap: 1rem;
 `;
 
 function Main() {
@@ -67,48 +68,56 @@ function Main() {
       <Row type="vertical">
         <StyledMain>
           <MainLeft>
-            <Tag>Wear Your Confidence</Tag>
+            <ContentWrapper>
+              <Tag>Wear Your Confidence</Tag>
 
-            <Heading as="h1">Your Stylish and Affordable Destination</Heading>
+              <Heading as="h1">Your Stylish and Affordable Destination</Heading>
 
-            <Heading as="h3">
-              Discover trendy looks that fit your budget! We've got the latest
-              styles and everyday essentials, all at prices that make shopping
-              fun and guilt-free.
-            </Heading>
+              <Heading as="h3">
+                Discover trendy looks that fit your budget! We've got the latest
+                styles and everyday essentials, all at prices that make shopping
+                fun and guilt-free.
+              </Heading>
 
-            <ButtonDiv>
-              <Button variation="primary" size="medium">
-                Shop Now
-                <HiOutlineArrowCircleRight />
-              </Button>
+              <ButtonDiv>
+                <Button variation="primary" size="medium">
+                  Shop Now
+                  <HiOutlineArrowCircleRight />
+                </Button>
 
-              <Button variation="text" size="medium">
-                Follow Instagram
-              </Button>
-            </ButtonDiv>
+                <Button variation="text" underline="underline" size="medium">
+                  Follow Instagram
+                </Button>
+              </ButtonDiv>
+            </ContentWrapper>
+
+            <MainSummary>
+              <div>
+                <h4>50+</h4>
+                <h5>Unique Fashion Styles</h5>
+              </div>
+
+              <div>
+                <h4>250+</h4>
+                <h5>Happy Customers</h5>
+              </div>
+
+              <div>
+                <h4>1000+</h4>
+                <h5>Trusted Partners</h5>
+              </div>
+            </MainSummary>
           </MainLeft>
 
           <MainRight>
-            <img src={headerImage} alt="Happy shopping girl" />
+            {/* <div> */}
+            <MainSwiper />
+            {/* </div> */}
           </MainRight>
-
-          <MainSummary>
-            <div>
-              <h4>50+</h4>
-              <h5>Unique Fashion Styles</h5>
-            </div>
-
-            <div>
-              <h4>250+</h4>
-              <h5>Happy Customers</h5>
-            </div>
-
-            <div>
-              <h4>1000+</h4>
-              <h5>Trusted Partners</h5>
-            </div>
-          </MainSummary>
+          {/* 
+          <MainRight>
+            <img src={headerImage} alt="Happy shopping girl" />
+          </MainRight> */}
         </StyledMain>
       </Row>
     </>

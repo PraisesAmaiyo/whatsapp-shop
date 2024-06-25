@@ -46,16 +46,23 @@ const variations = {
     }
   `,
 
+  outline: css`
+    color: var(--color-grey-50);
+    background-color: var(--color-brand-100-opacity);
+
+    &:hover {
+      color: var(--color-grey-50);
+      background-color: var(--color-brand-200-opacity);
+    }
+  `,
+
   text: css`
     color: var(--color-grey-100);
     background-color: transparent;
-    text-decoration: 2px underline;
-    text-decoration-color: var(--color-gold-400);
 
     &:hover {
       outline: 2px solid var(--color-gold-400);
       outline-offset: -2px;
-      text-decoration-color: transparent;
     }
   `,
 
@@ -73,6 +80,20 @@ const variations = {
   `,
 };
 
+const underlineStyles = {
+  none: css`
+    text-decoration: none;
+  `,
+  underline: css`
+    text-decoration: 2px underline;
+    text-decoration-color: var(--color-gold-400);
+
+    &:hover {
+      text-decoration-color: transparent;
+    }
+  `,
+};
+
 const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-full);
@@ -85,11 +106,13 @@ const Button = styled.button`
 
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}
+  ${(props) => underlineStyles[props.underline]}
 `;
 
 Button.defaultProps = {
   variation: 'primary',
   size: 'medium',
+  underline: 'none',
 };
 
 export default Button;

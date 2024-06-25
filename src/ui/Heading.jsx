@@ -33,7 +33,7 @@ const Heading = styled.h1`
     props.as === 'h4' &&
     css`
       font-size: 1.5rem;
-      font-weight: 400;
+      font-weight: 600;
     `}
     
 

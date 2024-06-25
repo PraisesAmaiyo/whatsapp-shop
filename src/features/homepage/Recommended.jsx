@@ -45,7 +45,7 @@ const FullWidthCardLeftTop = styled(ProductCard)`
   grid-template-rows: min-content;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gold-50);
+  background-color: var(--color-grey-0);
 
   &:hover {
     img {
@@ -83,7 +83,7 @@ const FullWidthCardLeftBottom = styled(ProductCard)`
   grid-template-rows: 1fr;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gold-50);
+  background-color: var(--color-grey-0);
 
   &:hover {
     img {
@@ -125,7 +125,7 @@ const FullWidthCardRight = styled(ProductCard)`
   grid-template-rows: repeat(3, min-content);
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gold-50);
+  background-color: var(--color-grey-0);
   padding: 2rem;
 
   &:hover {
@@ -172,7 +172,7 @@ const HalfWidthCardLeft = styled(ProductCard)`
   grid-template-rows: repeat(3, min-content);
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gold-50);
+  background-color: var(--color-grey-0);
   padding: 2rem;
 
   span {
@@ -212,7 +212,7 @@ const HalfWidthCardRight = styled(ProductCard)`
   grid-template-rows: repeat(3, min-content);
   justify-content: center;
   align-items: center;
-  background-color: var(--color-gold-50);
+  background-color: var(--color-grey-0);
   padding: 2rem;
 
   span {
