@@ -3,6 +3,19 @@ import styled from 'styled-components';
 import Button from '../../ui/Button';
 
 import headerImage from '../../assets/images/header-image.jpeg';
+import MainMaleImage1 from '../../assets/images/header/main-male-1.jpeg';
+import MainMaleImage2 from '../../assets/images/header/main-male-2.jpeg';
+import MainMaleImage3 from '../../assets/images/header/main-male-3.jpeg';
+import MainFemaleImage1 from '../../assets/images/header/main-female-1.jpeg';
+import MainFemaleImage2 from '../../assets/images/header/main-female-2.jpeg';
+import MainShoeImage1 from '../../assets/images/header/main-shoe-1.jpeg';
+import MainShoeImage2 from '../../assets/images/header/main-shoe-2.jpeg';
+import MainShoeImage3 from '../../assets/images/header/main-shoe-3.jpeg';
+import MainShoeImage4 from '../../assets/images/header/main-shoe-4.jpeg';
+import MainWatchImage1 from '../../assets/images/header/main-watch-1.jpeg';
+import MainWatchImage2 from '../../assets/images/header/main-watch-2.jpeg';
+import MainWatchImage3 from '../../assets/images/header/main-watch-3.jpeg';
+import MainWatchImage4 from '../../assets/images/header/main-watch-4.jpeg';
 
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
@@ -88,6 +101,7 @@ const AccordionItem = styled.li`
   }
 
   .content span {
+    margin-left: 0.5rem;
     position: absolute;
     z-index: 3;
     left: 50%;
@@ -107,25 +121,27 @@ const ButtonContainer = styled.div`
 
 function MainSwiper() {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const items = [
     {
-      img: headerImage,
+      img: MainMaleImage2,
       title: 'Male Clothings',
       description: 'Unique Designers',
     },
     {
-      img: headerImage,
-      title: 'Smart Baddies',
+      img: MainFemaleImage2,
+      title: 'Female Clothings',
       description: 'Slick Wears',
     },
     {
-      img: headerImage,
-      title: 'Sharp Kicks',
+      img: MainShoeImage3,
+      title: 'Classy Kicks',
       description: 'Rock Your Swag',
     },
+
     {
-      img: headerImage,
-      title: 'Classy Wears',
+      img: MainWatchImage4,
+      title: 'Luxury Watches',
       description: 'Premium or Nothing',
     },
   ];
@@ -158,6 +174,7 @@ function MainSwiper() {
           </AccordionItem>
         ))}
       </AccordionList>
+
       <ButtonContainer>
         <Button variation="outline" size="large" onClick={prevItem}>
           <FaArrowLeft />

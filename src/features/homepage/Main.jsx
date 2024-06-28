@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
-import headerImage from '../../assets/images/header-image.jpeg';
 
 import Tag from '../../ui/Tag';
 import Row from '../../ui/Row';
@@ -110,9 +109,7 @@ function Main() {
           </MainLeft>
 
           <MainRight>
-            {/* <div> */}
             <MainSwiper />
-            {/* </div> */}
           </MainRight>
           {/* 
           <MainRight>

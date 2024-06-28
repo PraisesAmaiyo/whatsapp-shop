@@ -5,6 +5,7 @@ import Benefits from '../features/homepage/Benefits';
 import Recommended from '../features/homepage/Recommended';
 import FeaturedCategories from '../features/homepage/FeaturedCategories';
 import MainSwiper from '../features/homepage/MainSwiper';
+import TrendingProducts from '../features/homepage/TrendingProducts';
 
 const Container = styled.div`
   width: 100%;
@@ -42,6 +43,7 @@ function Homepage() {
           <Benefits />
           <Recommended />
           <FeaturedCategories />
+          <TrendingProducts />
         </Container>
       </WhiteWrapper>
     </>
