@@ -13,9 +13,12 @@ import TrendingProductImage5 from '../../assets/images/trendingProducts/trending
 import TrendingProductImage6 from '../../assets/images/trendingProducts/trending-6.jpg';
 import TrendingProductImage7 from '../../assets/images/trendingProducts/trending-7.jpg';
 import TrendingProductImage8 from '../../assets/images/trendingProducts/trending-8.jpg';
+import DiscountTag from '../../ui/DiscountTag';
+import WishlistIcon from '../../ui/WishlistIcon';
 
 const StyledTrendingProducts = styled.section`
   padding: 4rem 0;
+  margin-bottom: 6rem;
 `;
 
 const TrendingProductHeader = styled.div`
@@ -39,6 +42,23 @@ const TrendingProduct = styled.div`
   min-width: 25rem;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+
+    .discount-tag {
+      background-color: var(--color-brand-700);
+    }
+
+    .trending-category_actions {
+      background-color: var(--color-brand-800);
+    }
+
+    img {
+      transform: scale(1.05);
+    }
+  }
 
   span {
     font-size: 1.2rem;
@@ -46,6 +66,7 @@ const TrendingProduct = styled.div`
 `;
 
 const TrendingImageContainer = styled.div`
+  position: relative;
   border-radius: var(--border-radius-lg);
   display: flex;
   align-items: center;
@@ -86,6 +107,7 @@ const TrendingCategoryActions = styled.div`
     color: var(--color-gold-500);
     position: relative;
     z-index: 1;
+    transition: all 0.2s;
 
     &:hover {
       transform: scale(1.1);
@@ -113,12 +135,14 @@ function TrendingProducts() {
         <TrendingProductsContainer>
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-20%</DiscountTag>
+              <WishlistIcon type="wishlisted" />
               <ProductImage src={TrendingProductImage1} alt="Category one" />
             </TrendingImageContainer>
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Vintage Shirt</Heading>
+                <span>₦11,000</span>
                 {/* <Heading as="h4">₦255,000</Heading> */}
               </div>
 
@@ -130,13 +154,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-10%</DiscountTag>
+              <WishlistIcon type="wishlisted" />
               <ProductImage src={TrendingProductImage2} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Givenchy Leather Shoe</Heading>
+                <span>₦55,000</span>
               </div>
 
               <div>
@@ -147,13 +173,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-5%</DiscountTag>
+              <WishlistIcon type="" />
               <ProductImage src={TrendingProductImage3} alt="Category one" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Collar Polo Shirt</Heading>
+                <span>₦25,000</span>
               </div>
 
               <div>
@@ -164,13 +192,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-20%</DiscountTag>
+              <WishlistIcon type="" />
               <ProductImage src={TrendingProductImage4} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Unisex Sneakers</Heading>
+                <span>₦30,500</span>
               </div>
 
               <div>
@@ -181,13 +211,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-25%</DiscountTag>
+              <WishlistIcon type="wishlisted" />
               <ProductImage src={TrendingProductImage5} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Corporate Gown</Heading>
+                <span>₦18,000</span>
               </div>
 
               <div>
@@ -198,13 +230,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-10%</DiscountTag>
+              <WishlistIcon type="" />
               <ProductImage src={TrendingProductImage6} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Cartier Watch Set</Heading>
+                <span>₦35,000</span>
               </div>
 
               <div>
@@ -215,13 +249,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-15%</DiscountTag>
+              <WishlistIcon type="wishlisted" />
               <ProductImage src={TrendingProductImage7} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Party Gown</Heading>
+                <span>₦15,000</span>
               </div>
 
               <div>
@@ -232,13 +268,15 @@ function TrendingProducts() {
 
           <TrendingProduct>
             <TrendingImageContainer>
+              <DiscountTag className="discount-tag">-10%</DiscountTag>
+              <WishlistIcon type="" />
               <ProductImage src={TrendingProductImage8} alt="Category two" />
             </TrendingImageContainer>
 
-            <TrendingCategoryActions>
+            <TrendingCategoryActions className="trending-category_actions">
               <div>
-                <Heading as="h4">Leather Shoes</Heading>
-                <span>₦255,000</span>
+                <Heading as="h4">Flat Foot Wear</Heading>
+                <span>₦12,500</span>
               </div>
 
               <div>
