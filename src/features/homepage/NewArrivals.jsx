@@ -17,6 +17,8 @@ import NewArrivalsProductImage6 from '../../assets/images/newArrivals/newArrival
 import NewArrivalsProductImage7 from '../../assets/images/newArrivals/newArrivals-7.jpg';
 import NewArrivalsProductImage8 from '../../assets/images/newArrivals/newArrivals-8.jpg';
 
+import { newArrivals } from './store';
+
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
   margin-bottom: 6rem;
@@ -138,157 +140,40 @@ function NewArrivals() {
         </NewArrivalHeader>
 
         <NewArrivalsContainer>
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-20%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={NewArrivalsProductImage1} alt="Category one" />
-            </NewArrivalImageContainer>
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Vintage Shirt</Heading>
-                <span>₦11,000</span>
-                {/* <Heading as="h4">₦255,000</Heading> */}
-              </div>
+          {newArrivals.map((newArrival, index) => {
+            const {
+              newArrivalImage,
+              newArrivalName,
+              newArrivalPrice,
+              newArrivalDiscount,
+            } = newArrival;
 
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
+            return (
+              <NewArrivalProduct key={index}>
+                <NewArrivalImageContainer>
+                  <DiscountTag className="discount-tag">
+                    {`-${newArrivalDiscount}%`}
+                  </DiscountTag>
+                  <WishlistIcon type="wishlisted" />
+                  <ProductImage
+                    src={newArrivalImage}
+                    alt={`picture of ${newArrivalName} `}
+                  />
+                </NewArrivalImageContainer>
+                <NewArrivalCategoryActions className="newArrival-category_actions">
+                  <div>
+                    <Heading as="h4">{newArrivalName}</Heading>
+                    <span>{`₦${newArrivalPrice}`}</span>
+                    {/* <Heading as="h4">₦255,000</Heading> */}
+                  </div>
 
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={NewArrivalsProductImage2} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Givenchy Leather Shoe</Heading>
-                <span>₦55,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-5%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={NewArrivalsProductImage3} alt="Category one" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Collar Polo Shirt</Heading>
-                <span>₦25,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-20%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={NewArrivalsProductImage4} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Unisex Sneakers</Heading>
-                <span>₦30,500</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-25%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={NewArrivalsProductImage5} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Corporate Gown</Heading>
-                <span>₦18,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={NewArrivalsProductImage6} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Cartier Watch Set</Heading>
-                <span>₦35,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-15%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={NewArrivalsProductImage7} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Party Gown</Heading>
-                <span>₦15,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
-
-          <NewArrivalProduct>
-            <NewArrivalImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={NewArrivalsProductImage8} alt="Category two" />
-            </NewArrivalImageContainer>
-
-            <NewArrivalCategoryActions className="newArrival-category_actions">
-              <div>
-                <Heading as="h4">Flat Foot Wear</Heading>
-                <span>₦12,500</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </NewArrivalCategoryActions>
-          </NewArrivalProduct>
+                  <div>
+                    <FaShoppingCart />
+                  </div>
+                </NewArrivalCategoryActions>
+              </NewArrivalProduct>
+            );
+          })}
         </NewArrivalsContainer>
       </Row>
     </StyledNewArrivals>
