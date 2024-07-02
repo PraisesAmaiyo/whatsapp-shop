@@ -1,39 +1,46 @@
 import styled from 'styled-components';
+
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
 import Button from '../../ui/Button';
-
-import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
-
-import TrendingProductImage1 from '../../assets/images/trendingProducts/trending-1.jpg';
-import TrendingProductImage2 from '../../assets/images/trendingProducts/trending-2.jpg';
-import TrendingProductImage3 from '../../assets/images/trendingProducts/trending-3.jpg';
-import TrendingProductImage4 from '../../assets/images/trendingProducts/trending-4.jpg';
-import TrendingProductImage5 from '../../assets/images/trendingProducts/trending-5.jpg';
-import TrendingProductImage6 from '../../assets/images/trendingProducts/trending-6.jpg';
-import TrendingProductImage7 from '../../assets/images/trendingProducts/trending-7.jpg';
-import TrendingProductImage8 from '../../assets/images/trendingProducts/trending-8.jpg';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 
-const StyledTrendingProducts = styled.section`
+import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
+
+import NewArrivalsProductImage1 from '../../assets/images/newArrivals/newArrivals-1.jpg';
+import NewArrivalsProductImage2 from '../../assets/images/newArrivals/newArrivals-2.jpg';
+import NewArrivalsProductImage3 from '../../assets/images/newArrivals/newArrivals-3.jpg';
+import NewArrivalsProductImage4 from '../../assets/images/newArrivals/newArrivals-4.jpg';
+import NewArrivalsProductImage5 from '../../assets/images/newArrivals/newArrivals-5.jpg';
+import NewArrivalsProductImage6 from '../../assets/images/newArrivals/newArrivals-6.jpg';
+import NewArrivalsProductImage7 from '../../assets/images/newArrivals/newArrivals-7.jpg';
+import NewArrivalsProductImage8 from '../../assets/images/newArrivals/newArrivals-8.jpg';
+
+const StyledNewArrivals = styled.section`
   padding: 4rem 0;
+  margin-bottom: 6rem;
 `;
 
-const TrendingProductHeader = styled.div`
+const NewArrivalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin-bottom: 0;
+  }
 `;
 
-const TrendingProductsContainer = styled.div`
+const NewArrivalsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, max-content);
   gap: 3rem 1.5rem;
 `;
 
-const TrendingProduct = styled.div`
+const NewArrivalProduct = styled.div`
   margin: 0 auto;
   text-align: center;
   background-color: var(--color-brand-100);
@@ -50,8 +57,9 @@ const TrendingProduct = styled.div`
       background-color: var(--color-brand-700);
     }
 
-    .trending-category_actions {
+    .newArrival-category_actions {
       background-color: var(--color-brand-800);
+      color: var(--color-grey-0);
     }
 
     img {
@@ -64,7 +72,7 @@ const TrendingProduct = styled.div`
   }
 `;
 
-const TrendingImageContainer = styled.div`
+const NewArrivalImageContainer = styled.div`
   position: relative;
   border-radius: var(--border-radius-lg);
   display: flex;
@@ -83,12 +91,12 @@ const ProductImage = styled.img`
   object-position: center;
 `;
 
-const TrendingCategoryActions = styled.div`
-  background-color: var(--color-brand-700);
+const NewArrivalCategoryActions = styled.div`
+  background-color: var(--color-brand-100);
   border-radius: var(--border-radius-lg);
   height: 7rem;
   padding: 1rem;
-  color: var(--color-grey-0);
+  color: var(--color-brand-800);
 
   display: flex;
   justify-content: space-between;
@@ -117,28 +125,26 @@ const TrendingCategoryActions = styled.div`
   }
 `;
 
-function TrendingProducts() {
+function NewArrivals() {
   return (
-    <StyledTrendingProducts>
+    <StyledNewArrivals>
       <Row type="vertical">
-        <TrendingProductHeader>
-          <Heading as="h1">
-            Trending products <br /> for you!
-          </Heading>
+        <NewArrivalHeader>
+          <Heading as="h1">New Arrivals</Heading>
 
           <Button variation="primary" size="large">
             View all products <FaArrowRight />
           </Button>
-        </TrendingProductHeader>
+        </NewArrivalHeader>
 
-        <TrendingProductsContainer>
-          <TrendingProduct>
-            <TrendingImageContainer>
+        <NewArrivalsContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-20%</DiscountTag>
               <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage1} alt="Category one" />
-            </TrendingImageContainer>
-            <TrendingCategoryActions className="trending-category_actions">
+              <ProductImage src={NewArrivalsProductImage1} alt="Category one" />
+            </NewArrivalImageContainer>
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Vintage Shirt</Heading>
                 <span>₦11,000</span>
@@ -148,17 +154,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-10%</DiscountTag>
               <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage2} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage2} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Givenchy Leather Shoe</Heading>
                 <span>₦55,000</span>
@@ -167,17 +173,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-5%</DiscountTag>
               <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage3} alt="Category one" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage3} alt="Category one" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Collar Polo Shirt</Heading>
                 <span>₦25,000</span>
@@ -186,17 +192,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-20%</DiscountTag>
               <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage4} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage4} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Unisex Sneakers</Heading>
                 <span>₦30,500</span>
@@ -205,17 +211,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-25%</DiscountTag>
               <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage5} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage5} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Corporate Gown</Heading>
                 <span>₦18,000</span>
@@ -224,17 +230,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-10%</DiscountTag>
               <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage6} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage6} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Cartier Watch Set</Heading>
                 <span>₦35,000</span>
@@ -243,17 +249,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-15%</DiscountTag>
               <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage7} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage7} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Party Gown</Heading>
                 <span>₦15,000</span>
@@ -262,17 +268,17 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
+          <NewArrivalProduct>
+            <NewArrivalImageContainer>
               <DiscountTag className="discount-tag">-10%</DiscountTag>
               <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage8} alt="Category two" />
-            </TrendingImageContainer>
+              <ProductImage src={NewArrivalsProductImage8} alt="Category two" />
+            </NewArrivalImageContainer>
 
-            <TrendingCategoryActions className="trending-category_actions">
+            <NewArrivalCategoryActions className="newArrival-category_actions">
               <div>
                 <Heading as="h4">Flat Foot Wear</Heading>
                 <span>₦12,500</span>
@@ -281,12 +287,12 @@ function TrendingProducts() {
               <div>
                 <FaShoppingCart />
               </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-        </TrendingProductsContainer>
+            </NewArrivalCategoryActions>
+          </NewArrivalProduct>
+        </NewArrivalsContainer>
       </Row>
-    </StyledTrendingProducts>
+    </StyledNewArrivals>
   );
 }
 
-export default TrendingProducts;
+export default NewArrivals;
