@@ -8,15 +8,6 @@ import WishlistIcon from '../../ui/WishlistIcon';
 
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
-import NewArrivalsProductImage1 from '../../assets/images/newArrivals/newArrivals-1.jpg';
-import NewArrivalsProductImage2 from '../../assets/images/newArrivals/newArrivals-2.jpg';
-import NewArrivalsProductImage3 from '../../assets/images/newArrivals/newArrivals-3.jpg';
-import NewArrivalsProductImage4 from '../../assets/images/newArrivals/newArrivals-4.jpg';
-import NewArrivalsProductImage5 from '../../assets/images/newArrivals/newArrivals-5.jpg';
-import NewArrivalsProductImage6 from '../../assets/images/newArrivals/newArrivals-6.jpg';
-import NewArrivalsProductImage7 from '../../assets/images/newArrivals/newArrivals-7.jpg';
-import NewArrivalsProductImage8 from '../../assets/images/newArrivals/newArrivals-8.jpg';
-
 import { newArrivals } from './store';
 
 const StyledNewArrivals = styled.section`
@@ -140,8 +131,9 @@ function NewArrivals() {
         </NewArrivalHeader>
 
         <NewArrivalsContainer>
-          {newArrivals.map((newArrival, index) => {
+          {newArrivals.map((newArrival) => {
             const {
+              id,
               newArrivalImage,
               newArrivalName,
               newArrivalPrice,
@@ -149,7 +141,7 @@ function NewArrivals() {
             } = newArrival;
 
             return (
-              <NewArrivalProduct key={index}>
+              <NewArrivalProduct key={id}>
                 <NewArrivalImageContainer>
                   <DiscountTag className="discount-tag">
                     {`-${newArrivalDiscount}%`}
