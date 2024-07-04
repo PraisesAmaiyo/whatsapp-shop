@@ -9,10 +9,10 @@ import WishlistIcon from '../../ui/WishlistIcon';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import { newArrivals } from './store';
+import LoadMore from '../../ui/LoadMore';
 
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
-  margin-bottom: 6rem;
 `;
 
 const NewArrivalHeader = styled.div`
@@ -31,6 +31,7 @@ const NewArrivalsContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, max-content);
   gap: 3rem 1.5rem;
+  margin-bottom: 3rem;
 `;
 
 const NewArrivalProduct = styled.div`
@@ -101,10 +102,10 @@ const NewArrivalCategoryActions = styled.div`
 
   & div svg {
     font-size: 4rem;
-    background-color: var(--color-grey-0);
+    background-color: var(--color-gold-500);
     border-radius: 50%;
     padding: 1rem;
-    color: var(--color-gold-500);
+    color: var(--color-grey-0);
     position: relative;
     z-index: 1;
     transition: all 0.2s;
@@ -113,7 +114,9 @@ const NewArrivalCategoryActions = styled.div`
       transform: scale(1.1);
       cursor: pointer;
       outline: 1.5px solid var(--color-gold-600);
-      color: var(--color-gold-600);
+      color: var(--color-gold-500);
+      background-color: var(--color-grey-0);
+      box-shadow: var(--shadow-sm);
     }
   }
 `;
@@ -138,6 +141,7 @@ function NewArrivals() {
               newArrivalName,
               newArrivalPrice,
               newArrivalDiscount,
+              wishlist,
             } = newArrival;
 
             return (
@@ -146,7 +150,7 @@ function NewArrivals() {
                   <DiscountTag className="discount-tag">
                     {`-${newArrivalDiscount}%`}
                   </DiscountTag>
-                  <WishlistIcon type="wishlisted" />
+                  <WishlistIcon type={wishlist ? 'wishlisted' : ''} />
                   <ProductImage
                     src={newArrivalImage}
                     alt={`picture of ${newArrivalName} `}
@@ -167,6 +171,8 @@ function NewArrivals() {
             );
           })}
         </NewArrivalsContainer>
+
+        <LoadMore />
       </Row>
     </StyledNewArrivals>
   );

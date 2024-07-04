@@ -6,6 +6,8 @@ import Recommended from '../features/homepage/Recommended';
 import FeaturedCategories from '../features/homepage/FeaturedCategories';
 import TrendingProducts from '../features/homepage/TrendingProducts';
 import NewArrivals from '../features/homepage/NewArrivals';
+import JoinCommunity from '../ui/JoinCommunity';
+import Footer from '../ui/Footer';
 
 const Container = styled.div`
   width: 100%;
@@ -45,7 +47,9 @@ function Homepage() {
           <FeaturedCategories />
           <TrendingProducts />
           <NewArrivals />
+          <JoinCommunity />
         </Container>
+        <Footer />
       </WhiteWrapper>
     </>
   );

@@ -14,7 +14,7 @@ const Row = styled.div`
     props.type === 'vertical' &&
     css`
       flex-direction: column;
-      /* gap: 8rem; */justify-conte
+      /* gap: 8rem; */
     `}
 `;
 
