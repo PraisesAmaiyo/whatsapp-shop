@@ -2,12 +2,20 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Heading from './Heading';
 
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import {
+  FaCreditCard,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaUniversity,
+  FaWhatsapp,
+} from 'react-icons/fa';
+import { AiOutlineMobile } from 'react-icons/ai';
 
 const src = '/logo-dark.png';
 
 const StyledFooter = styled.footer`
-  padding: 4rem 0;
+  padding: 4rem 0 0 0;
 `;
 const FooterImageContainer = styled.div`
   padding: 2rem;
@@ -86,17 +94,19 @@ const FooterBase = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  color: var(--color-brand-50);
+  font-size: 1.4rem;
 `;
 
 const FooterBaseItems = styled.div`
-  width: ;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   width: 100%;
   max-width: 120rem;
   margin: 0 auto;
-  padding: 1.2rem 4.8rem;
+  padding: 2rem 4.8rem;
 `;
 
 const IconContainer = styled.div`
@@ -111,9 +121,10 @@ const StyledIcon = styled.a`
   text-decoration: none;
   font-size: 2rem;
   transition: color 0.3s;
+  display: inline-flex;
 
   &:hover {
-    color: var(--color-brand-500); // Customize this color as needed
+    color: var(--color-gold-500); // Customize this color as needed
   }
 `;
 
@@ -222,32 +233,49 @@ function Footer() {
       <FooterBase>
         <FooterBaseItems>
           <div>
-            <Heading as={'h4'}>
-              Copyright &copy; 2024 PBlaze Store. All Rights Reserved
-            </Heading>
+            <span>Copyright &copy; 2024 PBlaze Store. All Rights Reserved</span>
           </div>
 
           <IconContainer>
             <StyledIcon
-              href="https://www.facebook.com"
+              //   href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaFacebook />
             </StyledIcon>
             <StyledIcon
-              href="https://www.instagram.com"
+              //   href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaInstagram />
             </StyledIcon>
             <StyledIcon
-              href="https://www.twitter.com"
+              //   href="https://www.twitter.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitter />
+            </StyledIcon>
+            <StyledIcon
+              //   href="https://www.whatsapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp />
+            </StyledIcon>
+          </IconContainer>
+
+          <IconContainer>
+            <StyledIcon href="#">
+              <FaUniversity title="Bank Transfer" />
+            </StyledIcon>
+            <StyledIcon href="#">
+              <FaCreditCard title="Card Payment" />
+            </StyledIcon>
+            <StyledIcon href="#">
+              <AiOutlineMobile title="Mobile Payment" />
             </StyledIcon>
           </IconContainer>
         </FooterBaseItems>
