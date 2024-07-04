@@ -2,6 +2,8 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Heading from './Heading';
 
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+
 const src = '/logo-dark.png';
 
 const StyledFooter = styled.footer`
@@ -95,6 +97,24 @@ const FooterBaseItems = styled.div`
   max-width: 120rem;
   margin: 0 auto;
   padding: 1.2rem 4.8rem;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledIcon = styled.a`
+  color: inherit;
+  text-decoration: none;
+  font-size: 2rem;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--color-brand-500); // Customize this color as needed
+  }
 `;
 
 function Footer() {
@@ -207,7 +227,29 @@ function Footer() {
             </Heading>
           </div>
 
-          <div></div>
+          <IconContainer>
+            <StyledIcon
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook />
+            </StyledIcon>
+            <StyledIcon
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram />
+            </StyledIcon>
+            <StyledIcon
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter />
+            </StyledIcon>
+          </IconContainer>
         </FooterBaseItems>
       </FooterBase>
     </StyledFooter>
