@@ -7,6 +7,7 @@ import Row from '../../ui/Row';
 
 import { HiOutlineArrowCircleRight } from 'react-icons/hi';
 import MainSwiper from './MainSwiper';
+import { useNavigate } from 'react-router-dom';
 
 const StyledMain = styled.main`
   display: grid;
@@ -62,6 +63,8 @@ const ButtonDiv = styled.div`
 `;
 
 function Main() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Row type="vertical">
@@ -79,7 +82,11 @@ function Main() {
               </Heading>
 
               <ButtonDiv>
-                <Button variation="primary" size="medium">
+                <Button
+                  variation="primary"
+                  size="medium"
+                  onClick={() => navigate('/products')}
+                >
                   Shop Now
                   <HiOutlineArrowCircleRight />
                 </Button>

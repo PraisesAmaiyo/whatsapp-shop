@@ -55,7 +55,7 @@ function MainNav() {
             </StyledNavLink>
           </li>
           <li>
-            <StyledNavLink to="/">
+            <StyledNavLink to="/products">
               <span>Products</span>
             </StyledNavLink>
           </li>

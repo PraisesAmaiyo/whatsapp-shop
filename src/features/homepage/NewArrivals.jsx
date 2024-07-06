@@ -10,6 +10,7 @@ import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import { newArrivals } from './store';
 import LoadMore from '../../ui/LoadMore';
+import { useNavigate } from 'react-router-dom';
 
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
@@ -46,6 +47,7 @@ const NewArrivalProduct = styled.div`
 
   &:hover {
     box-shadow: var(--shadow-md);
+    cursor: pointer;
 
     .discount-tag {
       background-color: var(--color-brand-700);
@@ -122,13 +124,19 @@ const NewArrivalCategoryActions = styled.div`
 `;
 
 function NewArrivals() {
+  const navigate = useNavigate();
+
   return (
     <StyledNewArrivals>
       <Row type="vertical">
         <NewArrivalHeader>
           <Heading as="h1">New Arrivals</Heading>
 
-          <Button variation="primary" size="large">
+          <Button
+            variation="primary"
+            size="large"
+            onClick={() => navigate('/products')}
+          >
             View all products <FaArrowRight />
           </Button>
         </NewArrivalHeader>

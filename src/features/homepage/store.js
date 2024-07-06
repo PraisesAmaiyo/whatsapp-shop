@@ -1,3 +1,21 @@
+import featuredCategoryImage1 from '../../assets/images/categories-1.png';
+import featuredCategoryImage2 from '../../assets/images/categories-2.png';
+import featuredCategoryImage3 from '../../assets/images/categories-3.png';
+import featuredCategoryImage4 from '../../assets/images/categories-4.png';
+import featuredCategoryImage5 from '../../assets/images/categories-7.png';
+import featuredCategoryImage6 from '../../assets/images/categories-8.png';
+import featuredCategoryImage7 from '../../assets/images/categories-9.png';
+import featuredCategoryImage8 from '../../assets/images/categories-11.png';
+
+import TrendingProductImage1 from '../../assets/images/trendingProducts/trending-1.jpg';
+import TrendingProductImage2 from '../../assets/images/trendingProducts/trending-2.jpg';
+import TrendingProductImage3 from '../../assets/images/trendingProducts/trending-3.jpg';
+import TrendingProductImage4 from '../../assets/images/trendingProducts/trending-4.jpg';
+import TrendingProductImage5 from '../../assets/images/trendingProducts/trending-5.jpg';
+import TrendingProductImage6 from '../../assets/images/trendingProducts/trending-6.jpg';
+import TrendingProductImage7 from '../../assets/images/trendingProducts/trending-7.jpg';
+import TrendingProductImage8 from '../../assets/images/trendingProducts/trending-8.jpg';
+
 import NewArrivalsProductImage1 from '../../assets/images/newArrivals/newArrivals-1.jpg';
 import NewArrivalsProductImage2 from '../../assets/images/newArrivals/newArrivals-2.jpg';
 import NewArrivalsProductImage3 from '../../assets/images/newArrivals/newArrivals-3.jpg';
@@ -29,9 +47,127 @@ import NewArrivalsProductImage28 from '../../assets/images/newArrivals/newArriva
 import NewArrivalsProductImage29 from '../../assets/images/newArrivals/newArrivals-29.jpg';
 import NewArrivalsProductImage30 from '../../assets/images/newArrivals/newArrivals-30.jpg';
 
+export const featuredCategories = [
+  {
+    id: 'featuredCate1',
+    featuredCategoryImage: featuredCategoryImage1,
+    featuredCategoryName: 'Leather Shoes',
+    featuredCategoryQuantity: 'Discover 120 products',
+  },
+  {
+    id: 'featuredCate2',
+    featuredCategoryImage: featuredCategoryImage2,
+    featuredCategoryName: 'Jackets',
+    featuredCategoryQuantity: 'Discover 85 products',
+  },
+  {
+    id: 'featuredCate3',
+    featuredCategoryImage: featuredCategoryImage3,
+    featuredCategoryName: 'Sweat Shirts',
+    featuredCategoryQuantity: 'Discover 49 products',
+  },
+  {
+    id: 'featuredCate4',
+    featuredCategoryImage: featuredCategoryImage4,
+    featuredCategoryName: 'Hoodies',
+    featuredCategoryQuantity: 'Discover 110 products',
+  },
+  {
+    id: 'featuredCate5',
+    featuredCategoryImage: featuredCategoryImage5,
+    featuredCategoryName: 'T-shirts/Polo',
+    featuredCategoryQuantity: 'Discover 260 products',
+  },
+  {
+    id: 'featuredCate6',
+    featuredCategoryImage: featuredCategoryImage6,
+    featuredCategoryName: 'Sneakers',
+    featuredCategoryQuantity: 'Discover 118 products',
+  },
+  {
+    id: 'featuredCate7',
+    featuredCategoryImage: featuredCategoryImage7,
+    featuredCategoryName: 'Leather Bags',
+    featuredCategoryQuantity: 'Discover 37 products',
+  },
+  {
+    id: 'featuredCate8',
+    featuredCategoryImage: featuredCategoryImage8,
+    featuredCategoryName: 'Designer Jeans',
+    featuredCategoryQuantity: 'Discover 194 products',
+  },
+];
+
+export const trendingProducts = [
+  {
+    id: 'trendingProduct1',
+    newArrivalImage: TrendingProductImage1,
+    newArrivalName: 'Vintage Shirt',
+    newArrivalPrice: '11,000',
+    newArrivalDiscount: 20,
+    wishlist: true,
+  },
+  {
+    id: 'trendingProduct2',
+    newArrivalImage: TrendingProductImage2,
+    newArrivalName: 'Givenchy Leather Shoe',
+    newArrivalPrice: '55,000',
+    newArrivalDiscount: 10,
+    wishlist: true,
+  },
+  {
+    id: 'trendingProduct3',
+    newArrivalImage: TrendingProductImage3,
+    newArrivalName: 'Collar Polo Shirt',
+    newArrivalPrice: '25,000',
+    newArrivalDiscount: 5,
+    wishlist: false,
+  },
+  {
+    id: 'trendingProduct4',
+    newArrivalImage: TrendingProductImage4,
+    newArrivalName: 'Unisex Sneakers',
+    newArrivalPrice: '30,500',
+    newArrivalDiscount: 20,
+    wishlist: false,
+  },
+  {
+    id: 'trendingProduct5',
+    newArrivalImage: TrendingProductImage5,
+    newArrivalName: 'Corporate Gown',
+    newArrivalPrice: '18,000',
+    newArrivalDiscount: 25,
+    wishlist: true,
+  },
+  {
+    id: 'trendingProduct6',
+    newArrivalImage: TrendingProductImage6,
+    newArrivalName: 'Cartier Watch Set',
+    newArrivalPrice: '35,000',
+    newArrivalDiscount: 10,
+    wishlist: false,
+  },
+  {
+    id: 'trendingProduct7',
+    newArrivalImage: TrendingProductImage7,
+    newArrivalName: 'Party Gown',
+    newArrivalPrice: '15,000',
+    newArrivalDiscount: 15,
+    wishlist: true,
+  },
+  {
+    id: 'trendingProduct8',
+    newArrivalImage: TrendingProductImage8,
+    newArrivalName: 'Flat Foot Wear',
+    newArrivalPrice: '12,500',
+    newArrivalDiscount: 10,
+    wishlist: true,
+  },
+];
+
 export const newArrivals = [
   {
-    id: 1,
+    id: 'newArrival1',
     newArrivalImage: NewArrivalsProductImage1,
     newArrivalName: 'Brown Collar Shirt',
     newArrivalPrice: '25,000',
@@ -39,7 +175,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 2,
+    id: 'newArrival2',
     newArrivalImage: NewArrivalsProductImage2,
     newArrivalName: 'Collar Polo',
     newArrivalPrice: '20,000',
@@ -47,7 +183,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 3,
+    id: 'newArrival3',
     newArrivalImage: NewArrivalsProductImage3,
     newArrivalName: 'Two Piece (Male)',
     newArrivalPrice: '45,000',
@@ -55,7 +191,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 4,
+    id: 'newArrival4',
     newArrivalImage: NewArrivalsProductImage4,
     newArrivalName: 'Blue Designers Jean',
     newArrivalPrice: '25,500',
@@ -63,7 +199,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 5,
+    id: 'newArrival5',
     newArrivalImage: NewArrivalsProductImage5,
     newArrivalName: 'Timberand Designers',
     newArrivalPrice: '85,000',
@@ -71,7 +207,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 6,
+    id: 'newArrival6',
     newArrivalImage: NewArrivalsProductImage6,
     newArrivalName: 'Sexy Open Back ',
     newArrivalPrice: '15,500',
@@ -79,7 +215,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 7,
+    id: 'newArrival7',
     newArrivalImage: NewArrivalsProductImage7,
     newArrivalName: 'Rolex Watch (With Box)',
     newArrivalPrice: '157,000',
@@ -87,7 +223,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 8,
+    id: 'newArrival8',
     newArrivalImage: NewArrivalsProductImage8,
     newArrivalName: 'Leather Slippers (Male)',
     newArrivalPrice: '18,500',
@@ -95,7 +231,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 9,
+    id: 'newArrival9',
     newArrivalImage: NewArrivalsProductImage9,
     newArrivalName: 'Givenchy Glossy Shoe',
     newArrivalPrice: '65,000',
@@ -103,7 +239,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 10,
+    id: 'newArrival10',
     newArrivalImage: NewArrivalsProductImage10,
     newArrivalName: 'Round Neck Polo',
     newArrivalPrice: '20,000',
@@ -111,7 +247,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 11,
+    id: 'newArrival11',
     newArrivalImage: NewArrivalsProductImage11,
     newArrivalName: 'Audemars Piguet',
     newArrivalPrice: '185,000',
@@ -119,7 +255,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 12,
+    id: 'newArrival12',
     newArrivalImage: NewArrivalsProductImage12,
     newArrivalName: 'Fendi Sneakers',
     newArrivalPrice: '35,000',
@@ -127,7 +263,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 13,
+    id: 'newArrival13',
     newArrivalImage: NewArrivalsProductImage13,
     newArrivalName: 'Sweat Shirt',
     newArrivalPrice: '30,000',
@@ -135,7 +271,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 14,
+    id: 'newArrival14',
     newArrivalImage: NewArrivalsProductImage14,
     newArrivalName: 'Designers Cardigan',
     newArrivalPrice: '25,000',
@@ -143,7 +279,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 15,
+    id: 'newArrival15',
     newArrivalImage: NewArrivalsProductImage15,
     newArrivalName: 'Ash Luxe Plain Polo',
     newArrivalPrice: '15,000',
@@ -151,7 +287,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 16,
+    id: 'newArrival16',
     newArrivalImage: NewArrivalsProductImage16,
     newArrivalName: 'Glitter Dinner Gown',
     newArrivalPrice: '13,000',
@@ -159,7 +295,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 17,
+    id: 'newArrival17',
     newArrivalImage: NewArrivalsProductImage17,
     newArrivalName: 'Leather Slippers (Female)',
     newArrivalPrice: '16,000',
@@ -167,14 +303,14 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 18,
+    id: 'newArrival18',
     newArrivalImage: NewArrivalsProductImage18,
     newArrivalName: 'Free Wear Shirt',
     newArrivalPrice: '10,000',
     newArrivalDiscount: 6,
   },
   {
-    id: 19,
+    id: 'newArrival19',
     newArrivalImage: NewArrivalsProductImage19,
     newArrivalName: 'Polo Ralph Slippers',
     newArrivalPrice: '25,000',
@@ -182,7 +318,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 20,
+    id: 'newArrival20',
     newArrivalImage: NewArrivalsProductImage20,
     newArrivalName: 'Balenciaga Leather Shoe',
     newArrivalPrice: '15,000',
@@ -190,7 +326,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 21,
+    id: 'newArrival21',
     newArrivalImage: NewArrivalsProductImage21,
     newArrivalName: 'Tread Sneakers',
     newArrivalPrice: '45,600',
@@ -198,7 +334,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 22,
+    id: 'newArrival22',
     newArrivalImage: NewArrivalsProductImage22,
     newArrivalName: 'Jean Jacket',
     newArrivalPrice: '49,999',
@@ -206,7 +342,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 23,
+    id: 'newArrival23',
     newArrivalImage: NewArrivalsProductImage23,
     newArrivalName: 'Lamborghini Luxury Watch',
     newArrivalPrice: '530,000',
@@ -214,7 +350,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 24,
+    id: 'newArrival24',
     newArrivalImage: NewArrivalsProductImage24,
     newArrivalName: 'Moissanite Diamond Ear Rings',
     newArrivalPrice: '180,000',
@@ -222,7 +358,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 25,
+    id: 'newArrival25',
     newArrivalImage: NewArrivalsProductImage25,
     newArrivalName: 'Amiri Jean',
     newArrivalPrice: '31,600',
@@ -230,7 +366,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 26,
+    id: 'newArrival26',
     newArrivalImage: NewArrivalsProductImage26,
     newArrivalName: 'Casual Shoe',
     newArrivalPrice: '51,500',
@@ -238,7 +374,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 27,
+    id: 'newArrival27',
     newArrivalImage: NewArrivalsProductImage27,
     newArrivalName: 'Timberland (Green)',
     newArrivalPrice: '96,000',
@@ -246,7 +382,7 @@ export const newArrivals = [
     wishlist: true,
   },
   {
-    id: 28,
+    id: 'newArrival28',
     newArrivalImage: NewArrivalsProductImage28,
     newArrivalName: 'Sexy Black Gown',
     newArrivalPrice: '12,000',
@@ -254,7 +390,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 29,
+    id: 'newArrival29',
     newArrivalImage: NewArrivalsProductImage29,
     newArrivalName: 'Nike Air Sneakers',
     newArrivalPrice: '31,000',
@@ -262,7 +398,7 @@ export const newArrivals = [
     wishlist: false,
   },
   {
-    id: 30,
+    id: 'newArrival30',
     newArrivalImage: NewArrivalsProductImage30,
     newArrivalName: 'Valentino Garavani',
     newArrivalPrice: '23,500',

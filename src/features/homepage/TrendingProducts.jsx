@@ -1,18 +1,13 @@
 import styled from 'styled-components';
-import Heading from '../../ui/Heading';
-import Row from '../../ui/Row';
-import Button from '../../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
-import TrendingProductImage1 from '../../assets/images/trendingProducts/trending-1.jpg';
-import TrendingProductImage2 from '../../assets/images/trendingProducts/trending-2.jpg';
-import TrendingProductImage3 from '../../assets/images/trendingProducts/trending-3.jpg';
-import TrendingProductImage4 from '../../assets/images/trendingProducts/trending-4.jpg';
-import TrendingProductImage5 from '../../assets/images/trendingProducts/trending-5.jpg';
-import TrendingProductImage6 from '../../assets/images/trendingProducts/trending-6.jpg';
-import TrendingProductImage7 from '../../assets/images/trendingProducts/trending-7.jpg';
-import TrendingProductImage8 from '../../assets/images/trendingProducts/trending-8.jpg';
+import { trendingProducts } from './store';
+
+import Heading from '../../ui/Heading';
+import Row from '../../ui/Row';
+import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 
@@ -45,6 +40,7 @@ const TrendingProduct = styled.div`
 
   &:hover {
     box-shadow: var(--shadow-md);
+    cursor: pointer;
 
     .discount-tag {
       background-color: var(--color-brand-700);
@@ -118,6 +114,8 @@ const TrendingCategoryActions = styled.div`
 `;
 
 function TrendingProducts() {
+  const navigate = useNavigate();
+
   return (
     <StyledTrendingProducts>
       <Row type="vertical">
@@ -126,163 +124,50 @@ function TrendingProducts() {
             Trending products <br /> for you!
           </Heading>
 
-          <Button variation="primary" size="large">
+          <Button
+            variation="primary"
+            size="large"
+            onClick={() => navigate('/products')}
+          >
             View all products <FaArrowRight />
           </Button>
         </TrendingProductHeader>
 
         <TrendingProductsContainer>
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-20%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage1} alt="Category one" />
-            </TrendingImageContainer>
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Vintage Shirt</Heading>
-                <span>₦11,000</span>
-                {/* <Heading as="h4">₦255,000</Heading> */}
-              </div>
+          {trendingProducts.map((trendingProduct, index) => {
+            const {
+              id,
+              newArrivalImage,
+              newArrivalName,
+              newArrivalPrice,
+              newArrivalDiscount,
+              wishlist,
+            } = trendingProduct;
 
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+            return (
+              <TrendingProduct key={id}>
+                <TrendingImageContainer>
+                  <DiscountTag className="discount-tag">{`-${newArrivalDiscount}%`}</DiscountTag>
+                  <WishlistIcon type={wishlist} />
+                  <ProductImage
+                    src={newArrivalImage}
+                    alt={`Category ${index}`}
+                  />
+                </TrendingImageContainer>
+                <TrendingCategoryActions className="trending-category_actions">
+                  <div>
+                    <Heading as="h4">{newArrivalName}</Heading>
+                    <span>{`₦${newArrivalPrice}`}</span>
+                    {/* <Heading as="h4">₦255,000</Heading> */}
+                  </div>
 
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage2} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Givenchy Leather Shoe</Heading>
-                <span>₦55,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-5%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage3} alt="Category one" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Collar Polo Shirt</Heading>
-                <span>₦25,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-20%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage4} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Unisex Sneakers</Heading>
-                <span>₦30,500</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-25%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage5} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Corporate Gown</Heading>
-                <span>₦18,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage6} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Cartier Watch Set</Heading>
-                <span>₦35,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-15%</DiscountTag>
-              <WishlistIcon type="wishlisted" />
-              <ProductImage src={TrendingProductImage7} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Party Gown</Heading>
-                <span>₦15,000</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
-
-          <TrendingProduct>
-            <TrendingImageContainer>
-              <DiscountTag className="discount-tag">-10%</DiscountTag>
-              <WishlistIcon type="" />
-              <ProductImage src={TrendingProductImage8} alt="Category two" />
-            </TrendingImageContainer>
-
-            <TrendingCategoryActions className="trending-category_actions">
-              <div>
-                <Heading as="h4">Flat Foot Wear</Heading>
-                <span>₦12,500</span>
-              </div>
-
-              <div>
-                <FaShoppingCart />
-              </div>
-            </TrendingCategoryActions>
-          </TrendingProduct>
+                  <div>
+                    <FaShoppingCart />
+                  </div>
+                </TrendingCategoryActions>
+              </TrendingProduct>
+            );
+          })}
         </TrendingProductsContainer>
       </Row>
     </StyledTrendingProducts>
