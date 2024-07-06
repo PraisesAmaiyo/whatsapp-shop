@@ -2,19 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../ui/Button';
 
-import headerImage from '../../assets/images/header-image.jpeg';
-import MainMaleImage1 from '../../assets/images/header/main-male-1.jpeg';
 import MainMaleImage2 from '../../assets/images/header/main-male-2.jpeg';
-import MainMaleImage3 from '../../assets/images/header/main-male-3.jpeg';
-import MainFemaleImage1 from '../../assets/images/header/main-female-1.jpeg';
 import MainFemaleImage2 from '../../assets/images/header/main-female-2.jpeg';
-import MainShoeImage1 from '../../assets/images/header/main-shoe-1.jpeg';
-import MainShoeImage2 from '../../assets/images/header/main-shoe-2.jpeg';
 import MainShoeImage3 from '../../assets/images/header/main-shoe-3.jpeg';
-import MainShoeImage4 from '../../assets/images/header/main-shoe-4.jpeg';
-import MainWatchImage1 from '../../assets/images/header/main-watch-1.jpeg';
-import MainWatchImage2 from '../../assets/images/header/main-watch-2.jpeg';
-import MainWatchImage3 from '../../assets/images/header/main-watch-3.jpeg';
 import MainWatchImage4 from '../../assets/images/header/main-watch-4.jpeg';
 
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';

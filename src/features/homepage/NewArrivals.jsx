@@ -153,7 +153,7 @@ function NewArrivals() {
             } = newArrival;
 
             return (
-              <NewArrivalProduct key={id}>
+              <NewArrivalProduct key={id} onClick={() => navigate('/products')}>
                 <NewArrivalImageContainer>
                   <DiscountTag className="discount-tag">
                     {`-${newArrivalDiscount}%`}

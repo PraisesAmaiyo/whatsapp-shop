@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
 import Header from '../features/homepage/Header';
-import Main from '../features/homepage/Main';
-import Benefits from '../features/homepage/Benefits';
-import Recommended from '../features/homepage/Recommended';
-import FeaturedCategories from '../features/homepage/FeaturedCategories';
-import TrendingProducts from '../features/homepage/TrendingProducts';
-import NewArrivals from '../features/homepage/NewArrivals';
-import JoinCommunity from '../ui/JoinCommunity';
-import Footer from '../ui/Footer';
+
+import ProductNavHistory from '../features/productDetails/ProductNavHistory';
+import ProductInfo from '../features/productDetails/ProductInfo';
 
 const Container = styled.div`
   width: 100%;
@@ -32,28 +27,22 @@ const WhiteWrapper = styled.div`
   color: var(--color-brand-950);
 `;
 
-function Homepage() {
+function ProductDetails() {
   return (
     <>
       <GradientWrapper>
         <Container>
           <Header />
-          <Main />
+          <ProductNavHistory />
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
-          <Benefits />
-          <Recommended />
-          <FeaturedCategories />
-          <TrendingProducts />
-          <NewArrivals />
-          <JoinCommunity />
+          <ProductInfo />
         </Container>
-        <Footer />
       </WhiteWrapper>
     </>
   );
 }
 
-export default Homepage;
+export default ProductDetails;
