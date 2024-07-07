@@ -79,6 +79,33 @@ const ProductImage = styled.img`
   object-position: center;
 `;
 
+const WishlistContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--color-brand-100);
+  border: none;
+  padding: 0.4rem;
+  border-radius: 100px;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  & svg {
+    width: 2rem;
+    height: 2rem;
+    transition: all 0.3s;
+  }
+`;
+
 const TrendingCategoryActions = styled.div`
   background-color: var(--color-brand-700);
   border-radius: var(--border-radius-lg);
@@ -148,7 +175,9 @@ function TrendingProducts() {
               <TrendingProduct key={id}>
                 <TrendingImageContainer>
                   <DiscountTag className="discount-tag">{`-${newArrivalDiscount}%`}</DiscountTag>
-                  <WishlistIcon type={wishlist} />
+                  <WishlistContainer>
+                    <WishlistIcon type={wishlist ? true : ''} />
+                  </WishlistContainer>
                   <ProductImage
                     src={newArrivalImage}
                     alt={`Category ${index}`}

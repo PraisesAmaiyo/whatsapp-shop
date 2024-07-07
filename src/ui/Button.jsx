@@ -30,12 +30,12 @@ const variations = {
     }
   `,
   secondary: css`
-    color: var(--color-grey-600);
-    background: var(--color-gold-500);
+    color: var(--color-brand-100);
+    background: var(--color-brand-800);
     border: 1px solid var(--color-grey-200);
 
     &:hover {
-      background-color: var(--color-grey-50);
+      background-color: var(--color-brand-900);
     }
   `,
   danger: css`
@@ -98,7 +98,7 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-full);
   box-shadow: var(--shadow-sm);
-  margin-right: 0.5rem;
+  /* margin-right: 0.5rem; */
 
   display: flex;
   gap: 0.5rem;

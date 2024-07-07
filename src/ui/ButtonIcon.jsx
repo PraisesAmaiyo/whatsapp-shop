@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ButtonIcon = styled.button`
   background: none;
-  border: none;
+  border: 1px;
   padding: 1rem;
   border-radius: var(--border-radius-sm);
   transition: all 0.2s;
