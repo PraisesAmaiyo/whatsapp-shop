@@ -46,7 +46,7 @@ const ProductDiscountAmount = styled.div`
   color: var(--color-brand-950);
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   span {
     font-size: 1.3rem;
@@ -54,7 +54,6 @@ const ProductDiscountAmount = styled.div`
 `;
 
 const ProductInfoText = styled.div`
-  background-color: red;
   h3 {
     font-weight: 500;
     font-size: 1.5rem;
@@ -130,12 +129,13 @@ function ProductInfo() {
             <span>Discount applied</span>
           </ProductDiscountAmount>
 
-          {/* <ProductInfoText> */}
           <Heading as="h1">Brown Collar Shirt</Heading>
-          <h3 className="product-mini_text">
-            Premium cotton shirt with a crisp collar and tailored fit, perfect
-            for any occasion from office to casual outings.
-          </h3>
+          <ProductInfoText>
+            <h3 className="product-mini_text">
+              Premium cotton shirt with a crisp collar and tailored fit, perfect
+              for any occasion from office to casual outings.
+            </h3>
+          </ProductInfoText>
 
           <ProductPricing>
             <h2 className="product-price">₦25,000</h2>
@@ -171,7 +171,6 @@ function ProductInfo() {
               <WishlistIcon />
             </WishlistContainer>
           </ButtonContainer>
-          {/* </ProductInfoText> */}
           {/* </ProductInfoTextContainer> */}
         </Row>
       </ProductMainInfo>
