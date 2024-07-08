@@ -172,7 +172,7 @@ function TrendingProducts() {
             } = trendingProduct;
 
             return (
-              <TrendingProduct key={id}>
+              <TrendingProduct key={id} onClick={() => navigate('/products')}>
                 <TrendingImageContainer>
                   <DiscountTag className="discount-tag">{`-${newArrivalDiscount}%`}</DiscountTag>
                   <WishlistContainer>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Heading from '../../ui/Heading';
 
 const StyledProductNavHistory = styled.div`
-  padding: 3rem;
+  /* padding: 3rem; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ const StyledProductNavHistory = styled.div`
 function ProductNavHistory() {
   return (
     <StyledProductNavHistory>
-      <Heading as="h1">Products/Shirt/Product Details</Heading>
+      <Heading as="h2">Products/Shirt/Product Details</Heading>
     </StyledProductNavHistory>
   );
 }

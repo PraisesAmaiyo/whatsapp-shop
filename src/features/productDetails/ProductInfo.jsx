@@ -13,7 +13,7 @@ const StyledProductInfoContainer = styled.section`
 
 const ProductMainInfo = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 50%);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   gap: 3rem;
 `;
@@ -41,12 +41,12 @@ const ProductDiscountAmount = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: var(--border-radius-sm);
   color: var(--color-brand-950);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 
   span {
     font-size: 1.3rem;
@@ -54,9 +54,10 @@ const ProductDiscountAmount = styled.div`
 `;
 
 const ProductInfoText = styled.div`
+  background-color: red;
   h3 {
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
 `;
@@ -87,7 +88,7 @@ const ProductReviews = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: auto;
   gap: 1rem;
 `;
 
@@ -101,7 +102,7 @@ const WishlistContainer = styled.div`
   margin-right: 1.5rem;
 
   svg {
-    font-size: 4rem;
+    font-size: 2.5rem;
     background-color: transparent;
   }
 
@@ -122,57 +123,57 @@ function ProductInfo() {
           <img src={ProductImage} alt="Product " />
         </ProductInfoImage>
 
-        <ProductInfoTextContainer>
-          <Row type="vertical">
-            <ProductDiscountAmount>
-              <p className="product-price">Save 24,000</p>
-              <span>Discount applied</span>
-            </ProductDiscountAmount>
+        <Row type="vertical">
+          {/* <ProductInfoTextContainer> */}
+          <ProductDiscountAmount>
+            <p className="product-price">Save 24,000</p>
+            <span>Discount applied</span>
+          </ProductDiscountAmount>
 
-            <ProductInfoText>
-              <Heading as="h1">Brown Collar Shirt</Heading>
-              <h3 className="product-mini_text">
-                Premium cotton shirt with a crisp collar and tailored fit,
-                perfect for any occasion from office to casual outings.
-              </h3>
+          {/* <ProductInfoText> */}
+          <Heading as="h1">Brown Collar Shirt</Heading>
+          <h3 className="product-mini_text">
+            Premium cotton shirt with a crisp collar and tailored fit, perfect
+            for any occasion from office to casual outings.
+          </h3>
 
-              <ProductPricing>
-                <h2 className="product-price">₦25,000</h2>
-                <h2 className="product-slashed_price">₦2,500</h2>
-              </ProductPricing>
+          <ProductPricing>
+            <h2 className="product-price">₦25,000</h2>
+            <h2 className="product-slashed_price">₦2,500</h2>
+          </ProductPricing>
 
-              <ProductAvailability>
-                <h3 className="product-mini_text">In Stock</h3>
-              </ProductAvailability>
+          <ProductAvailability>
+            <h3 className="product-mini_text">In Stock</h3>
+          </ProductAvailability>
 
-              <ProductReviews>
-                <div className="reviewRatings">
-                  <p>⭐⭐⭐⭐⭐</p>
-                  <p>4.9</p>
-                </div>
+          <ProductReviews>
+            <div className="reviewRatings">
+              <p>⭐⭐⭐⭐⭐</p>
+              <p>4.9</p>
+            </div>
 
-                <div className="reviewNumbers">
-                  <p>120 Reviews ~ 23 sold</p>
-                </div>
-              </ProductReviews>
+            <div className="reviewNumbers">
+              <p>120 Reviews ~ 23 sold</p>
+            </div>
+          </ProductReviews>
 
-              <UpdateItemQuantity />
+          <UpdateItemQuantity />
 
-              <ButtonContainer>
-                <Button variation="secondary" size="large">
-                  Buy Now
-                </Button>
-                <Button variation="primary" size="large">
-                  Add to Cart
-                </Button>
+          <ButtonContainer>
+            <Button variation="secondary" size="large">
+              Buy Now
+            </Button>
+            <Button variation="primary" size="large">
+              Add to Cart
+            </Button>
 
-                <WishlistContainer>
-                  <WishlistIcon />
-                </WishlistContainer>
-              </ButtonContainer>
-            </ProductInfoText>
-          </Row>
-        </ProductInfoTextContainer>
+            <WishlistContainer>
+              <WishlistIcon />
+            </WishlistContainer>
+          </ButtonContainer>
+          {/* </ProductInfoText> */}
+          {/* </ProductInfoTextContainer> */}
+        </Row>
       </ProductMainInfo>
     </StyledProductInfoContainer>
   );

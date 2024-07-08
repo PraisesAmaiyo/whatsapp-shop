@@ -4,6 +4,7 @@ import Header from '../features/homepage/Header';
 
 import ProductNavHistory from '../features/productDetails/ProductNavHistory';
 import ProductInfo from '../features/productDetails/ProductInfo';
+import Footer from '../ui/Footer';
 
 const Container = styled.div`
   width: 100%;
@@ -40,6 +41,7 @@ function ProductDetails() {
         <Container>
           <ProductInfo />
         </Container>
+        <Footer />
       </WhiteWrapper>
     </>
   );
