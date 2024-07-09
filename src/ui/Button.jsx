@@ -71,6 +71,7 @@ const variations = {
     background-color: transparent;
     text-decoration: 2px underline;
     text-decoration-color: var(--color-brand-400);
+    outline: 1px solid var(--color-brand-300);
 
     &:hover {
       outline: 2px solid var(--color-brand-400);

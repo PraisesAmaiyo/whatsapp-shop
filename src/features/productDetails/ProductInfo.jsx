@@ -4,7 +4,7 @@ import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
 import UpdateItemQuantity from './UpdateItemQuantity';
 import Button from '../../ui/Button';
-import ButtonIcon from '../../ui/ButtonIcon';
+import ButtonGroup from '../../ui/ButtonGroup';
 import WishlistIcon from '../../ui/WishlistIcon';
 
 const StyledProductInfoContainer = styled.section`
@@ -46,7 +46,7 @@ const ProductDiscountAmount = styled.div`
   color: var(--color-brand-950);
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 
   span {
     font-size: 1.3rem;
@@ -54,6 +54,7 @@ const ProductDiscountAmount = styled.div`
 `;
 
 const ProductInfoText = styled.div`
+  width: 80%;
   h3 {
     font-weight: 500;
     font-size: 1.5rem;
@@ -64,7 +65,7 @@ const ProductInfoText = styled.div`
 const ProductPricing = styled.div`
   display: flex;
   gap: 2rem;
-  margin: 4rem 0 1.5rem 0;
+  margin: 2rem 0 1.5rem 0;
 `;
 
 const ProductAvailability = styled.div`
@@ -112,6 +113,15 @@ const WishlistContainer = styled.div`
       transform: scale(1.1);
     }
   }
+`;
+
+const ProductSubInfo = styled.div`
+  margin-top: 6rem;
+`;
+
+const ProductSubInfoNav = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 function ProductInfo() {
@@ -174,6 +184,22 @@ function ProductInfo() {
           {/* </ProductInfoTextContainer> */}
         </Row>
       </ProductMainInfo>
+
+      <ProductSubInfo>
+        <ProductSubInfoNav>
+          <ButtonGroup>
+            <Button size="large" variation="primary">
+              Description
+            </Button>
+            <Button size="large" variation="textDark">
+              Additional Information
+            </Button>
+            <Button size="large" variation="textDark">
+              Review
+            </Button>
+          </ButtonGroup>
+        </ProductSubInfoNav>
+      </ProductSubInfo>
     </StyledProductInfoContainer>
   );
 }
