@@ -4,7 +4,6 @@ import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
 import UpdateItemQuantity from './UpdateItemQuantity';
 import Button from '../../ui/Button';
-import ButtonGroup from '../../ui/ButtonGroup';
 import WishlistIcon from '../../ui/WishlistIcon';
 
 const StyledProductInfoContainer = styled.section`
@@ -29,11 +28,6 @@ const ProductInfoImage = styled.div`
 
     border-radius: var(--border-radius-lg);
   }
-`;
-
-const ProductInfoTextContainer = styled.div`
-  height: 50rem;
-  width: 100%;
 `;
 
 const ProductDiscountAmount = styled.div`
@@ -119,11 +113,6 @@ const ProductSubInfo = styled.div`
   margin-top: 6rem;
 `;
 
-const ProductSubInfoNav = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 function ProductInfo() {
   return (
     <StyledProductInfoContainer>
@@ -186,19 +175,43 @@ function ProductInfo() {
       </ProductMainInfo>
 
       <ProductSubInfo>
-        <ProductSubInfoNav>
-          <ButtonGroup>
-            <Button size="large" variation="primary">
-              Description
-            </Button>
-            <Button size="large" variation="textDark">
-              Additional Information
-            </Button>
-            <Button size="large" variation="textDark">
-              Review
-            </Button>
-          </ButtonGroup>
-        </ProductSubInfoNav>
+        <Heading as="h2">Description</Heading>
+        <p>
+          Upgrade your wardrobe with our Classic White Button-Down Shirt, a
+          timeless piece that blends elegance with comfort. Crafted from
+          premium, breathable cotton, this shirt is perfect for both formal and
+          casual occasions. The tailored fit ensures a sleek silhouette, while
+          the button-down collar adds a touch of sophistication. Whether you're
+          dressing up for a meeting or dressing down for a weekend outing, this
+          versatile shirt is a must-have staple.
+        </p>
+        <Heading as="h2">Specificaion</Heading>
+        <ul>
+          <li>
+            <strong>Type: </strong>Polo
+          </li>
+          <li>
+            <strong>Gender: </strong>Unisex
+          </li>
+          <li>
+            <strong>Material: </strong>100% Cotton
+          </li>
+          <li>
+            <strong>Colour: </strong>Brown
+          </li>
+          <li>
+            <strong>Fit: </strong>Regular Fit
+          </li>
+          <li>
+            <strong>Sizes Available: </strong> S, M, L, XL, XXL
+          </li>
+          <li>
+            <strong>Brand: </strong>Fendi
+          </li>
+          <li>
+            <strong>Instructions: </strong> Machine wash cold, tumble dry low
+          </li>
+        </ul>
       </ProductSubInfo>
     </StyledProductInfoContainer>
   );
