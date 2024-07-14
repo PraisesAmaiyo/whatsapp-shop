@@ -63,6 +63,12 @@ const ProductPricing = styled.div`
   display: flex;
   gap: 2rem;
   margin: 2rem 0 1.5rem 0;
+
+  .product-slashed_price {
+    text-decoration: line-through;
+    font-weight: 400;
+    opacity: 0.5;
+  }
 `;
 
 const ProductAvailability = styled.div`
@@ -125,9 +131,8 @@ function ProductInfo() {
         </ProductInfoImage>
 
         <Row type="vertical">
-          {/* <ProductInfoTextContainer> */}
           <ProductDiscountAmount>
-            <p className="product-price">Save 24,000</p>
+            <p className="product-price">Save 2,500</p>
             <span>Discount applied</span>
           </ProductDiscountAmount>
 
@@ -140,8 +145,12 @@ function ProductInfo() {
           </ProductInfoText>
 
           <ProductPricing>
-            <h2 className="product-price">₦25,000</h2>
-            <h2 className="product-slashed_price">₦2,500</h2>
+            <h2 className="product-price">
+              <span className="naira-sign">₦</span> 25,000
+            </h2>
+            <h2 className="product-slashed_price">
+              <span className="naira-sign">₦</span>2,500
+            </h2>
           </ProductPricing>
 
           <ProductAvailability>
@@ -173,7 +182,6 @@ function ProductInfo() {
               <WishlistIcon />
             </WishlistContainer>
           </ButtonContainer>
-          {/* </ProductInfoTextContainer> */}
         </Row>
       </ProductMainInfo>
 
