@@ -119,6 +119,11 @@ const TrendingCategoryActions = styled.div`
 
   div {
     text-align: left;
+
+    span {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
   }
 
   & div svg {

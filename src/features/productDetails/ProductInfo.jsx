@@ -5,6 +5,9 @@ import Heading from '../../ui/Heading';
 import UpdateItemQuantity from './UpdateItemQuantity';
 import Button from '../../ui/Button';
 import WishlistIcon from '../../ui/WishlistIcon';
+import SimilarItems from './SimilarItems';
+import FrequentlyViewed from './FrequentlyViewed';
+import Benefits from '../../ui/Benefits';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -213,6 +216,11 @@ function ProductInfo() {
           </li>
         </ul>
       </ProductSubInfo>
+
+      <SimilarItems />
+      <FrequentlyViewed />
+
+      <Benefits />
     </StyledProductInfoContainer>
   );
 }

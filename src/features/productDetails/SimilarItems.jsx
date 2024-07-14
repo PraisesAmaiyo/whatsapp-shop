@@ -1,22 +1,21 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
 import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
+import CustomSwiper from '../../ui/CustomSwiper';
 
-import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
+import { similarItems } from './storeProductInfo';
 
-import { newArrivals } from './store';
-import LoadMore from '../../ui/LoadMore';
-import { useNavigate } from 'react-router-dom';
-
-const StyledNewArrivals = styled.section`
+const StyleSimilarItems = styled.section`
   padding: 4rem 0;
 `;
 
-const NewArrivalHeader = styled.div`
+const SimilarItemsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,15 +26,11 @@ const NewArrivalHeader = styled.div`
   }
 `;
 
-const NewArrivalsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, max-content);
-  gap: 3rem 1.5rem;
+const SimilarItemsContainer = styled.div`
   margin-bottom: 3rem;
 `;
 
-const NewArrivalProduct = styled.div`
+const SimilarItemsProduct = styled.div`
   margin: 0 auto;
   text-align: center;
   background-color: var(--color-brand-100);
@@ -53,7 +48,7 @@ const NewArrivalProduct = styled.div`
       background-color: var(--color-brand-700);
     }
 
-    .newArrival-category_actions {
+    .SimilarItems-category_actions {
       background-color: var(--color-brand-800);
       color: var(--color-grey-0);
     }
@@ -68,7 +63,7 @@ const NewArrivalProduct = styled.div`
   }
 `;
 
-const NewArrivalImageContainer = styled.div`
+const SimilarItemsImageContainer = styled.div`
   position: relative;
   border-radius: var(--border-radius-lg);
   display: flex;
@@ -81,7 +76,7 @@ const NewArrivalImageContainer = styled.div`
 
 const ProductImage = styled.img`
   width: 100%;
-  height: 25rem;
+  /* height: 25rem; */
   height: auto;
   object-fit: cover;
   object-position: center;
@@ -114,7 +109,7 @@ const WishlistContainer = styled.div`
   }
 `;
 
-const NewArrivalCategoryActions = styled.div`
+const SimilarItemsCategoryActions = styled.div`
   background-color: var(--color-brand-100);
   border-radius: var(--border-radius-lg);
   height: 7rem;
@@ -155,14 +150,53 @@ const NewArrivalCategoryActions = styled.div`
   }
 `;
 
-function NewArrivals() {
+function SimilarItems() {
   const navigate = useNavigate();
 
+  const slides = similarItems.map((item) => {
+    const {
+      id,
+      similarItemsImage,
+      similarItemsName,
+      similarItemsPrice,
+      similarItemsDiscount,
+      wishlist,
+    } = item;
+
+    return (
+      <SimilarItemsProduct key={id} onClick={() => navigate('/products')}>
+        <SimilarItemsImageContainer>
+          <DiscountTag className="discount-tag">
+            {`-${similarItemsDiscount}%`}
+          </DiscountTag>
+          <WishlistContainer>
+            <WishlistIcon type={wishlist ? true : ''} />
+          </WishlistContainer>
+          <ProductImage
+            src={similarItemsImage}
+            alt={`picture of ${similarItemsName} `}
+          />
+        </SimilarItemsImageContainer>
+        <SimilarItemsCategoryActions className="SimilarItems-category_actions">
+          <div>
+            <Heading as="h4">{similarItemsName}</Heading>
+            <span>{`₦${similarItemsPrice}`}</span>
+            {/* <Heading as="h4">₦255,000</Heading> */}
+          </div>
+
+          <div>
+            <FaShoppingCart />
+          </div>
+        </SimilarItemsCategoryActions>
+      </SimilarItemsProduct>
+    );
+  });
+
   return (
-    <StyledNewArrivals>
+    <StyleSimilarItems>
       <Row type="vertical">
-        <NewArrivalHeader>
-          <Heading as="h1">New Arrivals</Heading>
+        <SimilarItemsHeader>
+          <Heading as="h1">Discover similar items</Heading>
 
           <Button
             variation="primary"
@@ -171,53 +205,14 @@ function NewArrivals() {
           >
             View all products <FaArrowRight />
           </Button>
-        </NewArrivalHeader>
+        </SimilarItemsHeader>
 
-        <NewArrivalsContainer>
-          {newArrivals.map((newArrival) => {
-            const {
-              id,
-              newArrivalImage,
-              newArrivalName,
-              newArrivalPrice,
-              newArrivalDiscount,
-              wishlist,
-            } = newArrival;
-
-            return (
-              <NewArrivalProduct key={id} onClick={() => navigate('/products')}>
-                <NewArrivalImageContainer>
-                  <DiscountTag className="discount-tag">
-                    {`-${newArrivalDiscount}%`}
-                  </DiscountTag>
-                  <WishlistContainer>
-                    <WishlistIcon type={wishlist ? true : ''} />
-                  </WishlistContainer>
-                  <ProductImage
-                    src={newArrivalImage}
-                    alt={`picture of ${newArrivalName} `}
-                  />
-                </NewArrivalImageContainer>
-                <NewArrivalCategoryActions className="newArrival-category_actions">
-                  <div>
-                    <Heading as="h4">{newArrivalName}</Heading>
-                    <span>{`₦${newArrivalPrice}`}</span>
-                    {/* <Heading as="h4">₦255,000</Heading> */}
-                  </div>
-
-                  <div>
-                    <FaShoppingCart />
-                  </div>
-                </NewArrivalCategoryActions>
-              </NewArrivalProduct>
-            );
-          })}
-        </NewArrivalsContainer>
-
-        <LoadMore />
+        <SimilarItemsContainer>
+          <CustomSwiper slides={slides} />
+        </SimilarItemsContainer>
       </Row>
-    </StyledNewArrivals>
+    </StyleSimilarItems>
   );
 }
 
-export default NewArrivals;
+export default SimilarItems;

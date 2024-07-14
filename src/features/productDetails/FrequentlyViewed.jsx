@@ -1,22 +1,21 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
 import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
+import CustomSwiper from '../../ui/CustomSwiper';
 
-import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
+import { frequentlyViewedItems } from './storeProductInfo';
 
-import { newArrivals } from './store';
-import LoadMore from '../../ui/LoadMore';
-import { useNavigate } from 'react-router-dom';
-
-const StyledNewArrivals = styled.section`
+const StyleFrequentlyViewed = styled.section`
   padding: 4rem 0;
 `;
 
-const NewArrivalHeader = styled.div`
+const FrequentlyViewedHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,15 +26,11 @@ const NewArrivalHeader = styled.div`
   }
 `;
 
-const NewArrivalsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, max-content);
-  gap: 3rem 1.5rem;
+const FrequentlyViewedContainer = styled.div`
   margin-bottom: 3rem;
 `;
 
-const NewArrivalProduct = styled.div`
+const FrequentlyViewedProduct = styled.div`
   margin: 0 auto;
   text-align: center;
   background-color: var(--color-brand-100);
@@ -53,7 +48,7 @@ const NewArrivalProduct = styled.div`
       background-color: var(--color-brand-700);
     }
 
-    .newArrival-category_actions {
+    .FrequentlyViewed-category_actions {
       background-color: var(--color-brand-800);
       color: var(--color-grey-0);
     }
@@ -68,7 +63,7 @@ const NewArrivalProduct = styled.div`
   }
 `;
 
-const NewArrivalImageContainer = styled.div`
+const FrequentlyViewedImageContainer = styled.div`
   position: relative;
   border-radius: var(--border-radius-lg);
   display: flex;
@@ -81,7 +76,7 @@ const NewArrivalImageContainer = styled.div`
 
 const ProductImage = styled.img`
   width: 100%;
-  height: 25rem;
+  /* height: 25rem; */
   height: auto;
   object-fit: cover;
   object-position: center;
@@ -114,7 +109,7 @@ const WishlistContainer = styled.div`
   }
 `;
 
-const NewArrivalCategoryActions = styled.div`
+const FrequentlyViewedCategoryActions = styled.div`
   background-color: var(--color-brand-100);
   border-radius: var(--border-radius-lg);
   height: 7rem;
@@ -155,14 +150,52 @@ const NewArrivalCategoryActions = styled.div`
   }
 `;
 
-function NewArrivals() {
+function FrequentlyViewed() {
   const navigate = useNavigate();
 
+  const slides = frequentlyViewedItems.map((item) => {
+    const {
+      id,
+      frequentlyViewedItemsImage,
+      frequentlyViewedItemsName,
+      frequentlyViewedItemsPrice,
+      frequentlyViewedItemsDiscount,
+      wishlist,
+    } = item;
+
+    return (
+      <FrequentlyViewedProduct key={id} onClick={() => navigate('/products')}>
+        <FrequentlyViewedImageContainer>
+          <DiscountTag className="discount-tag">
+            {`-${frequentlyViewedItemsDiscount}%`}
+          </DiscountTag>
+          <WishlistContainer>
+            <WishlistIcon type={wishlist ? true : ''} />
+          </WishlistContainer>
+          <ProductImage
+            src={frequentlyViewedItemsImage}
+            alt={`picture of ${frequentlyViewedItemsName} `}
+          />
+        </FrequentlyViewedImageContainer>
+        <FrequentlyViewedCategoryActions className="FrequentlyViewed-category_actions">
+          <div>
+            <Heading as="h4">{frequentlyViewedItemsName}</Heading>
+            <span>{`₦${frequentlyViewedItemsPrice}`}</span>
+          </div>
+
+          <div>
+            <FaShoppingCart />
+          </div>
+        </FrequentlyViewedCategoryActions>
+      </FrequentlyViewedProduct>
+    );
+  });
+
   return (
-    <StyledNewArrivals>
+    <StyleFrequentlyViewed>
       <Row type="vertical">
-        <NewArrivalHeader>
-          <Heading as="h1">New Arrivals</Heading>
+        <FrequentlyViewedHeader>
+          <Heading as="h1">Customers frequrntly viewed</Heading>
 
           <Button
             variation="primary"
@@ -171,53 +204,14 @@ function NewArrivals() {
           >
             View all products <FaArrowRight />
           </Button>
-        </NewArrivalHeader>
+        </FrequentlyViewedHeader>
 
-        <NewArrivalsContainer>
-          {newArrivals.map((newArrival) => {
-            const {
-              id,
-              newArrivalImage,
-              newArrivalName,
-              newArrivalPrice,
-              newArrivalDiscount,
-              wishlist,
-            } = newArrival;
-
-            return (
-              <NewArrivalProduct key={id} onClick={() => navigate('/products')}>
-                <NewArrivalImageContainer>
-                  <DiscountTag className="discount-tag">
-                    {`-${newArrivalDiscount}%`}
-                  </DiscountTag>
-                  <WishlistContainer>
-                    <WishlistIcon type={wishlist ? true : ''} />
-                  </WishlistContainer>
-                  <ProductImage
-                    src={newArrivalImage}
-                    alt={`picture of ${newArrivalName} `}
-                  />
-                </NewArrivalImageContainer>
-                <NewArrivalCategoryActions className="newArrival-category_actions">
-                  <div>
-                    <Heading as="h4">{newArrivalName}</Heading>
-                    <span>{`₦${newArrivalPrice}`}</span>
-                    {/* <Heading as="h4">₦255,000</Heading> */}
-                  </div>
-
-                  <div>
-                    <FaShoppingCart />
-                  </div>
-                </NewArrivalCategoryActions>
-              </NewArrivalProduct>
-            );
-          })}
-        </NewArrivalsContainer>
-
-        <LoadMore />
+        <FrequentlyViewedContainer>
+          <CustomSwiper slides={slides} />
+        </FrequentlyViewedContainer>
       </Row>
-    </StyledNewArrivals>
+    </StyleFrequentlyViewed>
   );
 }
 
-export default NewArrivals;
+export default FrequentlyViewed;

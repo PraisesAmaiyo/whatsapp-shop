@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Header from '../features/homepage/Header';
 import Main from '../features/homepage/Main';
-import Benefits from '../features/homepage/Benefits';
+import Benefits from '../ui/Benefits';
 import Recommended from '../features/homepage/Recommended';
 import FeaturedCategories from '../features/homepage/FeaturedCategories';
 import TrendingProducts from '../features/homepage/TrendingProducts';
