@@ -180,7 +180,10 @@ function FrequentlyViewed() {
         <FrequentlyViewedCategoryActions className="FrequentlyViewed-category_actions">
           <div>
             <Heading as="h4">{frequentlyViewedItemsName}</Heading>
-            <span>{`₦${frequentlyViewedItemsPrice}`}</span>
+            <span>
+              <span className="naira-sign">₦</span>
+              {`${frequentlyViewedItemsPrice}`}
+            </span>
           </div>
 
           <div>

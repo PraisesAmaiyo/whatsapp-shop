@@ -168,6 +168,10 @@ img {
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
 
+.naira-sign{
+   font-family: "Libre Franklin", sans-serif!important
+}
+
 `;
 
 export default GlobalStyles;

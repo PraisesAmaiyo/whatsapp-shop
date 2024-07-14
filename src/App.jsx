@@ -6,12 +6,14 @@ import ProductDetails from './pages/ProductDetails';
 import PageNotFound from './pages/PageNotFound';
 import GlobalStyles from './styles/GlobalStyles';
 import AppLayout from './ui/AppLayout';
+import ScrollToTop from './services/ScrollToTop';
 
 function App() {
   return (
     <>
       <GlobalStyles />
       <BrowserRouter>
+        <ScrollToTop />
         <StyleSheetManager shouldForwardProp={(prop) => prop !== 'variation'}>
           <Routes>
             <Route element={<AppLayout />}>

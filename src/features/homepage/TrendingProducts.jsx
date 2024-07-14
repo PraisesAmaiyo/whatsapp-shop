@@ -191,8 +191,10 @@ function TrendingProducts() {
                 <TrendingCategoryActions className="trending-category_actions">
                   <div>
                     <Heading as="h4">{newArrivalName}</Heading>
-                    <span>{`₦${newArrivalPrice}`}</span>
-                    {/* <Heading as="h4">₦255,000</Heading> */}
+                    <span>
+                      <span className="naira-sign">₦</span>
+                      {`${newArrivalPrice}`}
+                    </span>
                   </div>
 
                   <div>

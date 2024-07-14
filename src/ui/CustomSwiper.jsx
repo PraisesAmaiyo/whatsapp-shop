@@ -118,5 +118,3 @@ function CustomSwiper({ slides }) {
 }
 
 export default CustomSwiper;
-{
-}

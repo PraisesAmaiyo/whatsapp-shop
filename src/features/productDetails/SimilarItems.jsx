@@ -180,8 +180,10 @@ function SimilarItems() {
         <SimilarItemsCategoryActions className="SimilarItems-category_actions">
           <div>
             <Heading as="h4">{similarItemsName}</Heading>
-            <span>{`₦${similarItemsPrice}`}</span>
-            {/* <Heading as="h4">₦255,000</Heading> */}
+            <span>
+              <span className="naira-sign">₦</span>
+              {`${similarItemsPrice}`}
+            </span>
           </div>
 
           <div>
