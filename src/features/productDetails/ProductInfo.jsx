@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ProductImage from '../../assets/images/newArrivals/newArrivals-1.jpg';
 import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
-import UpdateItemQuantity from './UpdateItemQuantity';
+import UpdateItemQuantity from '../../ui/UpdateItemQuantity';
 import Button from '../../ui/Button';
 import WishlistIcon from '../../ui/WishlistIcon';
 import SimilarItems from './SimilarItems';

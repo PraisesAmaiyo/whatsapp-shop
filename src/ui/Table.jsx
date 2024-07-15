@@ -6,7 +6,7 @@ const StyledTable = styled.div`
 
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
-  border-radius: 7px;
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
 `;
 
@@ -21,15 +21,16 @@ const CommonRow = styled.header`
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
 
-  background-color: var(--color-grey-50);
+  background-color: var(--color-brand-800);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
-  color: var(--color-grey-600);
+  color: var(--color-grey-50);
 `;
 
 const StyledBody = styled.section`
+  background-color: var(--color-brand-100);
   margin: 0.4rem 0;
 `;
 
