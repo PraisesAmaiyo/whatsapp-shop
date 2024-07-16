@@ -5,24 +5,24 @@ import CartRow from './CartRow';
 import { cartItems, OrderSummary } from './storeCartItems';
 import OrderSummaryRow from './OrderSummaryRow';
 
-console.log(OrderSummary);
-console.log(cartItems);
-
 const StyledCart = styled.div`
   display: grid;
-  grid-template-columns: 69% 29%;
+  grid-template-columns: 67% 31%;
   gap: 2rem;
+
+  .quantity {
+    padding-left: 1rem;
+  }
 `;
 
 function CartTable() {
   return (
     <StyledCart>
-      <Table columns="30rem 1.8fr 2.2fr 1fr 1fr ">
+      <Table columns="30rem 8rem auto 9rem 6rem">
         <Table.Header role="row">
           <div>Product</div>
-
           <div>Price</div>
-          <div>Quantity</div>
+          <div className="quantity">Quantity</div>
           <div>Subtotal</div>
           <div></div>
         </Table.Header>

@@ -1,8 +1,8 @@
 import HeaderNav from './HeaderNav';
 import HeaderMenu from './HeaderMenu';
 
-import Logo from '../../ui/Logo';
-import Row from '../../ui/Row';
+import Logo from './Logo';
+import Row from './Row';
 
 function Header() {
   return (

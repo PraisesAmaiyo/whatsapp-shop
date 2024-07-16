@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
-import { FaTimes } from 'react-icons/fa';
-
 import Table from '../../ui/Table';
 import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
 
 const Group = styled.div`
   display: grid;
-  grid-template-columns: 65% 31%;
+  grid-template-columns: 60% 1fr;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 2.4rem;

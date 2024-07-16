@@ -8,6 +8,7 @@ import WishlistIcon from '../../ui/WishlistIcon';
 import SimilarItems from './SimilarItems';
 import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
+import { useNavigate } from 'react-router-dom';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -123,6 +124,8 @@ const ProductSubInfo = styled.div`
 `;
 
 function ProductInfo() {
+  const navigate = useNavigate();
+
   return (
     <StyledProductInfoContainer>
       <ProductMainInfo>
@@ -174,7 +177,11 @@ function ProductInfo() {
             <Button variation="secondary" size="large">
               Buy Now
             </Button>
-            <Button variation="primary" size="large">
+            <Button
+              variation="primary"
+              size="large"
+              onClick={() => navigate('/cart')}
+            >
               Add to Cart
             </Button>
 

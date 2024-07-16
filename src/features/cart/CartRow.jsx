@@ -34,7 +34,6 @@ const Img = styled.img`
   object-fit: cover;
   object-position: center;
   border-radius: var(--border-radius-md);
-  /* transform: scale(1.5) translateX(-7px); */
 `;
 
 const Name = styled.div`
@@ -51,6 +50,10 @@ const SubTotal = styled.div`
 `;
 
 const DeleteItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   div {
     padding: 1rem;
     border-radius: var(--border-radius-full);

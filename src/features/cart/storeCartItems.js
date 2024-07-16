@@ -69,5 +69,3 @@ const updateOrderSummary = (cartItems) => {
 };
 
 export const OrderSummary = [updateOrderSummary(cartItems)];
-
-console.log(OrderSummary);

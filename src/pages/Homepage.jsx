@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Header from '../features/homepage/Header';
+import Header from '../ui/Header';
 import Main from '../features/homepage/Main';
 import Benefits from '../ui/Benefits';
 import Recommended from '../features/homepage/Recommended';

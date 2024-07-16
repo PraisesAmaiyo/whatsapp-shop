@@ -3,10 +3,8 @@ import styled from 'styled-components';
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
   height: min-content;
   font-size: 1.4rem;
-  /* background-color: var(--color-grey-0); */
   border-radius: var(--border-radius-lg);
   overflow: hidden;
 `;
@@ -14,14 +12,13 @@ const StyledTable = styled.div`
 const CommonRow = styled.header`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
-  column-gap: 2.4rem;
+  column-gap: 1.5rem;
   align-items: center;
   transition: none;
 `;
 
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
   background-color: var(--color-brand-800);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;

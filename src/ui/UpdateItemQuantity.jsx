@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyedUpdateItemQuantity = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   margin: 2rem 0;
   background-color: var(--color-brand-100);
   width: min-content;

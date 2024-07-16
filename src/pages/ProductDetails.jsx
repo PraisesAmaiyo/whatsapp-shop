@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Header from '../features/homepage/Header';
+import Header from '../ui/Header';
 
 import ProductNavHistory from '../features/productDetails/ProductNavHistory';
 import ProductInfo from '../features/productDetails/ProductInfo';

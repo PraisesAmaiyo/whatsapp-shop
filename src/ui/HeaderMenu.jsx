@@ -2,7 +2,7 @@ import { HiOutlineUser } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import ButtonIcon from '../../ui/ButtonIcon';
+import ButtonIcon from './ButtonIcon';
 import { FiHeart, FiSearch, FiShoppingCart } from 'react-icons/fi';
 
 const StyledHeaderMenu = styled.ul`
@@ -20,7 +20,7 @@ function Headermenu() {
           <HiOutlineUser />
         </ButtonIcon>
 
-        <ButtonIcon onClick={() => navigate('/')}>
+        <ButtonIcon onClick={() => navigate('/cart')}>
           <FiShoppingCart />
         </ButtonIcon>
 

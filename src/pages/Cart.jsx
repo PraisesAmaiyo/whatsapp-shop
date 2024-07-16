@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
-import Header from '../features/homepage/Header';
-
+import Header from '../ui/Header';
 import CartHeader from '../features/cart/CartHeader';
-import ProductInfo from '../features/productDetails/ProductInfo';
-import Footer from '../ui/Footer';
-import Table from '../ui/Table';
 import CabinTable from '../features/cart/CartTable';
+
+import Footer from '../ui/Footer';
 import Benefits from '../ui/Benefits';
 
 const Container = styled.div`
