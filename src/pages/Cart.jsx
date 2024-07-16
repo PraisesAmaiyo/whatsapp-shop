@@ -7,6 +7,7 @@ import ProductInfo from '../features/productDetails/ProductInfo';
 import Footer from '../ui/Footer';
 import Table from '../ui/Table';
 import CabinTable from '../features/cart/CartTable';
+import Benefits from '../ui/Benefits';
 
 const Container = styled.div`
   width: 100%;
@@ -42,6 +43,7 @@ function ProductDetails() {
       <WhiteWrapper>
         <Container>
           <CabinTable />
+          <Benefits />
         </Container>
         <Footer />
       </WhiteWrapper>

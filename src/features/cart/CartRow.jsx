@@ -5,6 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 import Table from '../../ui/Table';
 import ButtonText from '../../ui/ButtonText';
 import UpdateItemQuantity from '../../ui/UpdateItemQuantity';
+import { formatNumber } from '../../utils/helpers';
 
 // const TableRow = styled.div`
 //   display: grid;
@@ -61,7 +62,7 @@ const DeleteItem = styled.div`
     }
 
     &:hover {
-      background-color: var(--color-brand-100);
+      background-color: var(--color-brand-200);
       svg {
         transform: scale(1.1);
       }
@@ -81,11 +82,14 @@ function CartRow({ cartItem }) {
 
       <Price>
         <span className="naira-sign">₦</span>
-        {cartItemsPrice}
+        {formatNumber(cartItemsPrice)}
       </Price>
       <UpdateItemQuantity />
 
-      <SubTotal>{cartItemsPrice}</SubTotal>
+      <SubTotal>
+        <span className="naira-sign">₦</span>
+        {formatNumber(cartItemsPrice)}
+      </SubTotal>
 
       <DeleteItem>
         <ButtonText>

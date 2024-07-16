@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
 
+  height: min-content;
   font-size: 1.4rem;
-  background-color: var(--color-grey-0);
+  /* background-color: var(--color-grey-0); */
   border-radius: var(--border-radius-lg);
   overflow: hidden;
 `;
@@ -35,7 +36,9 @@ const StyledBody = styled.section`
 `;
 
 const StyledRow = styled(CommonRow)`
-  padding: 1.2rem 2.4rem;
+  padding: ${(props) => (props.istotalrow ? '0' : '1.2rem 2.4rem')};
+  background-color: ${(props) =>
+    props.istotalrow ? 'var(--color-brand-100)' : 'inherit'};
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
@@ -79,11 +82,11 @@ function Header({ children }) {
   );
 }
 
-function Row({ children }) {
+function Row({ children, istotalrow }) {
   const { columns } = useContext(TableContext);
 
   return (
-    <StyledRow role="row" columns={columns}>
+    <StyledRow role="row" columns={columns} istotalrow={istotalrow}>
       {children}
     </StyledRow>
   );

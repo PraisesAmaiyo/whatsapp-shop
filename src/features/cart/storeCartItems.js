@@ -9,7 +9,7 @@ export const cartItems = [
     id: 'cartItems1',
     cartItemsImage: cartItemsProductImage1,
     cartItemsName: 'Patek Phillipe',
-    cartItemsPrice: '185,000',
+    cartItemsPrice: 185000,
     cartItemsDiscount: 10,
     wishlist: false,
   },
@@ -17,7 +17,7 @@ export const cartItems = [
     id: 'cartItems2',
     cartItemsImage: cartItemsProductImage2,
     cartItemsName: 'Smith Jeans Shirt ',
-    cartItemsPrice: '26,000',
+    cartItemsPrice: 26000,
     cartItemsDiscount: 5,
     wishlist: false,
   },
@@ -25,7 +25,7 @@ export const cartItems = [
     id: 'cartItems3',
     cartItemsImage: cartItemsProductImage3,
     cartItemsName: 'Alexander McQUEEN Shoe',
-    cartItemsPrice: '35,000',
+    cartItemsPrice: 35000,
     cartItemsDiscount: 15,
     wishlist: true,
   },
@@ -33,7 +33,7 @@ export const cartItems = [
     id: 'cartItems4',
     cartItemsImage: cartItemsProductImage4,
     cartItemsName: 'Balenciaga Black Jean',
-    cartItemsPrice: '30,000',
+    cartItemsPrice: 30000,
     cartItemsDiscount: 5,
     wishlist: true,
   },
@@ -41,8 +41,33 @@ export const cartItems = [
     id: 'cartItems5',
     cartItemsImage: cartItemsProductImage5,
     cartItemsName: 'Cartier Watch (+strap)',
-    cartItemsPrice: '230,000',
+    cartItemsPrice: 23000,
     cartItemsDiscount: 5,
     wishlist: true,
   },
 ];
+
+const calculateShipping = (subtotal) => {
+  if (subtotal > 100000) {
+    return 0;
+  } else {
+    return 2000;
+  }
+};
+
+const updateOrderSummary = (cartItems) => {
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.cartItemsPrice,
+    0
+  );
+  const shipping = calculateShipping(subtotal);
+  return {
+    subtotal,
+    shipping,
+    total: subtotal + shipping,
+  };
+};
+
+export const OrderSummary = [updateOrderSummary(cartItems)];
+
+console.log(OrderSummary);
