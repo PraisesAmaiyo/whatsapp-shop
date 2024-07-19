@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import Table from '../../ui/Table';
-import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
-import { useNavigate } from 'react-router-dom';
+
+import { formatNumber } from '../../utils/helpers';
 
 const Group = styled.div`
   display: grid;
@@ -34,7 +35,8 @@ const CheckoutBtn = styled.div`
 `;
 
 function OrderSummaryRow({ summary }) {
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
+
   const { subtotal, shipping, total } = summary;
 
   return (
@@ -72,9 +74,9 @@ function OrderSummaryRow({ summary }) {
         <Button
           variation="primary"
           size="large"
-          onClick={() => navigate('/checkout')}
+          //  onClick={() => navigate('/checkout')}
         >
-          Proceed To Checkout
+          Proceed To XXX
         </Button>
       </CheckoutBtn>
     </Table.Row>

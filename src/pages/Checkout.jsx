@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import Header from '../ui/Header';
-import CartHeader from '../features/cart/CartHeader';
-import CartTable from '../features/cart/CartTable';
+import CheckoutHeader from '../features/checkout/CheckoutHeader';
+import Checkout from '../features/checkout/Checkout';
 
 import Footer from '../ui/Footer';
 import Benefits from '../ui/Benefits';
@@ -35,12 +35,12 @@ function ProductDetails() {
       <GradientWrapper>
         <Container>
           <Header />
-          <CartHeader />
+          <CheckoutHeader />
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
-          <CartTable />
+          <Checkout />
           <Benefits />
         </Container>
         <Footer />

@@ -2,7 +2,6 @@ import { createContext, useContext } from 'react';
 import styled from 'styled-components';
 
 const StyledTable = styled.div`
-  border: 1px solid var(--color-grey-200);
   height: min-content;
   font-size: 1.4rem;
   border-radius: var(--border-radius-lg);
