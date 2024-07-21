@@ -22,19 +22,37 @@ function CountryStateCity() {
   const [stateList, setStateList] = useState([]);
   const [cityList, setCityList] = useState([]);
 
+  const [loadingStates, setLoadingStates] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
+
   const NIGERIA_ID = 161;
 
+  const customCities = {
+    316: [
+      { id: 'ozoro', name: 'Ozoro' },
+      { id: 'oleh2', name: 'Oleh' },
+    ],
+  };
+
   useEffect(() => {
-    GetCountries().then((result) => {
-      setCountriesList(result);
-      const nigeria = result.find((country) => country.id === NIGERIA_ID);
-      if (nigeria) {
-        setCountryid(nigeria.id);
-        GetState(nigeria.id).then((states) => {
-          setStateList(states);
-        });
-      }
-    });
+    GetCountries()
+      .then((result) => {
+        setCountriesList(result);
+        const nigeria = result.find((country) => country.id === NIGERIA_ID);
+        if (nigeria) {
+          setCountryid(nigeria.id);
+          setLoadingStates(true);
+          GetState(nigeria.id)
+            .then((states) => {
+              setStateList(states);
+              setLoadingStates(false);
+            })
+            .catch((error) => {
+              setLoadingStates(false);
+            });
+        }
+      })
+      .catch((error) => console.error('Error fetching countries:', error));
   }, []);
 
   const handleCountryChange = (e) => {
@@ -45,9 +63,19 @@ function CountryStateCity() {
     setStateList([]);
     setCityList([]);
 
-    GetState(selectedCountryId).then((result) => {
-      setStateList(result);
-    });
+    setLoadingStates(true);
+    GetState(selectedCountryId)
+      .then((result) => {
+        setStateList(result);
+        setLoadingStates(false);
+      })
+      .catch((error) => {
+        console.error(
+          `Error fetching states for country ${selectedCountryId}:`,
+          error
+        );
+        setLoadingStates(false);
+      });
   };
 
   const handleStateChange = (e) => {
@@ -56,9 +84,25 @@ function CountryStateCity() {
     setCityid('');
     setCityList([]);
 
-    GetCity(countryid, selectedStateId).then((result) => {
-      setCityList(result);
-    });
+    setLoadingCities(true);
+    GetCity(countryid, selectedStateId)
+      .then((result) => {
+        const additionalCities = customCities[selectedStateId] || [];
+        setCityList([...result, ...additionalCities]);
+        setLoadingCities(false);
+      })
+      .catch((error) => {
+        console.error(
+          `Error fetching cities for state ${selectedStateId}:`,
+          error
+        );
+        setLoadingCities(false);
+      });
+  };
+
+  const handleCityChange = (e) => {
+    const selectedCityId = e.target.value;
+    setCityid(selectedCityId);
   };
 
   return (
@@ -73,27 +117,32 @@ function CountryStateCity() {
       </FormRowVertical>
 
       <FormRowVertical label="State">
-        <Select
-          onChange={handleStateChange}
-          value={stateid}
-          options={stateList}
-          type={'white'}
-          variation={'state'}
-          id="state"
-        />
+        {loadingStates ? (
+          <p>Loading states...</p>
+        ) : (
+          <Select
+            onChange={handleStateChange}
+            value={stateid}
+            options={stateList}
+            type={'white'}
+            variation={'state'}
+            id="state"
+          />
+        )}
       </FormRowVertical>
 
       <FormRowVertical label="City">
-        <Select
-          onChange={(e) => {
-            const selectedCityId = parseInt(e.target.value, 10);
-            setCityid(selectedCityId);
-          }}
-          value={cityid}
-          options={cityList}
-          variation={'city'}
-          id="city"
-        />
+        {loadingCities ? (
+          <p>Loading cities...</p>
+        ) : (
+          <Select
+            onChange={handleCityChange}
+            value={cityid}
+            options={cityList}
+            variation={'city'}
+            id="city"
+          />
+        )}
       </FormRowVertical>
     </InputGroup>
   );
