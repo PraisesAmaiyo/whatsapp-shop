@@ -1,9 +1,17 @@
 import { useEffect, useState } from 'react';
-
-import 'react-country-state-city/dist/react-country-state-city.css';
+import styled from 'styled-components';
 
 import { GetCountries, GetState, GetCity } from 'react-country-state-city';
+import 'react-country-state-city/dist/react-country-state-city.css';
+
 import Select from './Select';
+import FormRowVertical from './FormRowVertical';
+
+const InputGroup = styled.div`
+  display: flex;
+  gap: 3rem;
+  width: 100%;
+`;
 
 function CountryStateCity() {
   const [countryid, setCountryid] = useState(0);
@@ -54,43 +62,40 @@ function CountryStateCity() {
   };
 
   return (
-    <div>
-      <h6>Country</h6>
-      <Select
-        onChange={handleCountryChange}
-        value={countryid}
-        options={countriesList}
-      />
+    <InputGroup>
+      <FormRowVertical label="Country">
+        <Select
+          onChange={handleCountryChange}
+          value={countryid}
+          options={countriesList}
+          id="country"
+        />
+      </FormRowVertical>
 
-      <h6>State</h6>
-      <Select
-        onChange={handleStateChange}
-        value={stateid}
-        options={stateList}
-        type={'white'}
-        variation={'state'}
-      />
+      <FormRowVertical label="State">
+        <Select
+          onChange={handleStateChange}
+          value={stateid}
+          options={stateList}
+          type={'white'}
+          variation={'state'}
+          id="state"
+        />
+      </FormRowVertical>
 
-      <h6>City</h6>
-      <Select
-        onChange={(e) => {
-          const selectedCityId = parseInt(e.target.value, 10);
-          setCityid(selectedCityId);
-        }}
-        value={cityid}
-        options={cityList}
-        variation={'city'}
-      />
-      {/* <option value="" disabled>
-          Select City
-        </option>
-        {cityList.map((item) => (
-          <option key={item.id} value={item.id}>
-            {item.name}
-          </option>
-        ))}
-      </Select> */}
-    </div>
+      <FormRowVertical label="City">
+        <Select
+          onChange={(e) => {
+            const selectedCityId = parseInt(e.target.value, 10);
+            setCityid(selectedCityId);
+          }}
+          value={cityid}
+          options={cityList}
+          variation={'city'}
+          id="city"
+        />
+      </FormRowVertical>
+    </InputGroup>
   );
 }
 

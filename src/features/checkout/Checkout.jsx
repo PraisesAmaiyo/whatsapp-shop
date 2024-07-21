@@ -64,6 +64,8 @@ function Checkout() {
           <FormRowVertical label="Address">
             <Input type="address" id="address" />
           </FormRowVertical>
+
+          <CountryStateCity />
         </Form>
 
         <Table columns="1fr ">
@@ -79,8 +81,6 @@ function Checkout() {
           />
         </Table>
       </StyledCheckout>
-
-      <CountryStateCity />
     </>
   );
 }
