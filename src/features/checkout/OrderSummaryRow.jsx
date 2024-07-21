@@ -11,20 +11,20 @@ const Group = styled.div`
   grid-template-columns: 60% 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 2.4rem;
+  padding: 1.5rem 2rem;
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 `;
 
 const Title = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 `;
 
 const TotalRow = styled(Group)`
   background-color: var(--color-grey-100);
   padding: 0;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   padding: 1.5rem 2.4rem;
 `;
 

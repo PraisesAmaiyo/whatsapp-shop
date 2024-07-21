@@ -17,7 +17,7 @@ const CommonRow = styled.header`
 `;
 
 const StyledHeader = styled(CommonRow)`
-  padding: 1.6rem 2.4rem;
+  padding: 1.6rem 2rem;
   background-color: var(--color-brand-800);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;

@@ -4,10 +4,10 @@ const Form = styled.form`
   ${(props) =>
     props.type === 'regular' &&
     css`
-      padding: 2.4rem 4rem;
+      padding: 0 1rem;
 
       /* Box */
-      background-color: var(--color-grey-0);
+      background-color: var(--color-brand-50);
       border: 1px solid var(--color-grey-100);
       border-radius: var(--border-radius-md);
     `}
