@@ -117,32 +117,24 @@ function CountryStateCity() {
       </FormRowVertical>
 
       <FormRowVertical label="State">
-        {loadingStates ? (
-          <p>Loading states...</p>
-        ) : (
-          <Select
-            onChange={handleStateChange}
-            value={stateid}
-            options={stateList}
-            type={'white'}
-            variation={'state'}
-            id="state"
-          />
-        )}
+        <Select
+          onChange={handleStateChange}
+          value={stateid}
+          options={stateList}
+          type={'white'}
+          variation={loadingStates ? 'loading' : 'state'}
+          id="state"
+        />
       </FormRowVertical>
 
       <FormRowVertical label="City">
-        {loadingCities ? (
-          <p>Loading cities...</p>
-        ) : (
-          <Select
-            onChange={handleCityChange}
-            value={cityid}
-            options={cityList}
-            variation={'city'}
-            id="city"
-          />
-        )}
+        <Select
+          onChange={handleCityChange}
+          value={cityid}
+          options={cityList}
+          variation={loadingStates ? 'loading' : 'city'}
+          id="city"
+        />
       </FormRowVertical>
     </InputGroup>
   );

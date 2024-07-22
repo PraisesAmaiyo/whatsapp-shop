@@ -27,6 +27,11 @@ function Select({ options, value, onChange, variation, ...props }) {
           Select City
         </option>
       )}
+      {variation === 'loading' && (
+        <option value="" disabled>
+          Loading...
+        </option>
+      )}
 
       {options.map((option) => (
         <option value={option.id} key={option.id}>

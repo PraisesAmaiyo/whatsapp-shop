@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-import { OrderSummary } from '../cart/storeCartItems';
-import OrderSummaryRow from './OrderSummaryRow';
+import BillingDetailsForm from './BillingDetailsForm';
+import ShippingDetailsForm from './ShippingDetailsForm';
+import CheckoutSummary from './CheckoutSummary';
+import CartTable from '../cart/CartTable';
 
-import Table from '../../ui/Table';
-import Form from '../../ui/Form';
-import FormRowVertical from '../../ui/FormRowVertical';
-import Input from '../../ui/Input';
-import CountryStateCity from '../../ui/CountryStateCity';
+import Row from '../../ui/Row';
 
 const StyledCheckout = styled.div`
   display: grid;
@@ -26,61 +24,19 @@ const Header = styled.div`
   margin: 2rem 0;
 `;
 
-const InputGroup = styled.div`
-  display: flex;
-  gap: 3rem;
-  width: 100%;
-`;
-
 function Checkout() {
   return (
     <>
       <Header>
         <span>Billing Details</span>
       </Header>
-
-      <StyledCheckout>
-        <Form>
-          <InputGroup>
-            <FormRowVertical label="First Name">
-              <Input type="name" id="firstname" />
-            </FormRowVertical>
-
-            <FormRowVertical label="Last Name">
-              <Input type="name" id="lastname" />
-            </FormRowVertical>
-          </InputGroup>
-
-          <InputGroup>
-            <FormRowVertical label="Phone Number">
-              <Input type="phonenumber" id="phonenumber" />
-            </FormRowVertical>
-
-            <FormRowVertical label="Email Address">
-              <Input type="email" id="email" />
-            </FormRowVertical>
-          </InputGroup>
-
-          <FormRowVertical label="Address">
-            <Input type="address" id="address" />
-          </FormRowVertical>
-
-          <CountryStateCity />
-        </Form>
-
-        <Table columns="1fr ">
-          <Table.Header role="row">
-            <div>Order Summary</div>
-          </Table.Header>
-
-          <Table.Body
-            data={OrderSummary}
-            render={(summary) => (
-              <OrderSummaryRow summary={summary} key={summary} />
-            )}
-          />
-        </Table>
-      </StyledCheckout>
+      {/* <Row> */}
+      <BillingDetailsForm />
+      <ShippingDetailsForm />
+      {/* </Row> */}s{/* <StyledCheckout> */}
+      <CartTable />
+      {/* <CheckoutSummary /> */}
+      {/* </StyledCheckout> */}
     </>
   );
 }

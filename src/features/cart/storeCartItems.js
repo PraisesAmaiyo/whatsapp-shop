@@ -47,24 +47,14 @@ export const cartItems = [
   },
 ];
 
-const calculateShipping = (subtotal) => {
-  if (subtotal > 100000) {
-    return 0;
-  } else {
-    return 2000;
-  }
-};
-
 const updateOrderSummary = (cartItems) => {
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.cartItemsPrice,
     0
   );
-  const shipping = calculateShipping(subtotal);
+
   return {
     subtotal,
-    shipping,
-    total: subtotal + shipping,
   };
 };
 
