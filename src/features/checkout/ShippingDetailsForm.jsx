@@ -34,6 +34,10 @@ const CheckboxGroup = styled.div`
 
 const shippingLocations = [
   {
+    location: 'Customer',
+    amount: 'Free',
+  },
+  {
     location: 'Ozoro',
     amount: 1500,
   },
@@ -67,6 +71,8 @@ const shippingLocations = [
   },
 ];
 
+// console.log(object);
+
 function Shipping() {
   const { shippingDetails, updateShippingDetails } = useShipping();
   const [selectedLocation, setSelectedLocation] = useState(
@@ -92,6 +98,7 @@ function Shipping() {
       </Header>
       {shippingLocations.map((shipping) => {
         const { location, amount } = shipping;
+        //   console.log(location);
 
         return (
           <Box
@@ -105,13 +112,22 @@ function Shipping() {
               id={location}
             >
               <CheckboxGroup>
-                <p>
-                  Shipping to <strong>{location}</strong>
-                </p>
+                {location === 'Customer' ? (
+                  <p>
+                    Pickup by <strong>{location}</strong>
+                  </p>
+                ) : (
+                  <p>
+                    Shipping to <strong>{location}</strong>
+                  </p>
+                )}
 
                 <strong>
-                  <span className="naira-sign">₦</span>
-                  {formatNumber(amount)}
+                  {location === 'Customer' ? (
+                    <span>Free</span>
+                  ) : (
+                    <span className="naira-sign">₦{formatNumber(amount)}</span>
+                  )}
                 </strong>
               </CheckboxGroup>
             </Checkbox>

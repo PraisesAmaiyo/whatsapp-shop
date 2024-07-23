@@ -12,6 +12,7 @@ export const cartItems = [
     cartItemsPrice: 185000,
     cartItemsDiscount: 10,
     wishlist: false,
+    quantity: 1,
   },
   {
     id: 'cartItems2',
@@ -20,6 +21,7 @@ export const cartItems = [
     cartItemsPrice: 26000,
     cartItemsDiscount: 5,
     wishlist: false,
+    quantity: 1,
   },
   {
     id: 'cartItems3',
@@ -28,6 +30,7 @@ export const cartItems = [
     cartItemsPrice: 35000,
     cartItemsDiscount: 15,
     wishlist: true,
+    quantity: 1,
   },
   {
     id: 'cartItems4',
@@ -36,6 +39,7 @@ export const cartItems = [
     cartItemsPrice: 30000,
     cartItemsDiscount: 5,
     wishlist: true,
+    quantity: 1,
   },
   {
     id: 'cartItems5',
@@ -44,6 +48,7 @@ export const cartItems = [
     cartItemsPrice: 23000,
     cartItemsDiscount: 5,
     wishlist: true,
+    quantity: 1,
   },
 ];
 

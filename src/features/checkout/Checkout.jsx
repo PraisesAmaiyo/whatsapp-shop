@@ -6,6 +6,8 @@ import CheckoutSummary from './CheckoutSummary';
 import CartTable from '../cart/CartTable';
 
 import Row from '../../ui/Row';
+import CartSummary from '../cart/CartSummary';
+import CartItems from '../cart/CartItems';
 
 const StyledCheckout = styled.div`
   display: grid;
@@ -24,19 +26,35 @@ const Header = styled.div`
   margin: 2rem 0;
 `;
 
+const StyledCartSummary = styled.div`
+  display: grid;
+  grid-template-columns: 67% 31%;
+  gap: 2rem;
+
+  .quantity {
+    padding-left: 1rem;
+  }
+`;
+
 function Checkout() {
   return (
     <>
       <Header>
         <span>Billing Details</span>
       </Header>
-      {/* <Row> */}
-      <BillingDetailsForm />
-      <ShippingDetailsForm />
-      {/* </Row> */}s{/* <StyledCheckout> */}
-      <CartTable />
-      {/* <CheckoutSummary /> */}
-      {/* </StyledCheckout> */}
+      <Row>
+        <BillingDetailsForm />
+        <ShippingDetailsForm />
+
+        <Header>
+          <span>Cart Summary</span>
+        </Header>
+
+        <StyledCartSummary>
+          <CartItems />
+          <CheckoutSummary />
+        </StyledCartSummary>
+      </Row>
     </>
   );
 }

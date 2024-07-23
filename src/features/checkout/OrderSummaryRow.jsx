@@ -36,10 +36,18 @@ const CheckoutBtn = styled.div`
 `;
 
 function OrderSummaryRow({ summary }) {
+  //   const navigate = useNavigate();
   const { shippingDetails } = useShipping();
 
-  const { amount: shippingAmount } = shippingDetails;
-  //   const navigate = useNavigate();
+  const { amount } = shippingDetails;
+
+  let shippingAmount;
+
+  if (amount === 'Free') {
+    shippingAmount = 0;
+  } else {
+    shippingAmount = amount;
+  }
 
   const { subtotal } = summary;
 
@@ -75,7 +83,7 @@ function OrderSummaryRow({ summary }) {
           size="large"
           //  onClick={() => navigate('/checkout')}
         >
-          Proceed To XXX
+          Proceed To Payment
         </Button>
       </CheckoutBtn>
     </Table.Row>

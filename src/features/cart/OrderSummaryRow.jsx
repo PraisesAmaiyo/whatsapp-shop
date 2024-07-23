@@ -4,6 +4,7 @@ import Table from '../../ui/Table';
 import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
 import { useNavigate } from 'react-router-dom';
+import { useShipping } from '../../context/ShippingContext';
 
 const Group = styled.div`
   display: grid;
@@ -35,7 +36,10 @@ const CheckoutBtn = styled.div`
 
 function OrderSummaryRow({ summary }) {
   const navigate = useNavigate();
-  const { subtotal, shipping, total } = summary;
+
+  const { shippingDetails } = useShipping();
+  const { amount: shippingAmount } = shippingDetails;
+  const { subtotal } = summary;
 
   return (
     <Table.Row istotalrow="istotalrow">
@@ -50,21 +54,18 @@ function OrderSummaryRow({ summary }) {
 
       <Group>
         <Title>Shipping</Title>
-        {shipping === 0 ? (
-          <div>Free</div>
-        ) : (
-          <div>
-            <span className="naira-sign">₦</span>
-            {formatNumber(shipping)}
-          </div>
-        )}
+
+        <div>
+          <span className="naira-sign">₦</span>
+          {formatNumber(shippingAmount)}
+        </div>
       </Group>
 
       <TotalRow>
         <Title>Total</Title>
         <div>
           <span className="naira-sign">₦</span>
-          {formatNumber(total)}
+          {formatNumber(subtotal + shippingAmount)}
         </div>
       </TotalRow>
 
