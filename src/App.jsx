@@ -1,16 +1,19 @@
 import { StyleSheetManager } from 'styled-components';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import GlobalStyles from './styles/GlobalStyles';
+import { ShippingProvider } from './context/ShippingContext';
+import { ItemQuantityProvider } from './context/ItemQuantityContext';
+import ScrollToTop from './services/ScrollToTop';
+
 import Homepage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Payment from './pages/Payment';
 import PageNotFound from './pages/PageNotFound';
-import GlobalStyles from './styles/GlobalStyles';
+
 import AppLayout from './ui/AppLayout';
-import ScrollToTop from './services/ScrollToTop';
-import { ShippingProvider } from './context/ShippingContext';
-import { ItemQuantityProvider } from './context/ItemQuantityContext';
 
 function App() {
   return (
@@ -30,6 +33,7 @@ function App() {
                   <Route path="products" element={<ProductDetails />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="checkout" element={<Checkout />} />
+                  <Route path="payment" element={<Payment />} />
 
                   <Route path="*" element={<PageNotFound />} />
                 </Route>
