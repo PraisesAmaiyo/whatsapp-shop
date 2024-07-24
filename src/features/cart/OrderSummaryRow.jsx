@@ -46,7 +46,6 @@ function OrderSummaryRow({ summary }) {
       <Group>
         <Title>Subtotal</Title>
         <div>
-          {' '}
           <span className="naira-sign">₦</span>
           {formatNumber(subtotal)}
         </div>

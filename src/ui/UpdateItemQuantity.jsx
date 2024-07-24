@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from './Button';
 import styled from 'styled-components';
+import { useItemQuantity } from '../context/ItemQuantityContext';
 
-const StyedUpdateItemQuantity = styled.div`
+const StyledUpdateItemQuantity = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -13,31 +14,39 @@ const StyedUpdateItemQuantity = styled.div`
   border-radius: var(--border-radius-full);
 `;
 
-function UpdateItemQuantity() {
-  const [quantity, setQuantity] = useState(1);
+function UpdateItemQuantity({ itemId }) {
+  const { cartItems, updateItemQuantity } = useItemQuantity();
+
+  const item = cartItems.find((item) => item.id === itemId);
+
+  const [itemNumber, setItemNumber] = useState(item?.quantity || 1);
+
+  useEffect(() => {
+    setItemNumber(item?.quantity || 1);
+  }, [item]);
 
   const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+    if (itemNumber > 1) {
+      setItemNumber(itemNumber - 1);
+      updateItemQuantity(itemId, itemNumber - 1);
     }
   };
 
   const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+    setItemNumber(itemNumber + 1);
+    updateItemQuantity(itemId, itemNumber + 1);
   };
 
   return (
-    <StyedUpdateItemQuantity>
+    <StyledUpdateItemQuantity>
       <Button type="primary" size="small" onClick={decreaseQuantity}>
         -
       </Button>
-
-      <span className="text-sm font-medium">{quantity}</span>
-
+      <span className="text-sm font-medium">{itemNumber}</span>
       <Button type="primary" size="small" onClick={increaseQuantity}>
         +
       </Button>
-    </StyedUpdateItemQuantity>
+    </StyledUpdateItemQuantity>
   );
 }
 

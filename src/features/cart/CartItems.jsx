@@ -1,8 +1,10 @@
+import { useItemQuantity } from '../../context/ItemQuantityContext';
 import Table from '../../ui/Table';
 import CartRow from './CartRow';
-import { cartItems } from './storeCartItems';
 
 function CartItems() {
+  const { cartItems } = useItemQuantity();
+
   return (
     <Table columns="30rem 8rem auto 9rem 6rem">
       <Table.Header role="row">

@@ -2,22 +2,10 @@ import styled from 'styled-components';
 
 import BillingDetailsForm from './BillingDetailsForm';
 import ShippingDetailsForm from './ShippingDetailsForm';
-import CheckoutSummary from './CheckoutSummary';
-import CartTable from '../cart/CartTable';
 
 import Row from '../../ui/Row';
 import CartSummary from '../cart/CartSummary';
 import CartItems from '../cart/CartItems';
-
-const StyledCheckout = styled.div`
-  display: grid;
-  grid-template-columns: 67% 31%;
-  gap: 2rem;
-
-  .quantity {
-    padding-left: 1rem;
-  }
-`;
 
 const Header = styled.div`
   padding: 1rem;
@@ -52,7 +40,7 @@ function Checkout() {
 
         <StyledCartSummary>
           <CartItems />
-          <CheckoutSummary />
+          <CartSummary />
         </StyledCartSummary>
       </Row>
     </>

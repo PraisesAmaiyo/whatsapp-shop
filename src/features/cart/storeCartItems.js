@@ -13,6 +13,7 @@ export const cartItems = [
     cartItemsDiscount: 10,
     wishlist: false,
     quantity: 1,
+    totalItemPrice: 185000,
   },
   {
     id: 'cartItems2',
@@ -21,7 +22,8 @@ export const cartItems = [
     cartItemsPrice: 26000,
     cartItemsDiscount: 5,
     wishlist: false,
-    quantity: 1,
+    quantity: 2,
+    totalItemPrice: 52000,
   },
   {
     id: 'cartItems3',
@@ -30,7 +32,8 @@ export const cartItems = [
     cartItemsPrice: 35000,
     cartItemsDiscount: 15,
     wishlist: true,
-    quantity: 1,
+    quantity: 3,
+    totalItemPrice: 105000,
   },
   {
     id: 'cartItems4',
@@ -40,6 +43,7 @@ export const cartItems = [
     cartItemsDiscount: 5,
     wishlist: true,
     quantity: 1,
+    totalItemPrice: 30000,
   },
   {
     id: 'cartItems5',
@@ -48,19 +52,20 @@ export const cartItems = [
     cartItemsPrice: 23000,
     cartItemsDiscount: 5,
     wishlist: true,
-    quantity: 1,
+    quantity: 2,
+    totalItemPrice: 46000,
   },
 ];
 
-const updateOrderSummary = (cartItems) => {
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.cartItemsPrice,
-    0
-  );
+// const updateOrderSummary = (cartItems) => {
+//   const subtotal = cartItems.reduce(
+//     (sum, item) => sum + item.cartItemsPrice,
+//     0
+//   );
 
-  return {
-    subtotal,
-  };
-};
+//   return {
+//     subtotal,
+//   };
+// };
 
-export const OrderSummary = [updateOrderSummary(cartItems)];
+// export const OrderSummary = [updateOrderSummary(cartItems)];

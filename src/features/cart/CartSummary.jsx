@@ -1,8 +1,19 @@
+import { useItemQuantity } from '../../context/ItemQuantityContext';
 import Table from '../../ui/Table';
 import OrderSummaryRow from './OrderSummaryRow';
-import { OrderSummary } from './storeCartItems';
 
 function CartSummary() {
+  const { totalPrice } = useItemQuantity();
+
+  console.log(totalPrice);
+
+  //   Table.Body takes in a data which shoukd be an array of object, however the `totalPrice` from context is jsut a number alone. sp i created an array for it
+  const orderSummary = [
+    {
+      subtotal: totalPrice,
+    },
+  ];
+
   return (
     <Table columns="1fr ">
       <Table.Header role="row">
@@ -10,7 +21,7 @@ function CartSummary() {
       </Table.Header>
 
       <Table.Body
-        data={OrderSummary}
+        data={orderSummary}
         render={(summary) => (
           <OrderSummaryRow summary={summary} key={summary} />
         )}

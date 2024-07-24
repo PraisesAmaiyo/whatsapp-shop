@@ -74,7 +74,14 @@ const DeleteItem = styled.div`
 `;
 
 function CartRow({ cartItem }) {
-  const { cartItemsImage, cartItemsName, cartItemsPrice } = cartItem;
+  const {
+    cartItemsImage,
+    cartItemsName,
+    cartItemsPrice,
+    quantity,
+    id: itemId,
+    totalItemPrice,
+  } = cartItem;
 
   return (
     <Table.Row>
@@ -87,11 +94,12 @@ function CartRow({ cartItem }) {
         <span className="naira-sign">₦</span>
         {formatNumber(cartItemsPrice)}
       </Price>
-      <UpdateItemQuantity />
+
+      <UpdateItemQuantity quantity={quantity} itemId={itemId} />
 
       <SubTotal>
         <span className="naira-sign">₦</span>
-        {formatNumber(cartItemsPrice)}
+        {formatNumber(totalItemPrice)}
       </SubTotal>
 
       <DeleteItem>

@@ -37,18 +37,9 @@ const CheckoutBtn = styled.div`
 
 function OrderSummaryRow({ summary }) {
   //   const navigate = useNavigate();
+
   const { shippingDetails } = useShipping();
-
-  const { amount } = shippingDetails;
-
-  let shippingAmount;
-
-  if (amount === 'Free') {
-    shippingAmount = 0;
-  } else {
-    shippingAmount = amount;
-  }
-
+  const { amount: shippingAmount } = shippingDetails;
   const { subtotal } = summary;
 
   return (
@@ -63,6 +54,7 @@ function OrderSummaryRow({ summary }) {
 
       <Group>
         <Title>Shipping</Title>
+
         <div>
           <span className="naira-sign">₦</span>
           {formatNumber(shippingAmount)}

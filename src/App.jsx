@@ -10,29 +10,34 @@ import GlobalStyles from './styles/GlobalStyles';
 import AppLayout from './ui/AppLayout';
 import ScrollToTop from './services/ScrollToTop';
 import { ShippingProvider } from './context/ShippingContext';
+import { ItemQuantityProvider } from './context/ItemQuantityContext';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <ShippingProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <StyleSheetManager shouldForwardProp={(prop) => prop !== 'variation'}>
-            <Routes>
-              <Route element={<AppLayout />}>
-                <Route index element={<Navigate replace to="home" />} />
-                <Route path="home" element={<Homepage />} />
-                <Route path="products" element={<ProductDetails />} />
-                <Route path="cart" element={<Cart />} />
-                <Route path="checkout" element={<Checkout />} />
+      <ItemQuantityProvider>
+        <ShippingProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <StyleSheetManager
+              shouldForwardProp={(prop) => prop !== 'variation'}
+            >
+              <Routes>
+                <Route element={<AppLayout />}>
+                  <Route index element={<Navigate replace to="home" />} />
+                  <Route path="home" element={<Homepage />} />
+                  <Route path="products" element={<ProductDetails />} />
+                  <Route path="cart" element={<Cart />} />
+                  <Route path="checkout" element={<Checkout />} />
 
-                <Route path="*" element={<PageNotFound />} />
-              </Route>
-            </Routes>
-          </StyleSheetManager>
-        </BrowserRouter>
-      </ShippingProvider>
+                  <Route path="*" element={<PageNotFound />} />
+                </Route>
+              </Routes>
+            </StyleSheetManager>
+          </BrowserRouter>
+        </ShippingProvider>
+      </ItemQuantityProvider>
     </>
   );
 }
