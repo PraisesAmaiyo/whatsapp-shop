@@ -41,6 +41,32 @@ const AccountDetails = styled.div`
   padding-top: 4rem;
 `;
 
+const StyledPaymentFile = styled.div`
+  display: flex;
+  justify-content: center;
+
+  .center {
+    margin-top: 4rem;
+    background-color: var(--color-brand-100);
+    height: 15rem;
+    width: 70%;
+    border-radius: var(--border-radius-lg);
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    outline: 1.5px solid var(--color-brand-300);
+  }
+
+  /* input[type='file'] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  } */
+`;
+
 function Payment() {
   return (
     <>
@@ -66,9 +92,23 @@ function Payment() {
             <Heading as="h1">UBA (United Bank of Africa)</Heading>
           </AccountDetails>
 
-          <FormRow label="Paste Payment Receipt here">
-            <FileInput id="avatar" accept="image/*" />
-          </FormRow>
+          <StyledPaymentFile>
+            <div className="center">
+              <FormRow
+                orientation="vertical"
+                label="Paste Payment Receipt here"
+              >
+                <FileInput accept="image/*" />
+              </FormRow>
+            </div>
+          </StyledPaymentFile>
+
+          {/* <StyledPaymentFile>
+            <div className="center">
+              <span>Paste Payment Receipt here</span>
+              <input type="file" accept="image/*" />
+            </div>
+          </StyledPaymentFile> */}
           <Benefits />
         </Container>
         <Footer />
