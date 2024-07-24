@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Table from '../../ui/Table';
 import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useShipping } from '../../context/ShippingContext';
 
 const Group = styled.div`
@@ -36,10 +36,23 @@ const CheckoutBtn = styled.div`
 
 function OrderSummaryRow({ summary }) {
   const navigate = useNavigate();
+  const urlLocation = useLocation();
+
+  const isCheckoutPage = urlLocation.pathname.includes('checkout');
+  const buttonText = isCheckoutPage
+    ? 'Proceed to Payment'
+    : 'Proceed to Checkout';
+  const navigatePath = isCheckoutPage ? '/payment' : '/checkout';
 
   const { shippingDetails } = useShipping();
-  const { amount: shippingAmount } = shippingDetails;
+  const { amount, location } = shippingDetails;
   const { subtotal } = summary;
+
+  let shippingAmount = amount;
+
+  if (location === 'Customer') {
+    shippingAmount = 0;
+  }
 
   return (
     <Table.Row istotalrow="istotalrow">
@@ -55,8 +68,11 @@ function OrderSummaryRow({ summary }) {
         <Title>Shipping</Title>
 
         <div>
-          <span className="naira-sign">₦</span>
-          {formatNumber(shippingAmount)}
+          {location === 'Customer' ? (
+            <span>{shippingAmount}</span>
+          ) : (
+            <span className="naira-sign">₦{formatNumber(shippingAmount)} </span>
+          )}
         </div>
       </Group>
 
@@ -72,9 +88,9 @@ function OrderSummaryRow({ summary }) {
         <Button
           variation="primary"
           size="large"
-          onClick={() => navigate('/checkout')}
+          onClick={() => navigate(navigatePath)}
         >
-          Proceed To Checkout
+          {buttonText}
         </Button>
       </CheckoutBtn>
     </Table.Row>
