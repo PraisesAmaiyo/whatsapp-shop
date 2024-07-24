@@ -71,8 +71,6 @@ const shippingLocations = [
   },
 ];
 
-// console.log(object);
-
 function Shipping() {
   const { shippingDetails, updateShippingDetails } = useShipping();
   const [selectedLocation, setSelectedLocation] = useState(
@@ -98,7 +96,6 @@ function Shipping() {
       </Header>
       {shippingLocations.map((shipping) => {
         const { location, amount } = shipping;
-        //   console.log(location);
 
         return (
           <Box

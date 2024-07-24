@@ -10,8 +10,6 @@ export const ShippingProvider = ({ children }) => {
 
   const updateShippingDetails = (location, amount) => {
     setShippingDetails({ location, amount });
-
-    //  console.log(location, amount);
   };
 
   return (
