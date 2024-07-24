@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { cartItems as initialCartItems } from '../features/cart/storeCartItems';
 
 const ItemQuantityContext = createContext();

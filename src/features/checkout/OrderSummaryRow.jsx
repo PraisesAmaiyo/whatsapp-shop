@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
@@ -73,7 +72,7 @@ function OrderSummaryRow({ summary }) {
         <Button
           variation="primary"
           size="large"
-          //  onClick={() => navigate('/checkout')}
+          //  onClick={() => navigate('/payment')}
         >
           Proceed To Payment
         </Button>
