@@ -58,13 +58,13 @@ const StyledPaymentFile = styled.div`
     outline: 1.5px solid var(--color-brand-300);
   }
 
-  /* input[type='file'] {
+  input[type='file'] {
     opacity: 0;
     position: absolute;
     width: 100%;
     height: 100%;
     cursor: pointer;
-  } */
+  }
 `;
 
 function Payment() {
@@ -103,12 +103,12 @@ function Payment() {
             </div>
           </StyledPaymentFile>
 
-          {/* <StyledPaymentFile>
+          <StyledPaymentFile>
             <div className="center">
               <span>Paste Payment Receipt here</span>
-              <input type="file" accept="image/*" />
+              <input type="file" accept="image/*" className="paymentSl" />
             </div>
-          </StyledPaymentFile> */}
+          </StyledPaymentFile>
           <Benefits />
         </Container>
         <Footer />
