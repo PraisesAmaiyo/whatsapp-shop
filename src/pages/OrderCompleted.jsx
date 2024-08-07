@@ -6,7 +6,8 @@ import Footer from '../ui/Footer';
 import Benefits from '../ui/Benefits';
 
 import PageHeader from '../ui/PageHeader';
-import PaymentInfo from '../features/payment/PaymentInfo';
+import OrderCompletedInfo from '../features/orderCompleted/OrderCompletedInfo';
+import CompletedOrderSummary from '../features/orderCompleted/CompletedOrderSummary';
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +31,7 @@ const WhiteWrapper = styled.div`
   color: var(--color-brand-950);
 `;
 
-function Payment() {
+function OrderCompleted() {
   return (
     <>
       <GradientWrapper>
@@ -41,7 +42,8 @@ function Payment() {
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
-          <PaymentInfo />
+          <OrderCompletedInfo />
+          <CompletedOrderSummary />
           <Benefits />
         </Container>
         <Footer />
@@ -50,4 +52,4 @@ function Payment() {
   );
 }
 
-export default Payment;
+export default OrderCompleted;

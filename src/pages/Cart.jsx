@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 import Header from '../ui/Header';
-import CartHeader from '../features/cart/CartHeader';
 import CartTable from '../features/cart/CartTable';
 
 import Footer from '../ui/Footer';
 import Benefits from '../ui/Benefits';
+import PageHeader from '../ui/PageHeader';
 
 const Container = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ function ProductDetails() {
       <GradientWrapper>
         <Container>
           <Header />
-          <CartHeader />
+          <PageHeader />
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
