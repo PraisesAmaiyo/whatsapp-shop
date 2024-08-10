@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import Table from '../../ui/Table';
 import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useShipping } from '../../context/ShippingContext';
+import { useItemQuantity } from '../../context/ItemQuantityContext';
 
 const Group = styled.div`
   display: grid;
-  grid-template-columns: 60% 1fr;
+  grid-template-columns: 80% 1fr;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 2rem;
@@ -32,19 +33,23 @@ const CheckoutBtn = styled.div`
   display: flex;
   justify-content: center;
   padding: 2rem;
+  width: 100%;
+`;
+
+const StyledButton = styled(Button)`
+  width: 95%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function CompletedOrderSummaryRow({ summary }) {
   const navigate = useNavigate();
-  const urlLocation = useLocation();
-
-  const isCheckoutPage = urlLocation.pathname.includes('checkout');
-  const buttonText = isCheckoutPage
-    ? 'Proceed to Payment'
-    : 'Proceed to Checkout';
-  const navigatePath = isCheckoutPage ? '/payment' : '/checkout';
 
   const { shippingDetails } = useShipping();
+  const { cartItems } = useItemQuantity();
+
   const { amount, location } = shippingDetails;
   const { subtotal } = summary;
 
@@ -57,41 +62,37 @@ function CompletedOrderSummaryRow({ summary }) {
   return (
     <Table.Row istotalrow="istotalrow">
       <Group>
-        <Title>Subtotal</Title>
-        <div>
-          <span className="naira-sign">₦</span>
-          {formatNumber(subtotal)}
-        </div>
+        <Title>Order Number</Title>
+        <div>#1234567890</div>
       </Group>
 
       <Group>
-        <Title>Shipping</Title>
+        <Title>Date</Title>
+        <div>Aug 10, 2024</div>
+      </Group>
 
-        <div>
-          {location === 'Customer' ? (
-            <span>{shippingAmount}</span>
-          ) : (
-            <span className="naira-sign">₦{formatNumber(shippingAmount)} </span>
-          )}
-        </div>
+      <Group>
+        <Title>Items Purchased</Title>
+
+        <div>{cartItems.length} total Items</div>
       </Group>
 
       <TotalRow>
         <Title>Total</Title>
         <div>
           <span className="naira-sign">₦</span>
-          {formatNumber(subtotal + shippingAmount)}
+          {formatNumber(subtotal + shippingAmount)}.00
         </div>
       </TotalRow>
 
       <CheckoutBtn>
-        <Button
+        <StyledButton
           variation="primary"
           size="large"
-          onClick={() => navigate(navigatePath)}
+          onClick={() => navigate('/')}
         >
-          {buttonText}
-        </Button>
+          View Order Details
+        </StyledButton>
       </CheckoutBtn>
     </Table.Row>
   );
