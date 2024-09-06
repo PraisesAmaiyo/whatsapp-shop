@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import ProductImage from '../../assets/images/newArrivals/newArrivals-1.jpg';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { formatNumber } from '../../utils/helpers';
+import { useMoveBack } from '../../hooks/useMoveBack';
+
 import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
 import UpdateItemQuantity from '../../ui/UpdateItemQuantity';
@@ -8,10 +12,8 @@ import WishlistIcon from '../../ui/WishlistIcon';
 import SimilarItems from './SimilarItems';
 import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
-import { useNavigate, useParams } from 'react-router-dom';
 
-import { trendingProducts } from '../homepage/store';
-import { formatNumber } from '../../utils/helpers';
+import { trendingProducts, newArrivals } from '../homepage/store';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -126,13 +128,62 @@ const ProductSubInfo = styled.div`
   margin-top: 6rem;
 `;
 
+const StyledProductNotFound = styled.main`
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.8rem;
+`;
+
+const Box = styled.div`
+  /* box */
+  background-color: var(--color-grey-0);
+  border: 1px solid var(--color-grey-100);
+  border-radius: var(--border-radius-md);
+
+  padding: 4.8rem;
+  flex: 0 1 96rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & h1 {
+    margin-bottom: 3.2rem;
+  }
+`;
+
 function ProductInfo() {
+  //   const navigation = useNavigation();
   const navigate = useNavigate();
+  const moveBack = useMoveBack();
+
+  //   const isLoading = navigation.state === 'loading';
 
   const { id } = useParams();
-  const product = trendingProducts.find((prod) => prod.id === id);
+  const product =
+    trendingProducts.find((prod) => prod.id === id) ||
+    newArrivals.find((prod) => prod.id === id);
 
-  console.log(product);
+  if (!product) {
+    return (
+      <StyledProductNotFound>
+        {' '}
+        <Box>
+          <Heading as="h1">
+            The Product you are looking for could not be found 😢
+          </Heading>
+          <div>
+            <Button onClick={moveBack} size="large">
+              &larr; Go back
+            </Button>
+          </div>
+        </Box>
+      </StyledProductNotFound>
+    );
+  }
 
   const {
     newArrivalImage,
@@ -142,10 +193,6 @@ function ProductInfo() {
     wishlist,
   } = product;
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
   return (
     <StyledProductInfoContainer>
       <ProductMainInfo>
@@ -154,10 +201,14 @@ function ProductInfo() {
         </ProductInfoImage>
 
         <Row type="vertical">
-          <ProductDiscountAmount>
-            <p className="product-price">Save {newArrivalDiscount}%</p>
-            <span>Discount applied</span>
-          </ProductDiscountAmount>
+          {newArrivalDiscount === 0 ? (
+            ''
+          ) : (
+            <ProductDiscountAmount>
+              <p className="product-price">Save {newArrivalDiscount}%</p>
+              <span>Discount applied</span>
+            </ProductDiscountAmount>
+          )}
 
           <Heading as="h1">{newArrivalName}</Heading>
           <ProductInfoText>
@@ -172,10 +223,14 @@ function ProductInfo() {
               <span className="naira-sign">₦</span>{' '}
               {formatNumber(newArrivalPrice)}
             </h2>
-            <h2 className="product-slashed_price">
-              <span className="naira-sign">₦ </span>
-              {formatNumber((newArrivalPrice / 100) * newArrivalDiscount)}
-            </h2>
+            {newArrivalDiscount === 0 ? (
+              ''
+            ) : (
+              <h2 className="product-slashed_price">
+                <span className="naira-sign">₦ </span>
+                {formatNumber((newArrivalPrice / 100) * newArrivalDiscount)}
+              </h2>
+            )}
           </ProductPricing>
 
           <ProductAvailability>

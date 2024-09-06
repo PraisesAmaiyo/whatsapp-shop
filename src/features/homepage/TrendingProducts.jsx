@@ -149,7 +149,6 @@ function TrendingProducts() {
   const navigate = useNavigate();
 
   function handleProductClick(id) {
-    console.log(id);
     navigate(`/products/${id}`);
   }
 

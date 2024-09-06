@@ -158,6 +158,10 @@ const NewArrivalCategoryActions = styled.div`
 function NewArrivals() {
   const navigate = useNavigate();
 
+  function handleProductClick(id) {
+    navigate(`/products/${id}`);
+  }
+
   return (
     <StyledNewArrivals>
       <Row type="vertical">
@@ -185,7 +189,10 @@ function NewArrivals() {
             } = newArrival;
 
             return (
-              <NewArrivalProduct key={id} onClick={() => navigate('/products')}>
+              <NewArrivalProduct
+                key={id}
+                onClick={() => handleProductClick(id)}
+              >
                 <NewArrivalImageContainer>
                   <DiscountTag className="discount-tag">
                     {`-${newArrivalDiscount}%`}
