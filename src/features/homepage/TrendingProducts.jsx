@@ -148,6 +148,11 @@ const TrendingCategoryActions = styled.div`
 function TrendingProducts() {
   const navigate = useNavigate();
 
+  function handleProductClick(id) {
+    console.log(id);
+    navigate(`/products/${id}`);
+  }
+
   return (
     <StyledTrendingProducts>
       <Row type="vertical">
@@ -177,7 +182,8 @@ function TrendingProducts() {
             } = trendingProduct;
 
             return (
-              <TrendingProduct key={id} onClick={() => navigate('/products')}>
+              //   <TrendingProduct key={id} onClick={() => navigate('/products')}>
+              <TrendingProduct key={id} onClick={() => handleProductClick(id)}>
                 <TrendingImageContainer>
                   <DiscountTag className="discount-tag">{`-${newArrivalDiscount}%`}</DiscountTag>
                   <WishlistContainer>

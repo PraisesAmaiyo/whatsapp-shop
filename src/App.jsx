@@ -32,7 +32,7 @@ function App() {
                 <Route element={<AppLayout />}>
                   <Route index element={<Navigate replace to="home" />} />
                   <Route path="home" element={<Homepage />} />
-                  <Route path="products" element={<ProductDetails />} />
+                  <Route path="products/:id" element={<ProductDetails />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="checkout" element={<Checkout />} />
                   <Route path="payment" element={<Payment />} />

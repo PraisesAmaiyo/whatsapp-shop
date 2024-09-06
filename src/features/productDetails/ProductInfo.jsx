@@ -8,7 +8,10 @@ import WishlistIcon from '../../ui/WishlistIcon';
 import SimilarItems from './SimilarItems';
 import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { trendingProducts } from '../homepage/store';
+import { formatNumber } from '../../utils/helpers';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -126,20 +129,37 @@ const ProductSubInfo = styled.div`
 function ProductInfo() {
   const navigate = useNavigate();
 
+  const { id } = useParams();
+  const product = trendingProducts.find((prod) => prod.id === id);
+
+  console.log(product);
+
+  const {
+    newArrivalImage,
+    newArrivalName,
+    newArrivalPrice,
+    newArrivalDiscount,
+    wishlist,
+  } = product;
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <StyledProductInfoContainer>
       <ProductMainInfo>
         <ProductInfoImage>
-          <img src={ProductImage} alt="Product " />
+          <img src={newArrivalImage} alt="Product " />
         </ProductInfoImage>
 
         <Row type="vertical">
           <ProductDiscountAmount>
-            <p className="product-price">Save 2,500</p>
+            <p className="product-price">Save {newArrivalDiscount}%</p>
             <span>Discount applied</span>
           </ProductDiscountAmount>
 
-          <Heading as="h1">Brown Collar Shirt</Heading>
+          <Heading as="h1">{newArrivalName}</Heading>
           <ProductInfoText>
             <h3 className="product-mini_text">
               Premium cotton shirt with a crisp collar and tailored fit, perfect
@@ -149,10 +169,12 @@ function ProductInfo() {
 
           <ProductPricing>
             <h2 className="product-price">
-              <span className="naira-sign">₦</span> 25,000
+              <span className="naira-sign">₦</span>{' '}
+              {formatNumber(newArrivalPrice)}
             </h2>
             <h2 className="product-slashed_price">
-              <span className="naira-sign">₦</span>2,500
+              <span className="naira-sign">₦ </span>
+              {formatNumber((newArrivalPrice / 100) * newArrivalDiscount)}
             </h2>
           </ProductPricing>
 
@@ -186,7 +208,7 @@ function ProductInfo() {
             </Button>
 
             <WishlistContainer>
-              <WishlistIcon />
+              <WishlistIcon type={wishlist ? true : ''} />
             </WishlistContainer>
           </ButtonContainer>
         </Row>
