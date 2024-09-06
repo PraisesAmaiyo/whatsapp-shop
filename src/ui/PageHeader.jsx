@@ -27,6 +27,9 @@ function PageHeader() {
   const isPaymentPage = urlLocation.pathname === '/payment';
   const paymentPageText = isPaymentPage ? 'Shopping Cart/Checkout/Payment' : '';
 
+  const isContactUsPage = urlLocation.pathname === '/contact';
+  const ContactUsPagText = isContactUsPage ? 'Contact' : '';
+
   return (
     <StyledPageHeader>
       {isOrderCompletePage ? (
@@ -42,6 +45,8 @@ function PageHeader() {
       {isCheckoutPage ? <Heading as="h2">{checkoutPageText}</Heading> : ''}
 
       {isPaymentPage ? <Heading as="h2">{paymentPageText}</Heading> : ''}
+
+      {isContactUsPage ? <Heading as="h2">{ContactUsPagText}</Heading> : ''}
     </StyledPageHeader>
   );
 }

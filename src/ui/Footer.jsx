@@ -124,7 +124,7 @@ const StyledIcon = styled.a`
   display: inline-flex;
 
   &:hover {
-    color: var(--color-gold-500); // Customize this color as needed
+    color: var(--color-gold-500);
   }
 `;
 

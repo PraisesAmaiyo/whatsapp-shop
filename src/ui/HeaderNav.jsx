@@ -70,7 +70,7 @@ function MainNav() {
             </StyledNavLink>
           </li>
           <li>
-            <StyledNavLink to="/">
+            <StyledNavLink to="/contact">
               <span>Contact us</span>
             </StyledNavLink>
           </li>

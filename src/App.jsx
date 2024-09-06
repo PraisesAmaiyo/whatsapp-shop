@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import PageNotFound from './pages/PageNotFound';
 import OrderCompleted from './pages/OrderCompleted';
+import ContactUs from './pages/ContactUsPage';
 
 import AppLayout from './ui/AppLayout';
 
@@ -36,6 +37,7 @@ function App() {
                   <Route path="checkout" element={<Checkout />} />
                   <Route path="payment" element={<Payment />} />
                   <Route path="order-completed" element={<OrderCompleted />} />
+                  <Route path="contact" element={<ContactUs />} />
 
                   <Route path="*" element={<PageNotFound />} />
                 </Route>
