@@ -15,8 +15,11 @@ export const AddItemToCartProvider = ({ children }) => {
         console.log('Item is already in the cart');
         return prevItems;
       } else {
+        const quantity = newCartItem.quantity || 1;
+
         const itemWithTotalPrice = {
           ...newCartItem,
+          quantity,
           totalItemPrice: newCartItem.newArrivalPrice * newCartItem.quantity,
         };
 
@@ -38,11 +41,19 @@ export const AddItemToCartProvider = ({ children }) => {
       )
     );
   };
-
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.totalItemPrice,
+    (sum, item) =>
+      sum +
+      (item.totalItemPrice
+        ? item.totalItemPrice
+        : item.newArrivalPrice * item.quantity),
     0
   );
+
+  //   const totalPrice = cartItems.reduce(
+  //     (sum, item) => sum + item.totalItemPrice,
+  //     0
+  //   );
 
   console.log(totalPrice);
 
