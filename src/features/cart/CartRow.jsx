@@ -74,6 +74,7 @@ const DeleteItem = styled.div`
 `;
 
 function CartRow({ cartItem }) {
+  console.log(cartItem);
   const {
     cartItemsImage,
     cartItemsName,

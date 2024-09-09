@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { formatNumber } from '../../utils/helpers';
 import { useMoveBack } from '../../hooks/useMoveBack';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
@@ -156,6 +157,8 @@ const Box = styled.div`
 `;
 
 function ProductInfo() {
+  const { cartItems, updateCartItems } = useAddItemToCart();
+
   //   const navigation = useNavigation();
   const navigate = useNavigate();
   const moveBack = useMoveBack();
@@ -163,6 +166,7 @@ function ProductInfo() {
   //   const isLoading = navigation.state === 'loading';
 
   const { id } = useParams();
+
   const product =
     trendingProducts.find((prod) => prod.id === id) ||
     newArrivals.find((prod) => prod.id === id);
@@ -183,6 +187,14 @@ function ProductInfo() {
         </Box>
       </StyledProductNotFound>
     );
+  }
+
+  const isInCart = cartItems.some((item) => item.id === product.id);
+
+  function handleAddToCart({ product }) {
+    if (!isInCart) {
+      updateCartItems(product);
+    }
   }
 
   const {
@@ -228,7 +240,9 @@ function ProductInfo() {
             ) : (
               <h2 className="product-slashed_price">
                 <span className="naira-sign">₦ </span>
-                {formatNumber((newArrivalPrice / 100) * newArrivalDiscount)}
+                {formatNumber(
+                  (newArrivalPrice / 100) * newArrivalDiscount + newArrivalPrice
+                )}
               </h2>
             )}
           </ProductPricing>
@@ -257,9 +271,10 @@ function ProductInfo() {
             <Button
               variation="primary"
               size="large"
-              onClick={() => navigate('/cart')}
+              onClick={() => handleAddToCart({ product })}
+              disabled={isInCart}
             >
-              Add to Cart
+              {isInCart ? 'Already in Cart' : 'Add to Cart'}
             </Button>
 
             <WishlistContainer>

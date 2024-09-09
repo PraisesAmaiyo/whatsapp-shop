@@ -1,9 +1,10 @@
-import { useItemQuantity } from '../../context/ItemQuantityContext';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import Table from '../../ui/Table';
 import CartRow from './CartRow';
 
 function CartItems() {
-  const { cartItems } = useItemQuantity();
+  const { cartItems } = useAddItemToCart();
+  //   console.log(cartItems);
 
   return (
     <Table columns="30rem 8rem auto 9rem 6rem">

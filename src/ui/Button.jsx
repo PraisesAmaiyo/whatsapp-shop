@@ -81,6 +81,16 @@ const variations = {
   `,
 };
 
+const disabledStyle = css`
+  background-color: var(--color-grey-300);
+  color: var(--color-grey-500);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: var(--color-grey-300); /* Same background for hover */
+  }
+`;
+
 const underlineStyles = {
   none: css`
     text-decoration: none;
@@ -108,6 +118,10 @@ const Button = styled.button`
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}
   ${(props) => underlineStyles[props.underline]}
+
+  &:disabled {
+    ${disabledStyle}
+  }
 `;
 
 Button.defaultProps = {
