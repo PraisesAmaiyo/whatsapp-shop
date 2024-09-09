@@ -1,11 +1,11 @@
-import { useItemQuantity } from '../../context/ItemQuantityContext';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import Table from '../../ui/Table';
 import OrderSummaryRow from './OrderSummaryRow';
 
 function CartSummary() {
-  const { totalPrice } = useItemQuantity();
+  const { totalPrice } = useAddItemToCart();
 
-  //   Table.Body takes in a data which shoukd be an array of object, however the `totalPrice` from context is just a number alone. so I created an array for it.
+  //  NOTE: Table.Body takes in a data which shoukd be an array of object, however the `totalPrice` from context is just a number alone. so I created an array for it.
   const orderSummary = [
     {
       subtotal: totalPrice,

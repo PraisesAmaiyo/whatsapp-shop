@@ -5,8 +5,9 @@ const AddItemToCartContext = createContext();
 
 export const AddItemToCartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(initialCartItems);
+  console.log(cartItems);
 
-  const updateCartItems = (newCartItem) => {
+  const addItemToCart = (newCartItem) => {
     setCartItems((prevItems) => {
       const itemExists = prevItems.some((item) => item.id === newCartItem.id);
 
@@ -14,13 +15,41 @@ export const AddItemToCartProvider = ({ children }) => {
         console.log('Item is already in the cart');
         return prevItems;
       } else {
-        return [...prevItems, newCartItem];
+        const itemWithTotalPrice = {
+          ...newCartItem,
+          totalItemPrice: newCartItem.newArrivalPrice * newCartItem.quantity,
+        };
+
+        return [...prevItems, itemWithTotalPrice];
       }
     });
   };
 
+  const updateItemQuantity = (itemId, newQuantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId
+          ? {
+              ...item,
+              quantity: newQuantity,
+              totalItemPrice: item.newArrivalPrice * newQuantity,
+            }
+          : item
+      )
+    );
+  };
+
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.totalItemPrice,
+    0
+  );
+
+  console.log(totalPrice);
+
   return (
-    <AddItemToCartContext.Provider value={{ cartItems, updateCartItems }}>
+    <AddItemToCartContext.Provider
+      value={{ cartItems, addItemToCart, updateItemQuantity, totalPrice }}
+    >
       {children}
     </AddItemToCartContext.Provider>
   );

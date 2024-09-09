@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import { useItemQuantity } from '../../context/ItemQuantityContext';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { formatNumber } from '../../utils/helpers';
 
 import Heading from '../../ui/Heading';
@@ -53,7 +53,7 @@ const ButtonContainer = styled.div`
 
 function PaymentInfo() {
   const navigate = useNavigate();
-  const { totalPrice } = useItemQuantity();
+  const { totalPrice } = useAddItemToCart();
 
   return (
     <>

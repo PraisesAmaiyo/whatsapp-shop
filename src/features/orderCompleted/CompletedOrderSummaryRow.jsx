@@ -5,7 +5,7 @@ import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { useShipping } from '../../context/ShippingContext';
-import { useItemQuantity } from '../../context/ItemQuantityContext';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 const Group = styled.div`
   display: grid;
@@ -48,7 +48,7 @@ function CompletedOrderSummaryRow({ summary }) {
   const navigate = useNavigate();
 
   const { shippingDetails } = useShipping();
-  const { cartItems } = useItemQuantity();
+  const { cartItems } = useAddItemToCart();
 
   const { amount, location } = shippingDetails;
   const { subtotal } = summary;

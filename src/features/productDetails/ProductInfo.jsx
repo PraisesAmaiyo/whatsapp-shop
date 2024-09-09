@@ -157,7 +157,7 @@ const Box = styled.div`
 `;
 
 function ProductInfo() {
-  const { cartItems, updateCartItems } = useAddItemToCart();
+  const { cartItems, addItemToCart } = useAddItemToCart();
 
   //   const navigation = useNavigation();
   const navigate = useNavigate();
@@ -193,7 +193,7 @@ function ProductInfo() {
 
   function handleAddToCart({ product }) {
     if (!isInCart) {
-      updateCartItems(product);
+      addItemToCart(product);
     }
   }
 

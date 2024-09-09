@@ -1,37 +1,44 @@
-import { createContext, useContext, useState } from 'react';
-import { cartItems as initialCartItems } from '../features/cart/storeCartItems';
+// import { createContext, useContext, useEffect, useState } from 'react';
+// import { useAddItemToCart } from '../context/AddItemToCartContext';
 
-const ItemQuantityContext = createContext();
+// const ItemQuantityContext = createContext();
 
-export const ItemQuantityProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+// export const ItemQuantityProvider = ({ children }) => {
+//   const { cartItems } = useAddItemToCart();
+//   const [cartItemsWithQuantity, setCartItemsWithQuantity] = useState([]);
 
-  const updateItemQuantity = (itemId, newQuantity) => {
-    setCartItems((prevCartItems) =>
-      prevCartItems.map((item) =>
-        item.id === itemId
-          ? {
-              ...item,
-              quantity: newQuantity,
-              totalItemPrice: item.cartItemsPrice * newQuantity,
-            }
-          : item
-      )
-    );
-  };
+//   useEffect(() => {
+//     setCartItemsWithQuantity(cartItems);
+//   }, [cartItems]);
 
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.totalItemPrice,
-    0
-  );
+//   console.log(cartItemsWithQuantity);
 
-  return (
-    <ItemQuantityContext.Provider
-      value={{ cartItems, updateItemQuantity, totalPrice }}
-    >
-      {children}
-    </ItemQuantityContext.Provider>
-  );
-};
+//   const updateItemQuantity = (itemId, newQuantity) => {
+//     setCartItemsWithQuantity((prevCartItems) =>
+//       prevCartItems.map((item) =>
+//         item.id === itemId
+//           ? {
+//               ...item,
+//               quantity: newQuantity,
+//               totalItemPrice: item.newArrivalPrice * newQuantity,
+//             }
+//           : item
+//       )
+//     );
+//   };
 
-export const useItemQuantity = () => useContext(ItemQuantityContext);
+//   const totalPrice = cartItemsWithQuantity.reduce(
+//     (sum, item) => sum + item.totalItemPrice,
+//     0
+//   );
+
+//   return (
+//     <ItemQuantityContext.Provider
+//       value={{ cartItemsWithQuantity, updateItemQuantity, totalPrice }}
+//     >
+//       {children}
+//     </ItemQuantityContext.Provider>
+//   );
+// };
+
+// export const useItemQuantity = () => useContext(ItemQuantityContext);

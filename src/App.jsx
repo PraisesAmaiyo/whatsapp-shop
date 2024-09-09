@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import GlobalStyles from './styles/GlobalStyles';
 import { ShippingProvider } from './context/ShippingContext';
-import { ItemQuantityProvider } from './context/ItemQuantityContext';
+// import { ItemQuantityProvider } from './context/ItemQuantityContext';
 import { AddItemToCartProvider } from './context/AddItemToCartContext';
 import ScrollToTop from './services/ScrollToTop';
 
@@ -23,34 +23,31 @@ function App() {
     <>
       <GlobalStyles />
       <AddItemToCartProvider>
-        <ItemQuantityProvider>
-          <ShippingProvider>
-            <BrowserRouter>
-              <ScrollToTop />
-              <StyleSheetManager
-                shouldForwardProp={(prop) => prop !== 'variation'}
-              >
-                <Routes>
-                  <Route element={<AppLayout />}>
-                    <Route index element={<Navigate replace to="home" />} />
-                    <Route path="home" element={<Homepage />} />
-                    <Route path="products/:id" element={<ProductDetails />} />
-                    <Route path="cart" element={<Cart />} />
-                    <Route path="checkout" element={<Checkout />} />
-                    <Route path="payment" element={<Payment />} />
-                    <Route
-                      path="order-completed"
-                      element={<OrderCompleted />}
-                    />
-                    <Route path="contact" element={<ContactUs />} />
+        {/* <ItemQuantityProvider> */}
+        <ShippingProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <StyleSheetManager
+              shouldForwardProp={(prop) => prop !== 'variation'}
+            >
+              <Routes>
+                <Route element={<AppLayout />}>
+                  <Route index element={<Navigate replace to="home" />} />
+                  <Route path="home" element={<Homepage />} />
+                  <Route path="products/:id" element={<ProductDetails />} />
+                  <Route path="cart" element={<Cart />} />
+                  <Route path="checkout" element={<Checkout />} />
+                  <Route path="payment" element={<Payment />} />
+                  <Route path="order-completed" element={<OrderCompleted />} />
+                  <Route path="contact" element={<ContactUs />} />
 
-                    <Route path="*" element={<PageNotFound />} />
-                  </Route>
-                </Routes>
-              </StyleSheetManager>
-            </BrowserRouter>
-          </ShippingProvider>
-        </ItemQuantityProvider>
+                  <Route path="*" element={<PageNotFound />} />
+                </Route>
+              </Routes>
+            </StyleSheetManager>
+          </BrowserRouter>
+        </ShippingProvider>
+        {/* </ItemQuantityProvider> */}
       </AddItemToCartProvider>
     </>
   );

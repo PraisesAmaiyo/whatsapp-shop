@@ -74,11 +74,10 @@ const DeleteItem = styled.div`
 `;
 
 function CartRow({ cartItem }) {
-  console.log(cartItem);
   const {
-    cartItemsImage,
-    cartItemsName,
-    cartItemsPrice,
+    newArrivalImage,
+    newArrivalName,
+    newArrivalPrice,
     quantity,
     id: itemId,
     totalItemPrice,
@@ -87,20 +86,20 @@ function CartRow({ cartItem }) {
   return (
     <Table.Row>
       <Group>
-        <Img src={cartItemsImage} />
-        <Name>{cartItemsName}</Name>
+        <Img src={newArrivalImage} />
+        <Name>{newArrivalName}</Name>
       </Group>
 
       <Price>
         <span className="naira-sign">₦</span>
-        {formatNumber(cartItemsPrice)}
+        {formatNumber(newArrivalPrice)}
       </Price>
 
       <UpdateItemQuantity quantity={quantity} itemId={itemId} />
 
       <SubTotal>
         <span className="naira-sign">₦</span>
-        {formatNumber(totalItemPrice)}
+        {formatNumber(totalItemPrice > 0 ? totalItemPrice : newArrivalPrice)}
       </SubTotal>
 
       <DeleteItem>

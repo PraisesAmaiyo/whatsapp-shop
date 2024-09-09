@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from './Button';
 import styled from 'styled-components';
-import { useItemQuantity } from '../context/ItemQuantityContext';
+import { useAddItemToCart } from '../context/AddItemToCartContext';
 
 const StyledUpdateItemQuantity = styled.div`
   display: flex;
@@ -15,7 +15,9 @@ const StyledUpdateItemQuantity = styled.div`
 `;
 
 function UpdateItemQuantity({ itemId }) {
-  const { cartItems, updateItemQuantity } = useItemQuantity();
+  const { cartItems, updateItemQuantity } = useAddItemToCart();
+
+  //   console.log(cartItemsWithQuantity);
 
   const item = cartItems.find((item) => item.id === itemId);
 
