@@ -12,8 +12,6 @@ function CartSummary() {
     },
   ];
 
-  console.log('total Price is:', totalPrice);
-
   return (
     <Table columns="1fr ">
       <Table.Header role="row">

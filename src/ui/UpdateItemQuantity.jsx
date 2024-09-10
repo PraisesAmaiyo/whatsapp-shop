@@ -14,29 +14,37 @@ const StyledUpdateItemQuantity = styled.div`
   border-radius: var(--border-radius-full);
 `;
 
-function UpdateItemQuantity({ itemId }) {
+function UpdateItemQuantity({
+  itemId,
+  defaultBuyingQuantity,
+  onQuantityChange,
+}) {
   const { cartItems, updateItemQuantity } = useAddItemToCart();
-
-  //   console.log(cartItemsWithQuantity);
 
   const item = cartItems.find((item) => item.id === itemId);
 
-  const [itemNumber, setItemNumber] = useState(item?.quantity || 1);
+  const [itemNumber, setItemNumber] = useState(
+    item?.quantity || defaultBuyingQuantity
+  );
 
   useEffect(() => {
-    setItemNumber(item?.quantity || 1);
-  }, [item]);
+    setItemNumber(item?.quantity || defaultBuyingQuantity);
+  }, [item, defaultBuyingQuantity]);
 
   const decreaseQuantity = () => {
     if (itemNumber > 1) {
-      setItemNumber(itemNumber - 1);
-      updateItemQuantity(itemId, itemNumber - 1);
+      const newQuantity = itemNumber - 1;
+      setItemNumber(newQuantity);
+      updateItemQuantity(itemId, newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
 
   const increaseQuantity = () => {
-    setItemNumber(itemNumber + 1);
-    updateItemQuantity(itemId, itemNumber + 1);
+    const newQuantity = itemNumber + 1;
+    setItemNumber(newQuantity);
+    updateItemQuantity(itemId, newQuantity);
+    onQuantityChange(newQuantity);
   };
 
   return (

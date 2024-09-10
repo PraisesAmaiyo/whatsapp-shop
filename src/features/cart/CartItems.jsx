@@ -4,7 +4,6 @@ import CartRow from './CartRow';
 
 function CartItems() {
   const { cartItems } = useAddItemToCart();
-  console.log(cartItems);
 
   return (
     <Table columns="30rem 8rem auto 9rem 6rem">

@@ -15,6 +15,7 @@ import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
 
 import { trendingProducts, newArrivals } from '../homepage/store';
+import { useState } from 'react';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -159,6 +160,8 @@ const Box = styled.div`
 function ProductInfo() {
   const { cartItems, addItemToCart } = useAddItemToCart();
 
+  const [itemNumber, setItemNumber] = useState(1);
+
   //   const navigation = useNavigation();
   const navigate = useNavigate();
   const moveBack = useMoveBack();
@@ -191,18 +194,28 @@ function ProductInfo() {
 
   const isInCart = cartItems.some((item) => item.id === product.id);
 
+  function handleQuantityChange(newQuantity) {
+    setItemNumber(newQuantity);
+  }
+
   function handleAddToCart({ product }) {
+    const quantity = itemNumber;
+
     if (!isInCart) {
-      addItemToCart(product);
+      const productWithQuantity = { ...product, quantity };
+
+      addItemToCart(productWithQuantity);
     }
   }
 
   const {
+    id: itemId,
     newArrivalImage,
     newArrivalName,
     newArrivalPrice,
     newArrivalDiscount,
     wishlist,
+    defaultBuyingQuantity,
   } = product;
 
   return (
@@ -262,7 +275,11 @@ function ProductInfo() {
             </div>
           </ProductReviews>
 
-          <UpdateItemQuantity />
+          <UpdateItemQuantity
+            defaultBuyingQuantity={defaultBuyingQuantity}
+            itemId={itemId}
+            onQuantityChange={handleQuantityChange}
+          />
 
           <ButtonContainer>
             <Button variation="secondary" size="large">

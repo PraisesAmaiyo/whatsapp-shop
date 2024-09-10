@@ -6,6 +6,8 @@ import Table from '../../ui/Table';
 import ButtonText from '../../ui/ButtonText';
 import UpdateItemQuantity from '../../ui/UpdateItemQuantity';
 import { formatNumber } from '../../utils/helpers';
+import { useState } from 'react';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 // const TableRow = styled.div`
 //   display: grid;
@@ -74,6 +76,12 @@ const DeleteItem = styled.div`
 `;
 
 function CartRow({ cartItem }) {
+  const { updateItemQuantity } = useAddItemToCart();
+
+  function handleQuantityChange(newQuantity) {
+    updateItemQuantity(cartItem.id, newQuantity);
+  }
+
   const {
     newArrivalImage,
     newArrivalName,
@@ -81,6 +89,7 @@ function CartRow({ cartItem }) {
     quantity,
     id: itemId,
     totalItemPrice,
+    defaultBuyingQuantity,
   } = cartItem;
 
   return (
@@ -95,7 +104,11 @@ function CartRow({ cartItem }) {
         {formatNumber(newArrivalPrice)}
       </Price>
 
-      <UpdateItemQuantity quantity={quantity} itemId={itemId} />
+      <UpdateItemQuantity
+        quantity={quantity}
+        itemId={itemId}
+        onQuantityChange={handleQuantityChange}
+      />
 
       <SubTotal>
         <span className="naira-sign">₦</span>

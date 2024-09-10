@@ -5,7 +5,6 @@ const AddItemToCartContext = createContext();
 
 export const AddItemToCartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(initialCartItems);
-  console.log(cartItems);
 
   const addItemToCart = (newCartItem) => {
     setCartItems((prevItems) => {
@@ -54,8 +53,6 @@ export const AddItemToCartProvider = ({ children }) => {
   //     (sum, item) => sum + item.totalItemPrice,
   //     0
   //   );
-
-  console.log(totalPrice);
 
   return (
     <AddItemToCartContext.Provider

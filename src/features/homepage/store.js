@@ -53,48 +53,56 @@ export const featuredCategories = [
     featuredCategoryImage: featuredCategoryImage1,
     featuredCategoryName: 'Leather Shoes',
     featuredCategoryQuantity: 'Discover 120 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate2',
     featuredCategoryImage: featuredCategoryImage2,
     featuredCategoryName: 'Jackets',
     featuredCategoryQuantity: 'Discover 85 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate3',
     featuredCategoryImage: featuredCategoryImage3,
     featuredCategoryName: 'Sweat Shirts',
     featuredCategoryQuantity: 'Discover 49 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate4',
     featuredCategoryImage: featuredCategoryImage4,
     featuredCategoryName: 'Hoodies',
     featuredCategoryQuantity: 'Discover 110 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate5',
     featuredCategoryImage: featuredCategoryImage5,
     featuredCategoryName: 'T-shirts/Polo',
     featuredCategoryQuantity: 'Discover 260 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate6',
     featuredCategoryImage: featuredCategoryImage6,
     featuredCategoryName: 'Sneakers',
     featuredCategoryQuantity: 'Discover 118 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate7',
     featuredCategoryImage: featuredCategoryImage7,
     featuredCategoryName: 'Leather Bags',
     featuredCategoryQuantity: 'Discover 37 products',
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'featuredCate8',
     featuredCategoryImage: featuredCategoryImage8,
     featuredCategoryName: 'Designer Jeans',
     featuredCategoryQuantity: 'Discover 194 products',
+    defaultBuyingQuantity: 1,
   },
 ];
 
@@ -106,6 +114,7 @@ export const trendingProducts = [
     newArrivalPrice: 11000,
     newArrivalDiscount: 20,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct2',
@@ -114,6 +123,7 @@ export const trendingProducts = [
     newArrivalPrice: 55000,
     newArrivalDiscount: 10,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct3',
@@ -122,6 +132,7 @@ export const trendingProducts = [
     newArrivalPrice: 25000,
     newArrivalDiscount: 5,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct4',
@@ -130,6 +141,7 @@ export const trendingProducts = [
     newArrivalPrice: 30500,
     newArrivalDiscount: 20,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct5',
@@ -138,6 +150,7 @@ export const trendingProducts = [
     newArrivalPrice: 18000,
     newArrivalDiscount: 25,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct6',
@@ -146,6 +159,7 @@ export const trendingProducts = [
     newArrivalPrice: 35000,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct7',
@@ -154,6 +168,7 @@ export const trendingProducts = [
     newArrivalPrice: 15000,
     newArrivalDiscount: 15,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'trendingProduct8',
@@ -162,6 +177,7 @@ export const trendingProducts = [
     newArrivalPrice: 12500,
     newArrivalDiscount: 10,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
 ];
 
@@ -173,6 +189,7 @@ export const newArrivals = [
     newArrivalPrice: 25000,
     newArrivalDiscount: 5,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival2',
@@ -181,6 +198,7 @@ export const newArrivals = [
     newArrivalPrice: 20000,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival3',
@@ -189,6 +207,7 @@ export const newArrivals = [
     newArrivalPrice: 45000,
     newArrivalDiscount: 12,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival4',
@@ -197,6 +216,7 @@ export const newArrivals = [
     newArrivalPrice: 25500,
     newArrivalDiscount: 5,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival5',
@@ -205,6 +225,7 @@ export const newArrivals = [
     newArrivalPrice: 85000,
     newArrivalDiscount: 15,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival6',
@@ -213,6 +234,7 @@ export const newArrivals = [
     newArrivalPrice: 15500,
     newArrivalDiscount: 5,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival7',
@@ -221,6 +243,7 @@ export const newArrivals = [
     newArrivalPrice: 157000,
     newArrivalDiscount: 0,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival8',
@@ -229,6 +252,7 @@ export const newArrivals = [
     newArrivalPrice: 18500,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival9',
@@ -237,6 +261,7 @@ export const newArrivals = [
     newArrivalPrice: 65000,
     newArrivalDiscount: 17,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival10',
@@ -245,6 +270,7 @@ export const newArrivals = [
     newArrivalPrice: 20000,
     newArrivalDiscount: 6,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival11',
@@ -253,6 +279,7 @@ export const newArrivals = [
     newArrivalPrice: 185000,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival12',
@@ -261,6 +288,7 @@ export const newArrivals = [
     newArrivalPrice: 35000,
     newArrivalDiscount: 26,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival13',
@@ -269,6 +297,7 @@ export const newArrivals = [
     newArrivalPrice: 30000,
     newArrivalDiscount: 5,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival14',
@@ -277,6 +306,7 @@ export const newArrivals = [
     newArrivalPrice: 25000,
     newArrivalDiscount: 0,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival15',
@@ -285,6 +315,7 @@ export const newArrivals = [
     newArrivalPrice: 15000,
     newArrivalDiscount: 15,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival16',
@@ -293,6 +324,7 @@ export const newArrivals = [
     newArrivalPrice: 13000,
     newArrivalDiscount: 1,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival17',
@@ -301,6 +333,7 @@ export const newArrivals = [
     newArrivalPrice: 16000,
     newArrivalDiscount: 15,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival18',
@@ -308,6 +341,8 @@ export const newArrivals = [
     newArrivalName: 'Free Wear Shirt',
     newArrivalPrice: 10000,
     newArrivalDiscount: 6,
+    wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival19',
@@ -316,6 +351,7 @@ export const newArrivals = [
     newArrivalPrice: 25000,
     newArrivalDiscount: 11,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival20',
@@ -324,6 +360,7 @@ export const newArrivals = [
     newArrivalPrice: 15000,
     newArrivalDiscount: 15,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival21',
@@ -332,6 +369,7 @@ export const newArrivals = [
     newArrivalPrice: 45600,
     newArrivalDiscount: 10,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival22',
@@ -340,6 +378,7 @@ export const newArrivals = [
     newArrivalPrice: 49999,
     newArrivalDiscount: 1,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival23',
@@ -348,6 +387,7 @@ export const newArrivals = [
     newArrivalPrice: 530000,
     newArrivalDiscount: 30,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival24',
@@ -356,6 +396,7 @@ export const newArrivals = [
     newArrivalPrice: 180000,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival25',
@@ -364,6 +405,7 @@ export const newArrivals = [
     newArrivalPrice: 31600,
     newArrivalDiscount: 16,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival26',
@@ -372,6 +414,7 @@ export const newArrivals = [
     newArrivalPrice: 51500,
     newArrivalDiscount: 8,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival27',
@@ -380,6 +423,7 @@ export const newArrivals = [
     newArrivalPrice: 96000,
     newArrivalDiscount: 14,
     wishlist: true,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival28',
@@ -388,6 +432,7 @@ export const newArrivals = [
     newArrivalPrice: 12000,
     newArrivalDiscount: 0,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival29',
@@ -396,6 +441,7 @@ export const newArrivals = [
     newArrivalPrice: 31000,
     newArrivalDiscount: 10,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
   {
     id: 'newArrival30',
@@ -404,5 +450,6 @@ export const newArrivals = [
     newArrivalPrice: 23500,
     newArrivalDiscount: 17,
     wishlist: false,
+    defaultBuyingQuantity: 1,
   },
 ];
