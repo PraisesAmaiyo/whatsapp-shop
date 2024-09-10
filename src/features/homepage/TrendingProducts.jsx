@@ -10,6 +10,8 @@ import Row from '../../ui/Row';
 import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
+import { formatNumber } from '../../utils/helpers';
 
 const StyledTrendingProducts = styled.section`
   padding: 4rem 0;
@@ -142,14 +144,32 @@ const TrendingCategoryActions = styled.div`
       outline: 1.5px solid var(--color-gold-600);
       color: var(--color-gold-600);
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: var(--color-grey-300);
+      background-color: var(--color-grey-200);
+    }
   }
 `;
 
 function TrendingProducts() {
   const navigate = useNavigate();
 
+  const { cartItems, addItemToCart } = useAddItemToCart();
+
   function handleProductClick(id) {
     navigate(`/products/${id}`);
+  }
+
+  function handleAddToCart(event, trendingProduct) {
+    event.stopPropagation();
+
+    const isInCart = cartItems.some((item) => item.id === trendingProduct.id);
+
+    if (!isInCart) {
+      addItemToCart(trendingProduct);
+    }
   }
 
   return (
@@ -180,8 +200,9 @@ function TrendingProducts() {
               wishlist,
             } = trendingProduct;
 
+            const isInCart = cartItems.some((item) => item.id === id);
+
             return (
-              //   <TrendingProduct key={id} onClick={() => navigate('/products')}>
               <TrendingProduct key={id} onClick={() => handleProductClick(id)}>
                 <TrendingImageContainer>
                   <DiscountTag className="discount-tag">{`-${newArrivalDiscount}%`}</DiscountTag>
@@ -198,12 +219,15 @@ function TrendingProducts() {
                     <Heading as="h4">{newArrivalName}</Heading>
                     <span>
                       <span className="naira-sign">₦</span>
-                      {`${newArrivalPrice}`}
+                      {`${formatNumber(newArrivalPrice)}`}
                     </span>
                   </div>
 
                   <div>
-                    <FaShoppingCart />
+                    <FaShoppingCart
+                      onClick={(e) => handleAddToCart(e, trendingProduct)}
+                      className={isInCart ? 'disabled' : ''}
+                    />
                   </div>
                 </TrendingCategoryActions>
               </TrendingProduct>

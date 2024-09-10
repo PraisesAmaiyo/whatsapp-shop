@@ -11,6 +11,7 @@ import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 import { newArrivals } from './store';
 import LoadMore from '../../ui/LoadMore';
 import { useNavigate } from 'react-router-dom';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
@@ -152,14 +153,32 @@ const NewArrivalCategoryActions = styled.div`
       background-color: var(--color-grey-0);
       box-shadow: var(--shadow-sm);
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: var(--color-grey-300);
+      background-color: var(--color-grey-200);
+    }
   }
 `;
 
 function NewArrivals() {
   const navigate = useNavigate();
 
+  const { cartItems, addItemToCart } = useAddItemToCart();
+
   function handleProductClick(id) {
     navigate(`/products/${id}`);
+  }
+
+  function handleAddToCart(event, newArrival) {
+    event.stopPropagation();
+
+    const isInCart = cartItems.some((item) => item.id === newArrivals.id);
+
+    if (!isInCart) {
+      addItemToCart(newArrival);
+    }
   }
 
   return (
@@ -188,6 +207,8 @@ function NewArrivals() {
               wishlist,
             } = newArrival;
 
+            const isInCart = cartItems.some((item) => item.id === id);
+
             return (
               <NewArrivalProduct
                 key={id}
@@ -215,7 +236,10 @@ function NewArrivals() {
                   </div>
 
                   <div>
-                    <FaShoppingCart />
+                    <FaShoppingCart
+                      onClick={(e) => handleAddToCart(e, newArrival)}
+                      className={isInCart ? 'disabled' : ''}
+                    />
                   </div>
                 </NewArrivalCategoryActions>
               </NewArrivalProduct>

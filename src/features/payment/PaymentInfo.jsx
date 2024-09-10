@@ -7,6 +7,7 @@ import { formatNumber } from '../../utils/helpers';
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
+import { useShipping } from '../../context/ShippingContext';
 
 const AccountDetails = styled.div`
   display: flex;
@@ -55,11 +56,17 @@ function PaymentInfo() {
   const navigate = useNavigate();
   const { totalPrice } = useAddItemToCart();
 
+  const { shippingDetails } = useShipping();
+  const { amount } = shippingDetails;
+
   return (
     <>
       <Heading as="h2">
         Copy the account number and pay the total of
-        <span className="naira-sign"> ₦{formatNumber(totalPrice)} </span>
+        <span className="naira-sign">
+          {' '}
+          ₦{formatNumber(totalPrice + amount)}{' '}
+        </span>
         to the account below.
       </Heading>
       <Heading as="h2">
