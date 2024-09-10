@@ -147,8 +147,8 @@ const TrendingCategoryActions = styled.div`
 
     &.disabled {
       cursor: not-allowed;
-      color: var(--color-grey-300);
-      background-color: var(--color-grey-200);
+      color: var(--color-grey-500);
+      background-color: var(--color-grey-300);
     }
   }
 `;

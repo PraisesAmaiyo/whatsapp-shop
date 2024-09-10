@@ -12,6 +12,7 @@ import { newArrivals } from './store';
 import LoadMore from '../../ui/LoadMore';
 import { useNavigate } from 'react-router-dom';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
+import { formatNumber } from '../../utils/helpers';
 
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
@@ -156,8 +157,8 @@ const NewArrivalCategoryActions = styled.div`
 
     &.disabled {
       cursor: not-allowed;
-      color: var(--color-grey-300);
-      background-color: var(--color-grey-200);
+      color: var(--color-grey-500);
+      background-color: var(--color-grey-300);
     }
   }
 `;
@@ -231,7 +232,7 @@ function NewArrivals() {
                     <Heading as="h4">{newArrivalName}</Heading>
                     <span>
                       <span className="naira-sign">₦</span>
-                      {`${newArrivalPrice}`}
+                      {`${formatNumber(newArrivalPrice)}`}
                     </span>
                   </div>
 

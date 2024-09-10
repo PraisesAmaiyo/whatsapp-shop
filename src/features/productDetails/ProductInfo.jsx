@@ -285,14 +285,23 @@ function ProductInfo() {
             <Button variation="secondary" size="large">
               Buy Now
             </Button>
-            <Button
-              variation="primary"
-              size="large"
-              onClick={() => handleAddToCart({ product })}
-              disabled={isInCart}
-            >
-              {isInCart ? 'Already in Cart' : 'Add to Cart'}
-            </Button>
+            {isInCart ? (
+              <Button
+                variation="primary"
+                size="large"
+                onClick={() => navigate('/cart')}
+              >
+                View Cart
+              </Button>
+            ) : (
+              <Button
+                variation="primary"
+                size="large"
+                onClick={() => handleAddToCart({ product })}
+              >
+                Add to Cart
+              </Button>
+            )}
 
             <WishlistContainer>
               <WishlistIcon type={wishlist ? true : ''} />
