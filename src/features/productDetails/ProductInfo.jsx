@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import { formatNumber } from '../../utils/helpers';
 import { useMoveBack } from '../../hooks/useMoveBack';
@@ -14,7 +15,12 @@ import SimilarItems from './SimilarItems';
 import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
 
-import { trendingProducts, newArrivals } from '../homepage/store';
+import {
+  trendingProducts,
+  newArrivals,
+  frequentlyViewedItems,
+  similarItems,
+} from '../homepage/store';
 import { useState } from 'react';
 
 const StyledProductInfoContainer = styled.section`
@@ -172,7 +178,9 @@ function ProductInfo() {
 
   const product =
     trendingProducts.find((prod) => prod.id === id) ||
-    newArrivals.find((prod) => prod.id === id);
+    newArrivals.find((prod) => prod.id === id) ||
+    frequentlyViewedItems.find((prod) => prod.id === id) ||
+    similarItems.find((prod) => prod.id === id);
 
   if (!product) {
     return (
@@ -205,7 +213,15 @@ function ProductInfo() {
       const productWithQuantity = { ...product, quantity };
 
       addItemToCart(productWithQuantity);
+
+      toast.success(`${productInfoName} Added to Cart 😎.`);
     }
+  }
+
+  function handleBuyNow(product) {
+    handleAddToCart(product);
+
+    navigate('/cart');
   }
 
   const {
@@ -214,28 +230,49 @@ function ProductInfo() {
     newArrivalName,
     newArrivalPrice,
     newArrivalDiscount,
+    similarItemsImage,
+    similarItemsName,
+    similarItemsPrice,
+    similarItemsDiscount,
+    frequentlyViewedItemsImage,
+    frequentlyViewedItemsName,
+    frequentlyViewedItemsPrice,
+    frequentlyViewedItemsDiscount,
     wishlist,
     defaultBuyingQuantity,
   } = product;
+
+  // Since the ProductInfo page receives data from different segments; I had to join each parameter together with the "or ||" method.
+  const productInfoPrice =
+    newArrivalPrice || similarItemsPrice || frequentlyViewedItemsPrice;
+
+  const productInfoName =
+    newArrivalName || similarItemsName || frequentlyViewedItemsName;
+
+  const productInfoImage =
+    newArrivalImage || similarItemsImage || frequentlyViewedItemsImage;
+
+  const productInfoDiscount =
+    newArrivalDiscount || similarItemsDiscount || frequentlyViewedItemsDiscount;
 
   return (
     <StyledProductInfoContainer>
       <ProductMainInfo>
         <ProductInfoImage>
-          <img src={newArrivalImage} alt="Product " />
+          <img src={productInfoImage} alt="Product " />
         </ProductInfoImage>
 
         <Row type="vertical">
-          {newArrivalDiscount === 0 ? (
+          {productInfoDiscount === 0 ? (
             ''
           ) : (
             <ProductDiscountAmount>
-              <p className="product-price">Save {newArrivalDiscount}%</p>
+              <p className="product-price">Save {productInfoDiscount}%</p>
               <span>Discount applied</span>
             </ProductDiscountAmount>
           )}
 
-          <Heading as="h1">{newArrivalName}</Heading>
+          <Heading as="h1">{productInfoName}</Heading>
           <ProductInfoText>
             <h3 className="product-mini_text">
               Premium cotton shirt with a crisp collar and tailored fit, perfect
@@ -246,15 +283,16 @@ function ProductInfo() {
           <ProductPricing>
             <h2 className="product-price">
               <span className="naira-sign">₦</span>{' '}
-              {formatNumber(newArrivalPrice)}
+              {formatNumber(productInfoPrice)}
             </h2>
-            {newArrivalDiscount === 0 ? (
+            {productInfoDiscount === 0 ? (
               ''
             ) : (
               <h2 className="product-slashed_price">
                 <span className="naira-sign">₦ </span>
                 {formatNumber(
-                  (newArrivalPrice / 100) * newArrivalDiscount + newArrivalPrice
+                  (productInfoPrice / 100) * productInfoDiscount +
+                    productInfoPrice
                 )}
               </h2>
             )}
@@ -282,7 +320,11 @@ function ProductInfo() {
           />
 
           <ButtonContainer>
-            <Button variation="secondary" size="large">
+            <Button
+              variation="secondary"
+              size="large"
+              onClick={() => handleBuyNow({ product })}
+            >
               Buy Now
             </Button>
             {isInCart ? (

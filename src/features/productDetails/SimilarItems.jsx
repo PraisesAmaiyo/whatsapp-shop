@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import Heading from '../../ui/Heading';
@@ -9,7 +9,9 @@ import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import CustomSwiper from '../../ui/CustomSwiper';
 
-import { similarItems } from './storeProductInfo';
+import { similarItems } from '../homepage/store';
+import toast from 'react-hot-toast';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 const StyleSimilarItems = styled.section`
   padding: 4rem 0;
@@ -147,58 +149,89 @@ const SimilarItemsCategoryActions = styled.div`
       background-color: var(--color-grey-0);
       box-shadow: var(--shadow-sm);
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: var(--color-grey-500);
+      background-color: var(--color-grey-300);
+    }
   }
 `;
 
 function SimilarItems() {
   const navigate = useNavigate();
+  const { id: URLId } = useParams();
 
-  const slides = similarItems.map((item) => {
-    const {
-      id,
-      similarItemsImage,
-      similarItemsName,
-      similarItemsPrice,
-      similarItemsDiscount,
-      wishlist,
-    } = item;
+  const { cartItems, addItemToCart } = useAddItemToCart();
 
-    return (
-      <SimilarItemsProduct key={id} onClick={() => navigate('/products')}>
-        <SimilarItemsImageContainer>
-          <DiscountTag className="discount-tag">
-            {`-${similarItemsDiscount}%`}
-          </DiscountTag>
-          <WishlistContainer>
-            <WishlistIcon type={wishlist ? true : ''} />
-          </WishlistContainer>
-          <ProductImage
-            src={similarItemsImage}
-            alt={`picture of ${similarItemsName} `}
-          />
-        </SimilarItemsImageContainer>
-        <SimilarItemsCategoryActions className="SimilarItems-category_actions">
-          <div>
-            <Heading as="h4">{similarItemsName}</Heading>
-            <span>
-              <span className="naira-sign">₦</span>
-              {`${similarItemsPrice}`}
-            </span>
-          </div>
+  function handleProductClick(id) {
+    navigate(`/products/${id}`);
+  }
 
-          <div>
-            <FaShoppingCart />
-          </div>
-        </SimilarItemsCategoryActions>
-      </SimilarItemsProduct>
-    );
-  });
+  function handleAddToCart(event, similarItem) {
+    event.stopPropagation();
+
+    const isInCart = cartItems.some((item) => item.id === similarItems.id);
+
+    if (!isInCart) {
+      addItemToCart(similarItem);
+      toast.success(`${similarItem.similarItemsName} Added to Cart 😎.`);
+    }
+  }
+
+  const slides = similarItems
+    .filter((similarItem) => similarItem.id !== URLId)
+    .map((similarItem) => {
+      const {
+        id,
+        similarItemsImage,
+        similarItemsName,
+        similarItemsPrice,
+        similarItemsDiscount,
+        wishlist,
+      } = similarItem;
+
+      const isInCart = cartItems.some((item) => item.id === id);
+
+      return (
+        <SimilarItemsProduct key={id} onClick={() => handleProductClick(id)}>
+          <SimilarItemsImageContainer>
+            <DiscountTag className="discount-tag">
+              {`-${similarItemsDiscount}%`}
+            </DiscountTag>
+            <WishlistContainer>
+              <WishlistIcon type={wishlist ? true : ''} />
+            </WishlistContainer>
+            <ProductImage
+              src={similarItemsImage}
+              alt={`picture of ${similarItemsName} `}
+            />
+          </SimilarItemsImageContainer>
+          <SimilarItemsCategoryActions className="SimilarItems-category_actions">
+            <div>
+              <Heading as="h4">{similarItemsName}</Heading>
+              <span>
+                <span className="naira-sign">₦</span>
+                {`${similarItemsPrice}`}
+              </span>
+            </div>
+
+            <div>
+              <FaShoppingCart
+                onClick={(e) => handleAddToCart(e, similarItem)}
+                className={isInCart ? 'disabled' : ''}
+              />
+            </div>
+          </SimilarItemsCategoryActions>
+        </SimilarItemsProduct>
+      );
+    });
 
   return (
     <StyleSimilarItems>
       <Row type="vertical">
         <SimilarItemsHeader>
-          <Heading as="h1">Discover similar items</Heading>
+          <Heading as="h1">Discover Similar Items</Heading>
 
           <Button
             variation="primary"

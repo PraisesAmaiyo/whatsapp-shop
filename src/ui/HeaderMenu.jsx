@@ -1,9 +1,11 @@
-import { HiOutlineUser } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { useAddItemToCart } from '../context/AddItemToCartContext';
+
 import ButtonIcon from './ButtonIcon';
 import { FiHeart, FiSearch, FiShoppingCart } from 'react-icons/fi';
+import { HiOutlineUser } from 'react-icons/hi';
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -11,6 +13,8 @@ const StyledHeaderMenu = styled.ul`
 `;
 
 function Headermenu() {
+  const { cartItems } = useAddItemToCart();
+
   const navigate = useNavigate();
 
   return (
@@ -21,7 +25,7 @@ function Headermenu() {
         </ButtonIcon>
 
         <ButtonIcon onClick={() => navigate('/cart')}>
-          <FiShoppingCart />
+          <FiShoppingCart /> {cartItems.length}
         </ButtonIcon>
 
         <ButtonIcon onClick={() => navigate('/')}>

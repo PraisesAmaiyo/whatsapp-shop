@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import Heading from '../../ui/Heading';
@@ -9,7 +9,9 @@ import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import CustomSwiper from '../../ui/CustomSwiper';
 
-import { frequentlyViewedItems } from './storeProductInfo';
+import { frequentlyViewedItems } from '../homepage/store';
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
+import toast from 'react-hot-toast';
 
 const StyleFrequentlyViewed = styled.section`
   padding: 4rem 0;
@@ -147,58 +149,96 @@ const FrequentlyViewedCategoryActions = styled.div`
       background-color: var(--color-grey-0);
       box-shadow: var(--shadow-sm);
     }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: var(--color-grey-500);
+      background-color: var(--color-grey-300);
+    }
   }
 `;
 
 function FrequentlyViewed() {
   const navigate = useNavigate();
+  const { id: URLId } = useParams();
 
-  const slides = frequentlyViewedItems.map((item) => {
-    const {
-      id,
-      frequentlyViewedItemsImage,
-      frequentlyViewedItemsName,
-      frequentlyViewedItemsPrice,
-      frequentlyViewedItemsDiscount,
-      wishlist,
-    } = item;
+  const { cartItems, addItemToCart } = useAddItemToCart();
 
-    return (
-      <FrequentlyViewedProduct key={id} onClick={() => navigate('/products')}>
-        <FrequentlyViewedImageContainer>
-          <DiscountTag className="discount-tag">
-            {`-${frequentlyViewedItemsDiscount}%`}
-          </DiscountTag>
-          <WishlistContainer>
-            <WishlistIcon type={wishlist ? true : ''} />
-          </WishlistContainer>
-          <ProductImage
-            src={frequentlyViewedItemsImage}
-            alt={`picture of ${frequentlyViewedItemsName} `}
-          />
-        </FrequentlyViewedImageContainer>
-        <FrequentlyViewedCategoryActions className="FrequentlyViewed-category_actions">
-          <div>
-            <Heading as="h4">{frequentlyViewedItemsName}</Heading>
-            <span>
-              <span className="naira-sign">₦</span>
-              {`${frequentlyViewedItemsPrice}`}
-            </span>
-          </div>
+  function handleProductClick(id) {
+    navigate(`/products/${id}`);
+  }
 
-          <div>
-            <FaShoppingCart />
-          </div>
-        </FrequentlyViewedCategoryActions>
-      </FrequentlyViewedProduct>
+  function handleAddToCart(event, frequentlyViewedItem) {
+    event.stopPropagation();
+
+    const isInCart = cartItems.some(
+      (item) => item.id === frequentlyViewedItems.id
     );
-  });
+
+    if (!isInCart) {
+      addItemToCart(frequentlyViewedItem);
+      toast.success(
+        `${frequentlyViewedItem.frequentlyViewedItemsName} Added to Cart 😎.`
+      );
+    }
+  }
+
+  const slides = frequentlyViewedItems
+    .filter((frequentlyViewedItem) => frequentlyViewedItem.id !== URLId)
+    .map((frequentlyViewedItem) => {
+      const {
+        id,
+        frequentlyViewedItemsImage,
+        frequentlyViewedItemsName,
+        frequentlyViewedItemsPrice,
+        frequentlyViewedItemsDiscount,
+        wishlist,
+      } = frequentlyViewedItem;
+
+      const isInCart = cartItems.some((item) => item.id === id);
+
+      return (
+        <FrequentlyViewedProduct
+          key={id}
+          onClick={() => handleProductClick(id)}
+        >
+          <FrequentlyViewedImageContainer>
+            <DiscountTag className="discount-tag">
+              {`-${frequentlyViewedItemsDiscount}%`}
+            </DiscountTag>
+            <WishlistContainer>
+              <WishlistIcon type={wishlist ? true : ''} />
+            </WishlistContainer>
+            <ProductImage
+              src={frequentlyViewedItemsImage}
+              alt={`picture of ${frequentlyViewedItemsName} `}
+            />
+          </FrequentlyViewedImageContainer>
+          <FrequentlyViewedCategoryActions className="FrequentlyViewed-category_actions">
+            <div>
+              <Heading as="h4">{frequentlyViewedItemsName}</Heading>
+              <span>
+                <span className="naira-sign">₦</span>
+                {`${frequentlyViewedItemsPrice}`}
+              </span>
+            </div>
+
+            <div>
+              <FaShoppingCart
+                onClick={(e) => handleAddToCart(e, frequentlyViewedItem)}
+                className={isInCart ? 'disabled' : ''}
+              />
+            </div>
+          </FrequentlyViewedCategoryActions>
+        </FrequentlyViewedProduct>
+      );
+    });
 
   return (
     <StyleFrequentlyViewed>
       <Row type="vertical">
         <FrequentlyViewedHeader>
-          <Heading as="h1">Customers frequrntly viewed</Heading>
+          <Heading as="h1">Customers Frequently Viewed</Heading>
 
           <Button
             variation="primary"

@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from 'react';
-import { cartItems as initialCartItems } from '../features/cart/storeCartItems';
 
 const AddItemToCartContext = createContext();
 
 export const AddItemToCartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const [cartItems, setCartItems] = useState([]);
 
   const addItemToCart = (newCartItem) => {
     setCartItems((prevItems) => {

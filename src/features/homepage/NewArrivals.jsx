@@ -1,16 +1,17 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
 import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
+import LoadMore from '../../ui/LoadMore';
 
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
 import { newArrivals } from './store';
-import LoadMore from '../../ui/LoadMore';
-import { useNavigate } from 'react-router-dom';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { formatNumber } from '../../utils/helpers';
 
@@ -179,6 +180,7 @@ function NewArrivals() {
 
     if (!isInCart) {
       addItemToCart(newArrival);
+      toast.success(`${newArrival.newArrivalName} Added to Cart 😎.`);
     }
   }
 
