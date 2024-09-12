@@ -21,4 +21,14 @@ export const ShippingProvider = ({ children }) => {
   );
 };
 
-export const useShipping = () => useContext(ShippingContext);
+function useShipping() {
+  const context = useContext(ShippingContext);
+  if (context === undefined)
+    throw new Error('ShippingContext was used outside of ShippingProvider');
+
+  return context;
+}
+
+// export const useShipping = () => useContext(ShippingContext);
+
+export { useShipping };

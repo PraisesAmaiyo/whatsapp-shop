@@ -94,4 +94,16 @@ export const AddItemToCartProvider = ({ children }) => {
   );
 };
 
-export const useAddItemToCart = () => useContext(AddItemToCartContext);
+function useAddItemToCart() {
+  const context = useContext(AddItemToCartContext);
+  if (context === undefined)
+    throw new Error(
+      'AddItemToCartContext was used outside of AddItemToCartProvider'
+    );
+
+  return context;
+}
+
+export { useAddItemToCart };
+
+// export const useAddItemToCart = () => useContext(AddItemToCartContext);

@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 import Header from '../ui/Header';
-
-import ProductInfo from '../features/productDetails/ProductInfo';
-import Footer from '../ui/Footer';
 import PageHeader from '../ui/PageHeader';
 import AllProducts from '../features/products/AllProducts';
+import Footer from '../ui/Footer';
 
 const Container = styled.div`
   width: 100%;
