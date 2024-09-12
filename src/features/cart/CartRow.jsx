@@ -83,25 +83,41 @@ function CartRow({ cartItem }) {
   }
 
   const {
+    id: itemId,
     newArrivalImage,
     newArrivalName,
     newArrivalPrice,
+    similarItemsImage,
+    similarItemsName,
+    similarItemsPrice,
+    frequentlyViewedItemsImage,
+    frequentlyViewedItemsName,
+    frequentlyViewedItemsPrice,
     quantity,
-    id: itemId,
     totalItemPrice,
-    defaultBuyingQuantity,
   } = cartItem;
+
+  //   console.log(totalItemPrice);
+
+  const cartItemPrice =
+    newArrivalPrice || similarItemsPrice || frequentlyViewedItemsPrice;
+
+  const cartItemName =
+    newArrivalName || similarItemsName || frequentlyViewedItemsName;
+
+  const cartItemImage =
+    newArrivalImage || similarItemsImage || frequentlyViewedItemsImage;
 
   return (
     <Table.Row>
       <Group>
-        <Img src={newArrivalImage} />
-        <Name>{newArrivalName}</Name>
+        <Img src={cartItemImage} />
+        <Name>{cartItemName}</Name>
       </Group>
 
       <Price>
         <span className="naira-sign">₦</span>
-        {formatNumber(newArrivalPrice)}
+        {formatNumber(cartItemPrice)}
       </Price>
 
       <UpdateItemQuantity
@@ -112,7 +128,7 @@ function CartRow({ cartItem }) {
 
       <SubTotal>
         <span className="naira-sign">₦</span>
-        {formatNumber(totalItemPrice > 0 ? totalItemPrice : newArrivalPrice)}
+        {formatNumber(totalItemPrice > 0 ? totalItemPrice : cartItemPrice)}
       </SubTotal>
 
       <DeleteItem>

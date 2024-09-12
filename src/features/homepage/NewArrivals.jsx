@@ -176,11 +176,13 @@ function NewArrivals() {
   function handleAddToCart(event, newArrival) {
     event.stopPropagation();
 
-    const isInCart = cartItems.some((item) => item.id === newArrivals.id);
+    const isInCart = cartItems.some((item) => item.id === newArrival.id);
 
     if (!isInCart) {
       addItemToCart(newArrival);
       toast.success(`${newArrival.newArrivalName} Added to Cart 😎.`);
+    } else {
+      toast.error(`${newArrival.newArrivalName} aready added to Cart 🙂.`);
     }
   }
 

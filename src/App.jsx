@@ -18,6 +18,7 @@ import ContactUs from './pages/ContactUsPage';
 
 import AppLayout from './ui/AppLayout';
 import { Toaster } from 'react-hot-toast';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                 <Route element={<AppLayout />}>
                   <Route index element={<Navigate replace to="home" />} />
                   <Route path="home" element={<Homepage />} />
+                  <Route path="products" element={<Products />} />
                   <Route path="products/:id" element={<ProductDetails />} />
                   <Route path="cart" element={<Cart />} />
                   <Route path="checkout" element={<Checkout />} />
@@ -57,7 +59,7 @@ function App() {
                 duration: 3000,
               },
               error: {
-                duration: 5000,
+                duration: 4000,
               },
               style: {
                 fontSize: '16px',

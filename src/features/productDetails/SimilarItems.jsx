@@ -171,11 +171,13 @@ function SimilarItems() {
   function handleAddToCart(event, similarItem) {
     event.stopPropagation();
 
-    const isInCart = cartItems.some((item) => item.id === similarItems.id);
+    const isInCart = cartItems.some((item) => item.id === similarItem.id);
 
     if (!isInCart) {
       addItemToCart(similarItem);
       toast.success(`${similarItem.similarItemsName} Added to Cart 😎.`);
+    } else {
+      toast.error(`${similarItem.similarItemsName} already added to Cart 🙂.`);
     }
   }
 

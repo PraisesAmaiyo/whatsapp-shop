@@ -172,13 +172,17 @@ function FrequentlyViewed() {
     event.stopPropagation();
 
     const isInCart = cartItems.some(
-      (item) => item.id === frequentlyViewedItems.id
+      (item) => item.id === frequentlyViewedItem.id
     );
 
     if (!isInCart) {
       addItemToCart(frequentlyViewedItem);
       toast.success(
         `${frequentlyViewedItem.frequentlyViewedItemsName} Added to Cart 😎.`
+      );
+    } else {
+      toast.error(
+        `${frequentlyViewedItem.frequentlyViewedItemsName} aready added to Cart 🙂.`
       );
     }
   }

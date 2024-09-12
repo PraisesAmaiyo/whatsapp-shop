@@ -267,7 +267,11 @@ function ProductInfo() {
             ''
           ) : (
             <ProductDiscountAmount>
-              <p className="product-price">Save {productInfoDiscount}%</p>
+              <p className="product-price">
+                Save {productInfoDiscount}% (
+                <span className="naira-sign">₦ </span>
+                {formatNumber((productInfoPrice / 100) * productInfoDiscount)})
+              </p>
               <span>Discount applied</span>
             </ProductDiscountAmount>
           )}

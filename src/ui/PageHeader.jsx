@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Heading from './Heading';
 
@@ -11,12 +11,18 @@ const StyledPageHeader = styled.div`
 
 function PageHeader() {
   const urlLocation = useLocation();
+  const { id } = useParams();
 
   const isOrderCompletePage = urlLocation.pathname === '/order-completed';
   const orderCompletePageText = isOrderCompletePage ? 'Order Completed' : '';
 
   const isProductPage = urlLocation.pathname === '/products';
-  const productPageText = isProductPage ? 'Products/Shirt/Product Details' : '';
+  const productPageText = isProductPage ? 'Products' : '';
+
+  const isProductInfoPage = id && urlLocation.pathname.startsWith('/products');
+  const productInfoPageText = isProductInfoPage
+    ? 'Products/Shirt/Product Details'
+    : '';
 
   const isCartPage = urlLocation.pathname === '/cart';
   const cartPageText = isCartPage ? 'Shopping Cart' : '';
@@ -32,21 +38,29 @@ function PageHeader() {
 
   return (
     <StyledPageHeader>
-      {isOrderCompletePage ? (
+      {isOrderCompletePage && (
         <Heading as="h2">{orderCompletePageText}</Heading>
-      ) : (
-        ''
       )}
 
-      {isProductPage ? <Heading as="h2">{productPageText}</Heading> : ''}
+      {isProductPage && <Heading as="h2">{productPageText}</Heading>}
 
-      {isCartPage ? <Heading as="h2">{cartPageText}</Heading> : ''}
+      {isProductInfoPage && <Heading as="h2">{productInfoPageText}</Heading>}
 
-      {isCheckoutPage ? <Heading as="h2">{checkoutPageText}</Heading> : ''}
+      {isCartPage && <Heading as="h2">{cartPageText}</Heading>}
 
-      {isPaymentPage ? <Heading as="h2">{paymentPageText}</Heading> : ''}
+      {isCheckoutPage && <Heading as="h2">{checkoutPageText}</Heading>}
 
-      {isContactUsPage ? <Heading as="h2">{ContactUsPagText}</Heading> : ''}
+      {isPaymentPage && <Heading as="h2">{paymentPageText}</Heading>}
+
+      {isContactUsPage && <Heading as="h2">{ContactUsPagText}</Heading>}
+
+      {!isOrderCompletePage &&
+        !isProductPage &&
+        !isProductInfoPage &&
+        !isCartPage &&
+        !isCheckoutPage &&
+        !isPaymentPage &&
+        !isContactUsPage && <Heading as="h2">Page Not Found</Heading>}
     </StyledPageHeader>
   );
 }

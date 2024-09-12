@@ -12,6 +12,7 @@ import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { formatNumber } from '../../utils/helpers';
+import toast from 'react-hot-toast';
 
 const StyledTrendingProducts = styled.section`
   padding: 4rem 0;
@@ -169,6 +170,11 @@ function TrendingProducts() {
 
     if (!isInCart) {
       addItemToCart(trendingProduct);
+      toast.success(`${trendingProduct.newArrivalName} Added to Cart 😎.`);
+    } else {
+      toast.error(
+        `${trendingProduct.newArrivalName} already added to Cart 🙂.`
+      );
     }
   }
 

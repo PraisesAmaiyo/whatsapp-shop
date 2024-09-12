@@ -6,6 +6,27 @@ export const AddItemToCartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addItemToCart = (newCartItem) => {
+    const {
+      newArrivalImage,
+      newArrivalName,
+      newArrivalPrice,
+      similarItemsImage,
+      similarItemsName,
+      similarItemsPrice,
+      frequentlyViewedItemsImage,
+      frequentlyViewedItemsName,
+      frequentlyViewedItemsPrice,
+    } = newCartItem;
+
+    const newCartItemPrice =
+      newArrivalPrice || similarItemsPrice || frequentlyViewedItemsPrice;
+
+    const newCartItemName =
+      newArrivalName || similarItemsName || frequentlyViewedItemsName;
+
+    const newCartItemImage =
+      newArrivalImage || similarItemsImage || frequentlyViewedItemsImage;
+
     setCartItems((prevItems) => {
       const itemExists = prevItems.some((item) => item.id === newCartItem.id);
 
@@ -17,8 +38,11 @@ export const AddItemToCartProvider = ({ children }) => {
 
         const itemWithTotalPrice = {
           ...newCartItem,
+          newCartItemName,
+          newCartItemImage,
+          newCartItemPrice,
           quantity,
-          totalItemPrice: newCartItem.newArrivalPrice * newCartItem.quantity,
+          totalItemPrice: newCartItemPrice * quantity,
         };
 
         return [...prevItems, itemWithTotalPrice];
@@ -28,23 +52,31 @@ export const AddItemToCartProvider = ({ children }) => {
 
   const updateItemQuantity = (itemId, newQuantity) => {
     setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId
+      prevItems.map((item) => {
+        const itemPrice =
+          item.newArrivalPrice ||
+          item.similarItemsPrice ||
+          item.frequentlyViewedItemsPrice;
+
+        return item.id === itemId
           ? {
               ...item,
               quantity: newQuantity,
-              totalItemPrice: item.newArrivalPrice * newQuantity,
+              totalItemPrice: itemPrice * newQuantity,
             }
-          : item
-      )
+          : item;
+      })
     );
   };
+
   const totalPrice = cartItems.reduce(
     (sum, item) =>
       sum +
       (item.totalItemPrice
         ? item.totalItemPrice
-        : item.newArrivalPrice * item.quantity),
+        : (item.newArrivalPrice ||
+            item.similarItemsPrice ||
+            item.frequentlyViewedItemsPrice) * item.quantity),
     0
   );
 
