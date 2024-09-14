@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useNavigation, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import { formatNumber } from '../../utils/helpers';
@@ -168,11 +168,17 @@ function ProductInfo() {
 
   const [itemNumber, setItemNumber] = useState(1);
 
-  //   const navigation = useNavigation();
+  const navigation = useNavigation();
   const navigate = useNavigate();
   const moveBack = useMoveBack();
 
-  //   const isLoading = navigation.state === 'loading';
+  const isLoading = navigation.state === 'loading';
+
+  if (isLoading) {
+    console.log('loading');
+  } else {
+    console.log('Not loading');
+  }
 
   const { id } = useParams();
 
@@ -257,104 +263,109 @@ function ProductInfo() {
 
   return (
     <StyledProductInfoContainer>
-      <ProductMainInfo>
-        <ProductInfoImage>
-          <img src={productInfoImage} alt="Product " />
-        </ProductInfoImage>
+      {isLoading ? (
+        'Loading'
+      ) : (
+        <ProductMainInfo>
+          <ProductInfoImage>
+            <img src={productInfoImage} alt="Product " />
+          </ProductInfoImage>
 
-        <Row type="vertical">
-          {productInfoDiscount === 0 ? (
-            ''
-          ) : (
-            <ProductDiscountAmount>
-              <p className="product-price">
-                Save {productInfoDiscount}% (
-                <span className="naira-sign">₦ </span>
-                {formatNumber((productInfoPrice / 100) * productInfoDiscount)})
-              </p>
-              <span>Discount applied</span>
-            </ProductDiscountAmount>
-          )}
-
-          <Heading as="h1">{productInfoName}</Heading>
-          <ProductInfoText>
-            <h3 className="product-mini_text">
-              Premium cotton shirt with a crisp collar and tailored fit, perfect
-              for any occasion from office to casual outings.
-            </h3>
-          </ProductInfoText>
-
-          <ProductPricing>
-            <h2 className="product-price">
-              <span className="naira-sign">₦</span>{' '}
-              {formatNumber(productInfoPrice)}
-            </h2>
+          <Row type="vertical">
             {productInfoDiscount === 0 ? (
               ''
             ) : (
-              <h2 className="product-slashed_price">
-                <span className="naira-sign">₦ </span>
-                {formatNumber(
-                  (productInfoPrice / 100) * productInfoDiscount +
-                    productInfoPrice
-                )}
+              <ProductDiscountAmount>
+                <p className="product-price">
+                  Save {productInfoDiscount}% (
+                  <span className="naira-sign">₦ </span>
+                  {formatNumber((productInfoPrice / 100) * productInfoDiscount)}
+                  )
+                </p>
+                <span>Discount applied</span>
+              </ProductDiscountAmount>
+            )}
+
+            <Heading as="h1">{productInfoName}</Heading>
+            <ProductInfoText>
+              <h3 className="product-mini_text">
+                Premium cotton shirt with a crisp collar and tailored fit,
+                perfect for any occasion from office to casual outings.
+              </h3>
+            </ProductInfoText>
+
+            <ProductPricing>
+              <h2 className="product-price">
+                <span className="naira-sign">₦</span>{' '}
+                {formatNumber(productInfoPrice)}
               </h2>
-            )}
-          </ProductPricing>
+              {productInfoDiscount === 0 ? (
+                ''
+              ) : (
+                <h2 className="product-slashed_price">
+                  <span className="naira-sign">₦ </span>
+                  {formatNumber(
+                    (productInfoPrice / 100) * productInfoDiscount +
+                      productInfoPrice
+                  )}
+                </h2>
+              )}
+            </ProductPricing>
 
-          <ProductAvailability>
-            <h3 className="product-mini_text">In Stock</h3>
-          </ProductAvailability>
+            <ProductAvailability>
+              <h3 className="product-mini_text">In Stock</h3>
+            </ProductAvailability>
 
-          <ProductReviews>
-            <div className="reviewRatings">
-              <p>⭐⭐⭐⭐⭐</p>
-              <p>4.9</p>
-            </div>
+            <ProductReviews>
+              <div className="reviewRatings">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>4.9</p>
+              </div>
 
-            <div className="reviewNumbers">
-              <p>120 Reviews ~ 23 sold</p>
-            </div>
-          </ProductReviews>
+              <div className="reviewNumbers">
+                <p>120 Reviews ~ 23 sold</p>
+              </div>
+            </ProductReviews>
 
-          <UpdateItemQuantity
-            defaultBuyingQuantity={defaultBuyingQuantity}
-            itemId={itemId}
-            onQuantityChange={handleQuantityChange}
-          />
+            <UpdateItemQuantity
+              defaultBuyingQuantity={defaultBuyingQuantity}
+              itemId={itemId}
+              onQuantityChange={handleQuantityChange}
+            />
 
-          <ButtonContainer>
-            <Button
-              variation="secondary"
-              size="large"
-              onClick={() => handleBuyNow({ product })}
-            >
-              Buy Now
-            </Button>
-            {isInCart ? (
+            <ButtonContainer>
               <Button
-                variation="primary"
+                variation="secondary"
                 size="large"
-                onClick={() => navigate('/cart')}
+                onClick={() => handleBuyNow({ product })}
               >
-                View Cart
+                Buy Now
               </Button>
-            ) : (
-              <Button
-                variation="primary"
-                size="large"
-                onClick={() => handleAddToCart({ product })}
-              >
-                Add to Cart
-              </Button>
-            )}
+              {isInCart ? (
+                <Button
+                  variation="primary"
+                  size="large"
+                  onClick={() => navigate('/cart')}
+                >
+                  View Cart
+                </Button>
+              ) : (
+                <Button
+                  variation="primary"
+                  size="large"
+                  onClick={() => handleAddToCart({ product })}
+                >
+                  Add to Cart
+                </Button>
+              )}
 
-            <WishlistContainer>
-              <WishlistIcon type={wishlist ? true : ''} />
-            </WishlistContainer>
-          </ButtonContainer>
-        </Row>
-      </ProductMainInfo>
+              <WishlistContainer>
+                <WishlistIcon type={wishlist ? true : ''} />
+              </WishlistContainer>
+            </ButtonContainer>
+          </Row>
+        </ProductMainInfo>
+      )}
 
       <ProductSubInfo>
         <Heading as="h2">Description</Heading>

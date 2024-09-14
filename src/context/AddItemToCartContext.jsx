@@ -1,9 +1,10 @@
 import { createContext, useContext, useState } from 'react';
+import { useLocalStorageState } from '../hooks/useLocalStorageState';
 
 const AddItemToCartContext = createContext();
 
 export const AddItemToCartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useLocalStorageState([], 'cartItems');
 
   const addItemToCart = (newCartItem) => {
     const {
@@ -54,6 +55,7 @@ export const AddItemToCartProvider = ({ children }) => {
     setCartItems((prevItems) =>
       prevItems.map((item) => {
         const itemPrice =
+          item.newCartItemPrice ||
           item.newArrivalPrice ||
           item.similarItemsPrice ||
           item.frequentlyViewedItemsPrice;
@@ -74,7 +76,8 @@ export const AddItemToCartProvider = ({ children }) => {
       sum +
       (item.totalItemPrice
         ? item.totalItemPrice
-        : (item.newArrivalPrice ||
+        : (item.newCartItemPrice ||
+            item.newArrivalPrice ||
             item.similarItemsPrice ||
             item.frequentlyViewedItemsPrice) * item.quantity),
     0
