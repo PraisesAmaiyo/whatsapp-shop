@@ -30,3 +30,15 @@ export async function getNewArrivals() {
     return [];
   }
 }
+export async function getFrequentlyViewed() {
+  try {
+    const response = await fetch(`${API_URL}/frequentlyvieweditems`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch frequently viewed products');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+}

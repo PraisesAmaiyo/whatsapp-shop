@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
-  useLoaderData,
   useNavigate,
-  useNavigation,
+  //   useNavigation,
   useParams,
 } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -21,12 +21,17 @@ import FrequentlyViewed from './FrequentlyViewed';
 import Benefits from '../../ui/Benefits';
 
 import {
-  trendingProducts,
-  newArrivals,
+  //   trendingProducts,
+  //   newArrivals,
   frequentlyViewedItems,
   similarItems,
 } from '../homepage/store';
-import { useState } from 'react';
+
+import {
+  getNewArrivals,
+  getTrendingProducts,
+} from '../../services/ApiProducts';
+import Spinner from '../../ui/Spinner';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -176,31 +181,45 @@ const Box = styled.div`
 // }
 
 function ProductInfo() {
+  const [trendingProducts, setTrendingProducts] = useState([]);
+  const [newArrivalProducts, setNewArrivalProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { cartItems, addItemToCart } = useAddItemToCart();
-
   const [itemNumber, setItemNumber] = useState(1);
 
-  const navigation = useNavigation();
+  //   const navigation = useNavigation();
   const navigate = useNavigate();
   const moveBack = useMoveBack();
-
-  const isLoading = navigation.state === 'loading';
-
-  if (isLoading) {
-    console.log('loading');
-  } else {
-    console.log('Not loading');
-  }
-
   const { id } = useParams();
+
+  //   const isLoading = navigation.state === 'loading';
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const trendingProducts = await getTrendingProducts();
+        const newArrivals = await getNewArrivals();
+        setTrendingProducts(trendingProducts);
+        setNewArrivalProducts(newArrivals);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) return <p>Error: {error}</p>;
 
   const product =
     trendingProducts.find((prod) => prod.id === id) ||
-    newArrivals.find((prod) => prod.id === id) ||
+    newArrivalProducts.find((prod) => prod.id === id) ||
     frequentlyViewedItems.find((prod) => prod.id === id) ||
     similarItems.find((prod) => prod.id === id);
 
-  if (!product) {
+  if (!isLoading && !product) {
     return (
       <StyledProductNotFound>
         {' '}
@@ -218,7 +237,8 @@ function ProductInfo() {
     );
   }
 
-  const isInCart = cartItems.some((item) => item.id === product.id);
+  //   const isInCart = cartItems.some((item) => item.id === product.id);
+  const isInCart = cartItems.some((item) => item.id === 1);
 
   function handleQuantityChange(newQuantity) {
     setItemNumber(newQuantity);
@@ -240,6 +260,10 @@ function ProductInfo() {
     handleAddToCart(product);
 
     navigate('/cart');
+  }
+
+  if (isLoading || !product) {
+    return <Spinner />;
   }
 
   const {
@@ -276,7 +300,7 @@ function ProductInfo() {
   return (
     <StyledProductInfoContainer>
       {isLoading ? (
-        'Loading'
+        <Spinner />
       ) : (
         <ProductMainInfo>
           <ProductInfoImage>

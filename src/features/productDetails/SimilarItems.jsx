@@ -181,6 +181,8 @@ function SimilarItems() {
     }
   }
 
+  console.log(similarItems.length);
+
   const slides = similarItems
     .filter((similarItem) => similarItem.id !== URLId)
     .map((similarItem) => {

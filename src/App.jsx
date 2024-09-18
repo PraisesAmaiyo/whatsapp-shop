@@ -2,10 +2,7 @@ import { StyleSheetManager } from 'styled-components';
 import {
   createBrowserRouter,
   RouterProvider,
-  BrowserRouter,
   Navigate,
-  Route,
-  Routes,
 } from 'react-router-dom';
 
 import GlobalStyles from './styles/GlobalStyles';

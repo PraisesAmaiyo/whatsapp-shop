@@ -10,7 +10,6 @@ import NewArrivals from '../features/homepage/NewArrivals';
 import JoinCommunity from '../ui/JoinCommunity';
 import Footer from '../ui/Footer';
 import { useEffect, useState } from 'react';
-import Spinner from '../ui/Spinner';
 import SpinnerLarge from '../ui/SpinnerLarge';
 
 const Container = styled.div`

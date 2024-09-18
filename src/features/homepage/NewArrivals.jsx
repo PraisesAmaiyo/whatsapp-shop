@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import styled from 'styled-components';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
-import { newArrivals } from './store';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { formatNumber } from '../../utils/helpers';
 
@@ -13,6 +13,8 @@ import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import LoadMore from '../../ui/LoadMore';
+import { getNewArrivals } from '../../services/ApiProducts';
+import Spinner from '../../ui/Spinner';
 
 const StyledNewArrivals = styled.section`
   padding: 4rem 0;
@@ -164,9 +166,30 @@ const NewArrivalCategoryActions = styled.div`
 `;
 
 function NewArrivals() {
+  const [newArrivalProducts, setNewArrivalProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const { cartItems, addItemToCart } = useAddItemToCart();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const newArrivals = await getNewArrivals();
+        setNewArrivalProducts(newArrivals);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) return <p>Error: {error}</p>;
 
   function handleProductClick(id) {
     navigate(`/products/${id}`);
@@ -200,56 +223,60 @@ function NewArrivals() {
           </Button>
         </NewArrivalHeader>
 
-        <NewArrivalsContainer>
-          {newArrivals.map((newArrival) => {
-            const {
-              id,
-              newArrivalImage,
-              newArrivalName,
-              newArrivalPrice,
-              newArrivalDiscount,
-              wishlist,
-            } = newArrival;
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <NewArrivalsContainer>
+            {newArrivalProducts.map((newArrival) => {
+              const {
+                id,
+                newArrivalImage,
+                newArrivalName,
+                newArrivalPrice,
+                newArrivalDiscount,
+                wishlist,
+              } = newArrival;
 
-            const isInCart = cartItems.some((item) => item.id === id);
+              const isInCart = cartItems.some((item) => item.id === id);
 
-            return (
-              <NewArrivalProduct
-                key={id}
-                onClick={() => handleProductClick(id)}
-              >
-                <NewArrivalImageContainer>
-                  <DiscountTag className="discount-tag">
-                    {`-${newArrivalDiscount}%`}
-                  </DiscountTag>
-                  <WishlistContainer>
-                    <WishlistIcon type={wishlist ? true : ''} />
-                  </WishlistContainer>
-                  <ProductImage
-                    src={newArrivalImage}
-                    alt={`picture of ${newArrivalName} `}
-                  />
-                </NewArrivalImageContainer>
-                <NewArrivalCategoryActions className="newArrival-category_actions">
-                  <div>
-                    <Heading as="h4">{newArrivalName}</Heading>
-                    <span>
-                      <span className="naira-sign">₦</span>
-                      {`${formatNumber(newArrivalPrice)}`}
-                    </span>
-                  </div>
-
-                  <div>
-                    <FaShoppingCart
-                      onClick={(e) => handleAddToCart(e, newArrival)}
-                      className={isInCart ? 'disabled' : ''}
+              return (
+                <NewArrivalProduct
+                  key={id}
+                  onClick={() => handleProductClick(id)}
+                >
+                  <NewArrivalImageContainer>
+                    <DiscountTag className="discount-tag">
+                      {`-${newArrivalDiscount}%`}
+                    </DiscountTag>
+                    <WishlistContainer>
+                      <WishlistIcon type={wishlist ? true : ''} />
+                    </WishlistContainer>
+                    <ProductImage
+                      src={newArrivalImage}
+                      alt={`picture of ${newArrivalName} `}
                     />
-                  </div>
-                </NewArrivalCategoryActions>
-              </NewArrivalProduct>
-            );
-          })}
-        </NewArrivalsContainer>
+                  </NewArrivalImageContainer>
+                  <NewArrivalCategoryActions className="newArrival-category_actions">
+                    <div>
+                      <Heading as="h4">{newArrivalName}</Heading>
+                      <span>
+                        <span className="naira-sign">₦</span>
+                        {`${formatNumber(newArrivalPrice)}`}
+                      </span>
+                    </div>
+
+                    <div>
+                      <FaShoppingCart
+                        onClick={(e) => handleAddToCart(e, newArrival)}
+                        className={isInCart ? 'disabled' : ''}
+                      />
+                    </div>
+                  </NewArrivalCategoryActions>
+                </NewArrivalProduct>
+              );
+            })}
+          </NewArrivalsContainer>
+        )}
 
         <LoadMore />
       </Row>
