@@ -9,6 +9,9 @@ import TrendingProducts from '../features/homepage/TrendingProducts';
 import NewArrivals from '../features/homepage/NewArrivals';
 import JoinCommunity from '../ui/JoinCommunity';
 import Footer from '../ui/Footer';
+import { useEffect, useState } from 'react';
+import Spinner from '../ui/Spinner';
+import SpinnerLarge from '../ui/SpinnerLarge';
 
 const Container = styled.div`
   width: 100%;
@@ -33,25 +36,39 @@ const WhiteWrapper = styled.div`
 `;
 
 function Homepage() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  }, []);
+
   return (
     <>
-      <GradientWrapper>
-        <Container>
-          <Header />
-          <Main />
-        </Container>
-      </GradientWrapper>
-      <WhiteWrapper>
-        <Container>
-          <Benefits />
-          <Recommended />
-          <FeaturedCategories />
-          <TrendingProducts />
-          <NewArrivals />
-          <JoinCommunity />
-        </Container>
-        <Footer />
-      </WhiteWrapper>
+      {loading ? (
+        <SpinnerLarge />
+      ) : (
+        <>
+          <GradientWrapper>
+            <Container>
+              <Header />
+              <Main />
+            </Container>
+          </GradientWrapper>
+          <WhiteWrapper>
+            <Container>
+              <Benefits />
+              <Recommended />
+              <FeaturedCategories />
+              <TrendingProducts />
+              <NewArrivals />
+              <JoinCommunity />
+            </Container>
+            <Footer />
+          </WhiteWrapper>
+        </>
+      )}
     </>
   );
 }

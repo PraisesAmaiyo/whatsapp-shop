@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { useNavigate, useNavigation, useParams } from 'react-router-dom';
+import {
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+  useParams,
+} from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import { formatNumber } from '../../utils/helpers';
@@ -162,6 +167,13 @@ const Box = styled.div`
     margin-bottom: 3.2rem;
   }
 `;
+
+// export async function loader() {
+//   const menu = await getMenu();
+
+//   console.log(menu);
+//   return menu;
+// }
 
 function ProductInfo() {
   const { cartItems, addItemToCart } = useAddItemToCart();
