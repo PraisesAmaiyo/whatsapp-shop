@@ -5,6 +5,7 @@ import Header from '../ui/Header';
 import ProductInfo from '../features/productDetails/ProductInfo';
 import Footer from '../ui/Footer';
 import PageHeader from '../ui/PageHeader';
+import ProductInfoPage from '../features/productDetails/ProductInfoPage';
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +40,7 @@ function ProductDetails() {
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
-          <ProductInfo />
+          <ProductInfoPage />
         </Container>
         <Footer />
       </WhiteWrapper>

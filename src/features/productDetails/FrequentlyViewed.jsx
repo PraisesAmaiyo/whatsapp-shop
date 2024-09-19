@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 
-import { frequentlyViewedItems } from '../homepage/store';
+import { getFrequentlyViewed } from '../../services/ApiProducts';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 import Heading from '../../ui/Heading';
@@ -13,8 +13,8 @@ import Button from '../../ui/Button';
 import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import CustomSwiper from '../../ui/CustomSwiper';
-import { getFrequentlyViewed } from '../../services/ApiProducts';
 import Spinner from '../../ui/Spinner';
+import { formatNumber } from '../../utils/helpers';
 
 const StyleFrequentlyViewed = styled.section`
   padding: 4rem 0;
@@ -175,6 +175,7 @@ function FrequentlyViewed() {
     const fetchData = async () => {
       try {
         const frequentlyViewed = await getFrequentlyViewed();
+
         setFrequentlyViewedProducts(frequentlyViewed);
       } catch (err) {
         setError(err.message);
@@ -251,7 +252,7 @@ function FrequentlyViewed() {
               <Heading as="h4">{frequentlyViewedItemsName}</Heading>
               <span>
                 <span className="naira-sign">₦</span>
-                {`${frequentlyViewedItemsPrice}`}
+                {`${formatNumber(frequentlyViewedItemsPrice)}`}
               </span>
             </div>
 
@@ -282,11 +283,7 @@ function FrequentlyViewed() {
         </FrequentlyViewedHeader>
 
         <FrequentlyViewedContainer>
-          {isLoading ? (
-            <Spinner /> // Show spinner only in this container
-          ) : (
-            <CustomSwiper slides={slides} />
-          )}
+          {isLoading ? <Spinner /> : <CustomSwiper slides={slides} />}
         </FrequentlyViewedContainer>
       </Row>
     </StyleFrequentlyViewed>

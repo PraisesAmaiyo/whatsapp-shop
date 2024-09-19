@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
+
+import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
@@ -9,9 +12,10 @@ import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import CustomSwiper from '../../ui/CustomSwiper';
 
-import { similarItems } from '../homepage/store';
-import toast from 'react-hot-toast';
-import { useAddItemToCart } from '../../context/AddItemToCartContext';
+import { useEffect, useState } from 'react';
+import { getSimilarItems } from '../../services/ApiProducts';
+import { formatNumber } from '../../utils/helpers';
+import Spinner from '../../ui/Spinner';
 
 const StyleSimilarItems = styled.section`
   padding: 4rem 0;
@@ -159,10 +163,31 @@ const SimilarItemsCategoryActions = styled.div`
 `;
 
 function SimilarItems() {
+  const [similarItemsProducts, setSimilarItemsProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
   const { id: URLId } = useParams();
 
   const { cartItems, addItemToCart } = useAddItemToCart();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const similarItems = await getSimilarItems();
+        setSimilarItemsProducts(similarItems);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) return <p>Error: {error}</p>;
 
   function handleProductClick(id) {
     navigate(`/products/${id}`);
@@ -181,9 +206,11 @@ function SimilarItems() {
     }
   }
 
-  console.log(similarItems.length);
+  //   if (isLoading || !similarItemsProducts) {
+  //     return;
+  //   }
 
-  const slides = similarItems
+  const slides = similarItemsProducts
     .filter((similarItem) => similarItem.id !== URLId)
     .map((similarItem) => {
       const {
@@ -216,7 +243,7 @@ function SimilarItems() {
               <Heading as="h4">{similarItemsName}</Heading>
               <span>
                 <span className="naira-sign">₦</span>
-                {`${similarItemsPrice}`}
+                {`${formatNumber(similarItemsPrice)}`}
               </span>
             </div>
 
@@ -247,7 +274,7 @@ function SimilarItems() {
         </SimilarItemsHeader>
 
         <SimilarItemsContainer>
-          <CustomSwiper slides={slides} />
+          {isLoading ? <Spinner /> : <CustomSwiper slides={slides} />}
         </SimilarItemsContainer>
       </Row>
     </StyleSimilarItems>

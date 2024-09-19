@@ -37,6 +37,14 @@ const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
 `;
 
+const StyledProductNotFound = styled.main`
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.8rem;
+`;
+
 const ProductMainInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -146,14 +154,6 @@ const ProductSubInfo = styled.div`
   margin-top: 6rem;
 `;
 
-const StyledProductNotFound = styled.main`
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4.8rem;
-`;
-
 const Box = styled.div`
   /* box */
   background-color: var(--color-grey-0);
@@ -222,7 +222,6 @@ function ProductInfo() {
   if (!isLoading && !product) {
     return (
       <StyledProductNotFound>
-        {' '}
         <Box>
           <Heading as="h1">
             The Product you are looking for could not be found 😢
@@ -263,7 +262,12 @@ function ProductInfo() {
   }
 
   if (isLoading || !product) {
-    return <Spinner />;
+    return (
+      <>
+        <Heading as="h1">Loading product...</Heading>
+        <Spinner />
+      </>
+    );
   }
 
   const {
@@ -299,109 +303,111 @@ function ProductInfo() {
 
   return (
     <StyledProductInfoContainer>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <ProductMainInfo>
-          <ProductInfoImage>
-            <img src={productInfoImage} alt="Product " />
-          </ProductInfoImage>
+      {/* {isLoading ? (
+        <>
+          <Heading as="h1">Product Loading...</Heading>
+          <Spinner />
+        </>
+      ) : ( */}
+      <ProductMainInfo>
+        <ProductInfoImage>
+          <img src={productInfoImage} alt="Product " />
+        </ProductInfoImage>
 
-          <Row type="vertical">
+        <Row type="vertical">
+          {productInfoDiscount === 0 ? (
+            ''
+          ) : (
+            <ProductDiscountAmount>
+              <p className="product-price">
+                Save {productInfoDiscount}% (
+                <span className="naira-sign">₦ </span>
+                {formatNumber((productInfoPrice / 100) * productInfoDiscount)})
+              </p>
+              <span>Discount applied</span>
+            </ProductDiscountAmount>
+          )}
+
+          <Heading as="h1">{productInfoName}</Heading>
+          <ProductInfoText>
+            <h3 className="product-mini_text">
+              Premium cotton shirt with a crisp collar and tailored fit, perfect
+              for any occasion from office to casual outings.
+            </h3>
+          </ProductInfoText>
+
+          <ProductPricing>
+            <h2 className="product-price">
+              <span className="naira-sign">₦</span>{' '}
+              {formatNumber(productInfoPrice)}
+            </h2>
             {productInfoDiscount === 0 ? (
               ''
             ) : (
-              <ProductDiscountAmount>
-                <p className="product-price">
-                  Save {productInfoDiscount}% (
-                  <span className="naira-sign">₦ </span>
-                  {formatNumber((productInfoPrice / 100) * productInfoDiscount)}
-                  )
-                </p>
-                <span>Discount applied</span>
-              </ProductDiscountAmount>
+              <h2 className="product-slashed_price">
+                <span className="naira-sign">₦ </span>
+                {formatNumber(
+                  (productInfoPrice / 100) * productInfoDiscount +
+                    productInfoPrice
+                )}
+              </h2>
+            )}
+          </ProductPricing>
+
+          <ProductAvailability>
+            <h3 className="product-mini_text">In Stock</h3>
+          </ProductAvailability>
+
+          <ProductReviews>
+            <div className="reviewRatings">
+              <p>⭐⭐⭐⭐⭐</p>
+              <p>4.9</p>
+            </div>
+
+            <div className="reviewNumbers">
+              <p>120 Reviews ~ 23 sold</p>
+            </div>
+          </ProductReviews>
+
+          <UpdateItemQuantity
+            defaultBuyingQuantity={defaultBuyingQuantity}
+            itemId={itemId}
+            onQuantityChange={handleQuantityChange}
+          />
+
+          <ButtonContainer>
+            <Button
+              variation="secondary"
+              size="large"
+              onClick={() => handleBuyNow({ product })}
+            >
+              Buy Now
+            </Button>
+            {isInCart ? (
+              <Button
+                variation="primary"
+                size="large"
+                onClick={() => navigate('/cart')}
+              >
+                View Cart
+              </Button>
+            ) : (
+              <Button
+                variation="primary"
+                size="large"
+                onClick={() => handleAddToCart({ product })}
+              >
+                Add to Cart
+              </Button>
             )}
 
-            <Heading as="h1">{productInfoName}</Heading>
-            <ProductInfoText>
-              <h3 className="product-mini_text">
-                Premium cotton shirt with a crisp collar and tailored fit,
-                perfect for any occasion from office to casual outings.
-              </h3>
-            </ProductInfoText>
-
-            <ProductPricing>
-              <h2 className="product-price">
-                <span className="naira-sign">₦</span>{' '}
-                {formatNumber(productInfoPrice)}
-              </h2>
-              {productInfoDiscount === 0 ? (
-                ''
-              ) : (
-                <h2 className="product-slashed_price">
-                  <span className="naira-sign">₦ </span>
-                  {formatNumber(
-                    (productInfoPrice / 100) * productInfoDiscount +
-                      productInfoPrice
-                  )}
-                </h2>
-              )}
-            </ProductPricing>
-
-            <ProductAvailability>
-              <h3 className="product-mini_text">In Stock</h3>
-            </ProductAvailability>
-
-            <ProductReviews>
-              <div className="reviewRatings">
-                <p>⭐⭐⭐⭐⭐</p>
-                <p>4.9</p>
-              </div>
-
-              <div className="reviewNumbers">
-                <p>120 Reviews ~ 23 sold</p>
-              </div>
-            </ProductReviews>
-
-            <UpdateItemQuantity
-              defaultBuyingQuantity={defaultBuyingQuantity}
-              itemId={itemId}
-              onQuantityChange={handleQuantityChange}
-            />
-
-            <ButtonContainer>
-              <Button
-                variation="secondary"
-                size="large"
-                onClick={() => handleBuyNow({ product })}
-              >
-                Buy Now
-              </Button>
-              {isInCart ? (
-                <Button
-                  variation="primary"
-                  size="large"
-                  onClick={() => navigate('/cart')}
-                >
-                  View Cart
-                </Button>
-              ) : (
-                <Button
-                  variation="primary"
-                  size="large"
-                  onClick={() => handleAddToCart({ product })}
-                >
-                  Add to Cart
-                </Button>
-              )}
-
-              <WishlistContainer>
-                <WishlistIcon type={wishlist ? true : ''} />
-              </WishlistContainer>
-            </ButtonContainer>
-          </Row>
-        </ProductMainInfo>
-      )}
+            <WishlistContainer>
+              <WishlistIcon type={wishlist ? true : ''} />
+            </WishlistContainer>
+          </ButtonContainer>
+        </Row>
+      </ProductMainInfo>
+      {/* )} */}
 
       <ProductSubInfo>
         <Heading as="h2">Description</Heading>
@@ -442,11 +448,6 @@ function ProductInfo() {
           </li>
         </ul>
       </ProductSubInfo>
-
-      <SimilarItems />
-      <FrequentlyViewed />
-
-      <Benefits />
     </StyledProductInfoContainer>
   );
 }

@@ -204,7 +204,7 @@ function NewArrivals() {
       addItemToCart(newArrival);
       toast.success(`${newArrival.newArrivalName} Added to Cart 😎.`);
     } else {
-      toast.error(`${newArrival.newArrivalName} aready added to Cart 🙂.`);
+      toast.error(`${newArrival.newArrivalName} already added to Cart 🙂.`);
     }
   }
 
