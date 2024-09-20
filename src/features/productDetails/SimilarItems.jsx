@@ -16,6 +16,8 @@ import { useEffect, useState } from 'react';
 import { getSimilarItems } from '../../services/ApiProducts';
 import { formatNumber } from '../../utils/helpers';
 import Spinner from '../../ui/Spinner';
+import { useLocalStorageState } from '../../hooks/useLocalStorageState';
+import { similarItems } from '../homepage/store';
 
 const StyleSimilarItems = styled.section`
   padding: 4rem 0;
@@ -164,6 +166,12 @@ const SimilarItemsCategoryActions = styled.div`
 
 function SimilarItems() {
   const [similarItemsProducts, setSimilarItemsProducts] = useState([]);
+
+  //   const [similarItemsProducts, setSimilarItemsProducts] = useLocalStorageState(
+  //     [],
+  //     'similarItemsProducts'
+  //   );
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -172,19 +180,34 @@ function SimilarItems() {
 
   const { cartItems, addItemToCart } = useAddItemToCart();
 
+  const hasDataChanged = (localData, apiData) => {
+    return JSON.stringify(localData) !== JSON.stringify(apiData);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSimilarItems = async () => {
       try {
-        const similarItems = await getSimilarItems();
-        setSimilarItemsProducts(similarItems);
-      } catch (err) {
-        setError(err.message);
-      } finally {
+        const cachedItems = JSON.parse(
+          localStorage.getItem('similarItemsProducts')
+        );
+        setSimilarItemsProducts(cachedItems || []);
         setIsLoading(false);
+
+        const freshData = await getSimilarItems();
+
+        if (hasDataChanged(cachedItems, freshData)) {
+          setSimilarItemsProducts(freshData);
+          localStorage.setItem(
+            'similarItemsProducts',
+            JSON.stringify(freshData)
+          );
+        }
+      } catch (err) {
+        setError('Failed to fetch similar items');
       }
     };
 
-    fetchData();
+    fetchSimilarItems();
   }, []);
 
   if (error) return <p>Error: {error}</p>;
@@ -274,7 +297,13 @@ function SimilarItems() {
         </SimilarItemsHeader>
 
         <SimilarItemsContainer>
-          {isLoading ? <Spinner /> : <CustomSwiper slides={slides} />}
+          {isLoading ? (
+            <Spinner />
+          ) : similarItemsProducts.length > 0 ? (
+            <CustomSwiper slides={slides} />
+          ) : (
+            <Heading as="h2">There are no SImilar Items available</Heading>
+          )}
         </SimilarItemsContainer>
       </Row>
     </StyleSimilarItems>

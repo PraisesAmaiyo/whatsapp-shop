@@ -38,11 +38,13 @@ const FrequentlyViewedContainer = styled.div`
 const FrequentlyViewedProduct = styled.div`
   margin: 0 auto;
   text-align: center;
-  background-color: var(--color-brand-100);
+  /* background-color: var(--color-brand-100); */
   width: 100%;
   min-width: 25rem;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
   transition: all 0.3s;
 
   &:hover {
@@ -65,6 +67,10 @@ const FrequentlyViewedProduct = styled.div`
 
   span {
     font-size: 1.2rem;
+  }
+
+  .visible {
+    opacity: 1;
   }
 `;
 
@@ -171,20 +177,34 @@ function FrequentlyViewed() {
 
   const { cartItems, addItemToCart } = useAddItemToCart();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const frequentlyViewed = await getFrequentlyViewed();
+  const hasDataChanged = (localData, apiData) => {
+    return JSON.stringify(localData) !== JSON.stringify(apiData);
+  };
 
-        setFrequentlyViewedProducts(frequentlyViewed);
-      } catch (err) {
-        setError(err.message);
-      } finally {
+  useEffect(() => {
+    const fetchFrequentlyViewed = async () => {
+      try {
+        const cachedItems = JSON.parse(
+          localStorage.getItem('FrequentlyViewedProducts')
+        );
+        setFrequentlyViewedProducts(cachedItems || []);
         setIsLoading(false);
+
+        const freshData = await getFrequentlyViewed();
+
+        if (hasDataChanged(cachedItems, freshData)) {
+          setFrequentlyViewedProducts(freshData);
+          localStorage.setItem(
+            'FrequentlyViewedProducts',
+            JSON.stringify(freshData)
+          );
+        }
+      } catch (err) {
+        setError('Failed to fetch similar items');
       }
     };
 
-    fetchData();
+    fetchFrequentlyViewed();
   }, []);
 
   if (error) return <p>Error: {error}</p>;
@@ -233,6 +253,7 @@ function FrequentlyViewed() {
       return (
         <FrequentlyViewedProduct
           key={id}
+          className={isLoading ? '' : 'visible'}
           onClick={() => handleProductClick(id)}
         >
           <FrequentlyViewedImageContainer>
@@ -283,7 +304,15 @@ function FrequentlyViewed() {
         </FrequentlyViewedHeader>
 
         <FrequentlyViewedContainer>
-          {isLoading ? <Spinner /> : <CustomSwiper slides={slides} />}
+          {isLoading ? (
+            <Spinner />
+          ) : frequentlyViewedProducts.length > 0 ? (
+            <CustomSwiper slides={slides} />
+          ) : (
+            <Heading as="h2">
+              There are no Frequently Viewed Products available
+            </Heading>
+          )}
         </FrequentlyViewedContainer>
       </Row>
     </StyleFrequentlyViewed>

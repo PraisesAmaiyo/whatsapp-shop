@@ -237,6 +237,19 @@ function ProductInfo() {
     );
   }
 
+  if (!product) {
+    return (
+      <>
+        <Heading as="h1">Loading product...</Heading>
+        <Spinner />
+      </>
+    );
+  }
+
+  //   if (!product) {
+  //     return <Spinner />;
+  //   }
+
   const isInCart = cartItems.some((item) => item.id === product.id);
   //   const isInCart = cartItems.some((item) => item.id === 1);
 
@@ -260,15 +273,6 @@ function ProductInfo() {
     handleAddToCart(product);
 
     navigate('/cart');
-  }
-
-  if (isLoading || !product) {
-    return (
-      <>
-        <Heading as="h1">Loading product...</Heading>
-        <Spinner />
-      </>
-    );
   }
 
   const {
