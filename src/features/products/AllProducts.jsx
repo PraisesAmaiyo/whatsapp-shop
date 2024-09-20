@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
+import { FaShoppingCart } from 'react-icons/fa';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
@@ -9,18 +10,18 @@ import DiscountTag from '../../ui/DiscountTag';
 import WishlistIcon from '../../ui/WishlistIcon';
 import LoadMore from '../../ui/LoadMore';
 import Benefits from '../../ui/Benefits';
+import Spinner from '../../ui/Spinner';
 
-import { FaShoppingCart } from 'react-icons/fa';
-
-import {
-  newArrivals,
-  similarItems,
-  frequentlyViewedItems,
-  trendingProducts,
-} from '../homepage/store';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { formatNumber } from '../../utils/helpers';
 import { useLocalStorageState } from '../../hooks/useLocalStorageState';
+
+import {
+  getFrequentlyViewed,
+  getNewArrivals,
+  getSimilarItems,
+  getTrendingProducts,
+} from '../../services/ApiProducts';
 
 const StyledAllProducts = styled.section`
   padding: 4rem 0;
@@ -161,14 +162,19 @@ const AllProductCategoryActions = styled.div`
 `;
 
 function AllProducts() {
-  const navigate = useNavigate();
-
   const [shuffledProducts, setShuffledProducts] = useLocalStorageState(
     [],
     'shuffledProducts'
   );
 
+  //   const [shuffledProducts, setShuffledProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  //   console.log('shuffledProducts', shuffledProducts);
+
   const { cartItems, addItemToCart } = useAddItemToCart();
+  const navigate = useNavigate();
 
   // Fisher-Yates Shuffle algorithm
   function shuffleArray(array) {
@@ -181,27 +187,50 @@ function AllProducts() {
   }
 
   useEffect(() => {
-    const lastShuffle = localStorage.getItem('lastShuffleTime');
-    const now = Date.now();
+    const fetchData = async () => {
+      try {
+        const lastShuffle = localStorage.getItem('lastShuffleTime');
+        const now = Date.now();
 
-    // If it's been more than 24 hours since the last shuffle, reshuffle the products
-    if (!lastShuffle || now - lastShuffle > 24 * 60 * 60 * 1000) {
-      // Combine all product arrays into one
-      const combinedProducts = [
-        ...newArrivals,
-        ...similarItems,
-        ...frequentlyViewedItems,
-        ...trendingProducts,
-      ];
+        // Check if we have shuffled products and the shuffle is within 24 hours
+        if (
+          shuffledProducts.length > 0 &&
+          lastShuffle &&
+          now - lastShuffle <= 24 * 60 * 60 * 1000
+        ) {
+          setIsLoading(false); // We have recent shuffled data, no need to fetch
+          return;
+        }
 
-      // Shuffle the combined array
-      const shuffled = shuffleArray(combinedProducts);
+        // Otherwise, fetch new data and shuffle
+        const newArrivalsProducts = await getNewArrivals();
+        const similarItemsProducts = await getSimilarItems();
+        const frequentlyViewedProducts = await getFrequentlyViewed();
+        const trendingProductsProducts = await getTrendingProducts();
 
-      // Store shuffled products and update the last shuffle time
-      setShuffledProducts(shuffled);
-      localStorage.setItem('lastShuffleTime', now);
-    }
-  }, [setShuffledProducts]);
+        // Combine and shuffle the data
+        const combinedProducts = [
+          ...newArrivalsProducts,
+          ...similarItemsProducts,
+          ...frequentlyViewedProducts,
+          ...trendingProductsProducts,
+        ];
+        const shuffled = shuffleArray(combinedProducts);
+
+        // Store the shuffled products and update the shuffle time
+        setShuffledProducts(shuffled);
+        localStorage.setItem('lastShuffleTime', now);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [shuffledProducts, setShuffledProducts]);
+
+  if (error) return <p>Error: {error}</p>;
 
   function handleProductClick(id) {
     navigate(`/products/${id}`);
@@ -221,86 +250,90 @@ function AllProducts() {
       addItemToCart(shuffledProduct);
       toast.success(`${shuffledProductName} Added to Cart 😎.`);
     } else {
-      toast.error(`${shuffledProductName} aready added to Cart 🙂.`);
+      toast.error(`${shuffledProductName} already added to Cart 🙂.`);
     }
   }
 
   return (
     <StyledAllProducts>
       <Row type="vertical">
-        <AllProductsContainer>
-          {shuffledProducts.map((shuffledProduct) => {
-            const {
-              id,
-              newArrivalImage,
-              newArrivalName,
-              newArrivalPrice,
-              newArrivalDiscount,
-              similarItemsImage,
-              similarItemsName,
-              similarItemsPrice,
-              similarItemsDiscount,
-              frequentlyViewedItemsImage,
-              frequentlyViewedItemsName,
-              frequentlyViewedItemsPrice,
-              frequentlyViewedItemsDiscount,
-              wishlist,
-            } = shuffledProduct;
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <AllProductsContainer>
+            {shuffledProducts.map((shuffledProduct) => {
+              const {
+                id,
+                newArrivalImage,
+                newArrivalName,
+                newArrivalPrice,
+                newArrivalDiscount,
+                similarItemsImage,
+                similarItemsName,
+                similarItemsPrice,
+                similarItemsDiscount,
+                frequentlyViewedItemsImage,
+                frequentlyViewedItemsName,
+                frequentlyViewedItemsPrice,
+                frequentlyViewedItemsDiscount,
+                wishlist,
+              } = shuffledProduct;
 
-            const shuffledProductPrice =
-              newArrivalPrice ||
-              similarItemsPrice ||
-              frequentlyViewedItemsPrice;
+              const shuffledProductPrice =
+                newArrivalPrice ||
+                similarItemsPrice ||
+                frequentlyViewedItemsPrice;
 
-            const shuffledProductName =
-              newArrivalName || similarItemsName || frequentlyViewedItemsName;
+              const shuffledProductName =
+                newArrivalName || similarItemsName || frequentlyViewedItemsName;
 
-            const shuffledProductImage =
-              newArrivalImage ||
-              similarItemsImage ||
-              frequentlyViewedItemsImage;
+              const shuffledProductImage =
+                newArrivalImage ||
+                similarItemsImage ||
+                frequentlyViewedItemsImage;
 
-            const shuffledProductDiscount =
-              newArrivalDiscount ||
-              similarItemsDiscount ||
-              frequentlyViewedItemsDiscount;
+              const shuffledProductDiscount =
+                newArrivalDiscount ||
+                similarItemsDiscount ||
+                frequentlyViewedItemsDiscount;
 
-            const isInCart = cartItems.some((item) => item.id === id);
+              const isInCart = cartItems.some((item) => item.id === id);
 
-            return (
-              <AllProduct key={id} onClick={() => handleProductClick(id)}>
-                <AllProductImageContainer>
-                  <DiscountTag className="discount-tag">
-                    {`-${shuffledProductDiscount}%`}
-                  </DiscountTag>
-                  <WishlistContainer>
-                    <WishlistIcon type={wishlist ? true : ''} />
-                  </WishlistContainer>
-                  <ProductImage
-                    src={shuffledProductImage}
-                    alt={`picture of ${shuffledProductName} `}
-                  />
-                </AllProductImageContainer>
-                <AllProductCategoryActions className="newArrival-category_actions">
-                  <div>
-                    <Heading as="h4">{shuffledProductName}</Heading>
-                    <span>
-                      <span className="naira-sign">₦</span>
-                      {`${formatNumber(shuffledProductPrice)}`}
-                    </span>
-                  </div>
-
-                  <div>
-                    <FaShoppingCart
-                      onClick={(e) => handleAddToCart(e, shuffledProduct)}
-                      className={isInCart ? 'disabled' : ''}
+              return (
+                <AllProduct key={id} onClick={() => handleProductClick(id)}>
+                  <AllProductImageContainer>
+                    <DiscountTag className="discount-tag">
+                      {`-${shuffledProductDiscount}%`}
+                    </DiscountTag>
+                    <WishlistContainer>
+                      <WishlistIcon type={wishlist ? true : ''} />
+                    </WishlistContainer>
+                    <ProductImage
+                      src={shuffledProductImage}
+                      alt={`picture of ${shuffledProductName} `}
                     />
-                  </div>
-                </AllProductCategoryActions>
-              </AllProduct>
-            );
-          })}
-        </AllProductsContainer>
+                  </AllProductImageContainer>
+                  <AllProductCategoryActions className="newArrival-category_actions">
+                    <div>
+                      <Heading as="h4">{shuffledProductName}</Heading>
+                      <span>
+                        <span className="naira-sign">₦</span>
+                        {`${formatNumber(shuffledProductPrice)}`}
+                      </span>
+                    </div>
+
+                    <div>
+                      <FaShoppingCart
+                        onClick={(e) => handleAddToCart(e, shuffledProduct)}
+                        className={isInCart ? 'disabled' : ''}
+                      />
+                    </div>
+                  </AllProductCategoryActions>
+                </AllProduct>
+              );
+            })}
+          </AllProductsContainer>
+        )}
 
         <LoadMore />
       </Row>

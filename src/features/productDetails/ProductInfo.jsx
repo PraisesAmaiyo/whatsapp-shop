@@ -16,21 +16,14 @@ import Heading from '../../ui/Heading';
 import UpdateItemQuantity from '../../ui/UpdateItemQuantity';
 import Button from '../../ui/Button';
 import WishlistIcon from '../../ui/WishlistIcon';
-import SimilarItems from './SimilarItems';
-import FrequentlyViewed from './FrequentlyViewed';
-import Benefits from '../../ui/Benefits';
 
 import {
-  //   trendingProducts,
-  //   newArrivals,
-  frequentlyViewedItems,
-  similarItems,
-} from '../homepage/store';
-
-import {
+  getFrequentlyViewed,
   getNewArrivals,
+  getSimilarItems,
   getTrendingProducts,
 } from '../../services/ApiProducts';
+
 import Spinner from '../../ui/Spinner';
 
 const StyledProductInfoContainer = styled.section`
@@ -183,6 +176,9 @@ const Box = styled.div`
 function ProductInfo() {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [newArrivalProducts, setNewArrivalProducts] = useState([]);
+  const [similarItemsProducts, setSimilarItemsProducts] = useState([]);
+  const [frequentlyViewedProducts, setFrequentlyViewedProducts] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { cartItems, addItemToCart } = useAddItemToCart();
@@ -197,10 +193,15 @@ function ProductInfo() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const trendingProducts = await getTrendingProducts();
+        const trending = await getTrendingProducts();
         const newArrivals = await getNewArrivals();
-        setTrendingProducts(trendingProducts);
+        const similarItems = await getSimilarItems();
+        const frequentlyViewed = await getFrequentlyViewed();
+
+        setTrendingProducts(trending);
         setNewArrivalProducts(newArrivals);
+        setSimilarItemsProducts(similarItems);
+        setFrequentlyViewedProducts(frequentlyViewed);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -216,8 +217,8 @@ function ProductInfo() {
   const product =
     trendingProducts.find((prod) => prod.id === id) ||
     newArrivalProducts.find((prod) => prod.id === id) ||
-    frequentlyViewedItems.find((prod) => prod.id === id) ||
-    similarItems.find((prod) => prod.id === id);
+    similarItemsProducts.find((prod) => prod.id === id) ||
+    frequentlyViewedProducts.find((prod) => prod.id === id);
 
   if (!isLoading && !product) {
     return (
@@ -236,8 +237,8 @@ function ProductInfo() {
     );
   }
 
-  //   const isInCart = cartItems.some((item) => item.id === product.id);
-  const isInCart = cartItems.some((item) => item.id === 1);
+  const isInCart = cartItems.some((item) => item.id === product.id);
+  //   const isInCart = cartItems.some((item) => item.id === 1);
 
   function handleQuantityChange(newQuantity) {
     setItemNumber(newQuantity);
@@ -303,12 +304,6 @@ function ProductInfo() {
 
   return (
     <StyledProductInfoContainer>
-      {/* {isLoading ? (
-        <>
-          <Heading as="h1">Product Loading...</Heading>
-          <Spinner />
-        </>
-      ) : ( */}
       <ProductMainInfo>
         <ProductInfoImage>
           <img src={productInfoImage} alt="Product " />
@@ -407,7 +402,6 @@ function ProductInfo() {
           </ButtonContainer>
         </Row>
       </ProductMainInfo>
-      {/* )} */}
 
       <ProductSubInfo>
         <Heading as="h2">Description</Heading>

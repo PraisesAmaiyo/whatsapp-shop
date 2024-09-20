@@ -22,6 +22,8 @@ import ContactUs from './pages/ContactUsPage';
 import AppLayout from './ui/AppLayout';
 import { Toaster } from 'react-hot-toast';
 import Products from './pages/Products';
+import { useEffect, useState } from 'react';
+import SpinnerLarge from './ui/SpinnerLarge';
 
 const router = createBrowserRouter([
   {
@@ -75,37 +77,53 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  }, []);
+
   return (
     <>
       <GlobalStyles />
-      <AddItemToCartProvider>
-        <ShippingProvider>
-          <StyleSheetManager shouldForwardProp={(prop) => prop !== 'variation'}>
-            <RouterProvider router={router} />
-          </StyleSheetManager>
+      {loading ? (
+        <SpinnerLarge />
+      ) : (
+        <>
+          <AddItemToCartProvider>
+            <ShippingProvider>
+              <StyleSheetManager
+                shouldForwardProp={(prop) => prop !== 'variation'}
+              >
+                <RouterProvider router={router} />
+              </StyleSheetManager>
 
-          <Toaster
-            position="top=center"
-            gutter={12}
-            containerStyle={{ margin: '8px' }}
-            toastOptions={{
-              success: {
-                duration: 3000,
-              },
-              error: {
-                duration: 4000,
-              },
-              style: {
-                fontSize: '16px',
-                maxWidth: '500px',
-                padding: '16px 24px',
-                backgroundColor: 'var(--color-grey-0',
-                color: 'var(--color-grey-700)',
-              },
-            }}
-          />
-        </ShippingProvider>
-      </AddItemToCartProvider>
+              <Toaster
+                position="top=center"
+                gutter={12}
+                containerStyle={{ margin: '8px' }}
+                toastOptions={{
+                  success: {
+                    duration: 3000,
+                  },
+                  error: {
+                    duration: 4000,
+                  },
+                  style: {
+                    fontSize: '16px',
+                    maxWidth: '500px',
+                    padding: '16px 24px',
+                    backgroundColor: 'var(--color-grey-0',
+                    color: 'var(--color-grey-700)',
+                  },
+                }}
+              />
+            </ShippingProvider>
+          </AddItemToCartProvider>
+        </>
+      )}
     </>
   );
 }

@@ -170,6 +170,8 @@ function NewArrivals() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //   console.log('newArrivalProducts', newArrivalProducts);
+
   const navigate = useNavigate();
 
   const { cartItems, addItemToCart } = useAddItemToCart();
@@ -178,6 +180,9 @@ function NewArrivals() {
     const fetchData = async () => {
       try {
         const newArrivals = await getNewArrivals();
+
+        console.log(newArrivals);
+
         setNewArrivalProducts(newArrivals);
       } catch (err) {
         setError(err.message);
