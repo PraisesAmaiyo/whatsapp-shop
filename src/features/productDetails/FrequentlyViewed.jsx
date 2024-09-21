@@ -38,7 +38,7 @@ const FrequentlyViewedContainer = styled.div`
 const FrequentlyViewedProduct = styled.div`
   margin: 0 auto;
   text-align: center;
-  /* background-color: var(--color-brand-100); */
+  background-color: var(--color-brand-100);
   width: 100%;
   min-width: 25rem;
   overflow: hidden;
@@ -69,7 +69,7 @@ const FrequentlyViewedProduct = styled.div`
     font-size: 1.2rem;
   }
 
-  .visible {
+  &.visible {
     opacity: 1;
   }
 `;
