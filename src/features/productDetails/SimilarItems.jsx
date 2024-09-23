@@ -165,13 +165,12 @@ const SimilarItemsCategoryActions = styled.div`
 `;
 
 function SimilarItems() {
-  const [similarItemsProducts, setSimilarItemsProducts] = useState([]);
+  //   const [similarItemsProducts, setSimilarItemsProducts] = useState([]);
 
-  //   const [similarItemsProducts, setSimilarItemsProducts] = useLocalStorageState(
-  //     [],
-  //     'similarItemsProducts'
-  //   );
-
+  const [similarItemsProducts, setSimilarItemsProducts] = useLocalStorageState(
+    [],
+    'similarItemsProducts'
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -187,23 +186,17 @@ function SimilarItems() {
   useEffect(() => {
     const fetchSimilarItems = async () => {
       try {
-        const cachedItems = JSON.parse(
-          localStorage.getItem('similarItemsProducts')
-        );
-        setSimilarItemsProducts(cachedItems || []);
-        setIsLoading(false);
+        setIsLoading(true);
 
         const freshData = await getSimilarItems();
 
-        if (hasDataChanged(cachedItems, freshData)) {
+        if (hasDataChanged(similarItemsProducts, freshData)) {
           setSimilarItemsProducts(freshData);
-          localStorage.setItem(
-            'similarItemsProducts',
-            JSON.stringify(freshData)
-          );
         }
       } catch (err) {
         setError('Failed to fetch similar items');
+      } finally {
+        setIsLoading(false);
       }
     };
 

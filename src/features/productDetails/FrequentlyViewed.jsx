@@ -15,6 +15,7 @@ import WishlistIcon from '../../ui/WishlistIcon';
 import CustomSwiper from '../../ui/CustomSwiper';
 import Spinner from '../../ui/Spinner';
 import { formatNumber } from '../../utils/helpers';
+import { useLocalStorageState } from '../../hooks/useLocalStorageState';
 
 const StyleFrequentlyViewed = styled.section`
   padding: 4rem 0;
@@ -168,7 +169,8 @@ const FrequentlyViewedCategoryActions = styled.div`
 `;
 
 function FrequentlyViewed() {
-  const [frequentlyViewedProducts, setFrequentlyViewedProducts] = useState([]);
+  const [frequentlyViewedProducts, setFrequentlyViewedProducts] =
+    useLocalStorageState([], 'FrequentlyViewedProducts');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -184,28 +186,22 @@ function FrequentlyViewed() {
   useEffect(() => {
     const fetchFrequentlyViewed = async () => {
       try {
-        const cachedItems = JSON.parse(
-          localStorage.getItem('FrequentlyViewedProducts')
-        );
-        setFrequentlyViewedProducts(cachedItems || []);
-        setIsLoading(false);
+        setIsLoading(true);
 
         const freshData = await getFrequentlyViewed();
 
-        if (hasDataChanged(cachedItems, freshData)) {
+        if (hasDataChanged(frequentlyViewedProducts, freshData)) {
           setFrequentlyViewedProducts(freshData);
-          localStorage.setItem(
-            'FrequentlyViewedProducts',
-            JSON.stringify(freshData)
-          );
         }
       } catch (err) {
-        setError('Failed to fetch similar items');
+        setError(error.message, 'Failed to fetch frequently viewed products');
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchFrequentlyViewed();
-  }, []);
+  }, [frequentlyViewedProducts, setFrequentlyViewedProducts, error]);
 
   if (error) return <p>Error: {error}</p>;
 

@@ -162,12 +162,12 @@ const AllProductCategoryActions = styled.div`
 `;
 
 function AllProducts() {
+  //   const [shuffledProducts, setShuffledProducts] = useState([]);
   const [shuffledProducts, setShuffledProducts] = useLocalStorageState(
     [],
     'shuffledProducts'
   );
 
-  //   const [shuffledProducts, setShuffledProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
