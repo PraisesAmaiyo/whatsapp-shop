@@ -82,10 +82,17 @@ function PaymentInfo() {
           .map(
             (item) => `
               <tr>
-                <td>${item.newCartItemName}</td>
+                <td>
+                <div style="display:flex; align-items: center; gap: 5px;">
+                 <img src="${
+                   item.newCartItemImage
+                 }" alt="Item Image" style="max-width: 50px; height: auto; margin-right: 10px;" />
+                  ${item.newCartItemName}
+                  <div>
+               </td>
                 <td>${item.quantity}</td>
-                <td>${item.newCartItemPrice}</td>
-                <td>${item.totalItemPrice}</td>
+                <td>${formatNumber(item.newCartItemPrice)}</td>
+                <td>${formatNumber(item.totalItemPrice)}</td>
               </tr>`
           )
           .join('')}
@@ -103,12 +110,14 @@ function PaymentInfo() {
       customer_name: 'Praises Amaiyo',
       customer_email: 'amaiyo.praises@gmail.com',
       customer_phone: '+2347057540749',
-      total_price: totalPrice,
+      total_price: formatNumber(totalPrice),
       orderID: '123455',
       order_date: new Date().toLocaleDateString(),
       payment_screenshot:
         'https://media.istockphoto.com/id/1169144637/vector/atm-bill-in-slot-vector-realistic-illustrations-set.jpg?s=612x612&w=0&k=20&c=lOFwWer_E14As5LzlJCAHNc_Y0Ee3Kx50-yg0IxBVVM=',
     };
+
+    console.log(templateParams);
 
     emailjs
       .send(
@@ -186,7 +195,7 @@ function PaymentInfo() {
           size="large"
           onClick={() => {
             sendOrderConfirmationEmail();
-            navigate('/order-completed');
+            // navigate('/order-completed');
             //  onClick={() => checkoutCart()}
           }}
         >
