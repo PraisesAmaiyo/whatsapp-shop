@@ -68,37 +68,40 @@ function PaymentInfo() {
     paymentScreenshot
   ) => {
     const orderSummaryHTML = `
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr>
-          <th>Item Name</th>
-          <th>Quantity</th>
-          <th>Price (₦)</th>
-          <th>Total Price (₦)</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${cartItems
-          .map(
-            (item) => `
-              <tr>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Price (₦)</th>
+              <th>Total Price (₦)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${cartItems
+              .map(
+                (item) => `
+                <tr>
                 <td>
-                <div style="display:flex; align-items: center; gap: 5px;">
-                 <img src="${
-                   item.newCartItemImage
-                 }" alt="Item Image" style="max-width: 50px; height: auto; margin-right: 10px;" />
-                  ${item.newCartItemName}
-                  <div>
-               </td>
-                <td>${item.quantity}</td>
-                <td>${formatNumber(item.newCartItemPrice)}</td>
-                <td>${formatNumber(item.totalItemPrice)}</td>
-              </tr>`
-          )
-          .join('')}
-      </tbody>
-    </table>
-  `;
+                   <div style="display: flex; align-items: center; gap: 5px;">
+                      <img src="${
+                        item.newCartItemImage
+                      }" alt="Item Image" style="max-width: 40px; height: auto;" />
+                      <p style="font-size: 13px; font-weight: bold; margin: auto 5px">${
+                        item.newCartItemName
+                      }</p>
+                   </div>
+                </td>
+
+                    <td>${item.quantity}</td>
+                    <td>${formatNumber(item.newCartItemPrice)}</td>
+                    <td>${formatNumber(item.totalItemPrice)}</td>
+                  </tr>`
+              )
+              .join('')}
+          </tbody>
+        </table>
+      `;
 
     const templateParams = {
       // order_summary: orderDetails,
