@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
-import { formatNumber } from '../../utils/helpers';
+import { formatNumber, generateOrderID } from '../../utils/helpers';
 
 import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import { useShipping } from '../../context/ShippingContext';
+import { useLocalStorageState } from '../../hooks/useLocalStorageState';
+import { useEffect } from 'react';
 
 const AccountDetails = styled.div`
   display: flex;
@@ -57,10 +59,21 @@ function PaymentInfo() {
   const navigate = useNavigate();
   const { totalPrice, cartItems } = useAddItemToCart();
 
-  console.log(cartItems);
-
   const { shippingDetails } = useShipping();
   const { amount } = shippingDetails;
+
+  const orderID = generateOrderID(6); // Generate the order ID
+
+  // Save the orderID to localStorage using the hook
+  const [storedOrderID, setStoredOrderID] = useLocalStorageState(
+    orderID,
+    'orderID'
+  );
+
+  // Optional: Log or use storedOrderID if needed
+  console.log(storedOrderID);
+
+  const orderLink = `http://localhost:5173/order-completed/${orderID}`;
 
   const sendOrderConfirmationEmail = (
     orderDetails,
@@ -113,14 +126,13 @@ function PaymentInfo() {
       customer_name: 'Praises Amaiyo',
       customer_email: 'amaiyo.praises@gmail.com',
       customer_phone: '+2347057540749',
+      order_link: orderLink,
       total_price: formatNumber(totalPrice),
-      orderID: '123455',
+      orderID: orderID,
       order_date: new Date().toLocaleDateString(),
       payment_screenshot:
         'https://media.istockphoto.com/id/1169144637/vector/atm-bill-in-slot-vector-realistic-illustrations-set.jpg?s=612x612&w=0&k=20&c=lOFwWer_E14As5LzlJCAHNc_Y0Ee3Kx50-yg0IxBVVM=',
     };
-
-    console.log(templateParams);
 
     emailjs
       .send(
@@ -141,35 +153,11 @@ function PaymentInfo() {
       });
   };
 
-  const checkoutCart = () => {
-    const phoneNumber = '+2348130909020'; // Your WhatsApp number
-    const cartDetails = cartItems
-      .map(
-        (
-          item
-        ) => `*${item.quantity}x* ${item.newCartItemName} = *₦${item.newCartItemPrice}*
-      `
-      )
-      .join('\n');
-
-    const message = encodeURIComponent(
-      `Hello, I would like to order the following items:\n\n${cartDetails}\n\nCart Total: *₦${formatNumber(
-        totalPrice + amount
-      )}*\n\nCustomer: Praises +2348130909020\n\nPayment Receipt: LINK_TO_PAYMENT-RECEIPT`
-    );
-
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-
-    // Open the URL to trigger WhatsApp with the pre-filled message
-    window.open(whatsappURL, '_blank');
-  };
-
   return (
     <>
       <Heading as="h2">
         Copy the account number and pay the total of
         <span className="naira-sign">
-          {' '}
           ₦{formatNumber(totalPrice + amount)}{' '}
         </span>
         to the account below.
@@ -197,9 +185,8 @@ function PaymentInfo() {
           variation="secondary"
           size="large"
           onClick={() => {
-            sendOrderConfirmationEmail();
-            // navigate('/order-completed');
-            //  onClick={() => checkoutCart()}
+            // sendOrderConfirmationEmail();
+            navigate('/order-completed');
           }}
         >
           Confirm Payment

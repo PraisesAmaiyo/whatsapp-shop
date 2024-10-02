@@ -6,6 +6,10 @@ import Button from '../../ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { useShipping } from '../../context/ShippingContext';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
+import { FaWhatsapp } from 'react-icons/fa';
+import { getDate } from '../../utils/helpers';
+// import { useLocalStorageState } from '../../hooks/useLocalStorageState';
+import { useOrderId } from '../../context/OrderIdContext';
 
 const Group = styled.div`
   display: grid;
@@ -36,6 +40,13 @@ const CheckoutBtn = styled.div`
   width: 100%;
 `;
 
+const WhatsappBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0 0 2rem 0;
+  width: 100%;
+`;
+
 const StyledButton = styled(Button)`
   width: 95%;
   text-align: center;
@@ -46,10 +57,8 @@ const StyledButton = styled(Button)`
 
 function CompletedOrderSummaryRow({ summary }) {
   const navigate = useNavigate();
-
+  const { totalPrice, cartItems } = useAddItemToCart();
   const { shippingDetails } = useShipping();
-  const { cartItems } = useAddItemToCart();
-
   const { amount, location } = shippingDetails;
   const { subtotal } = summary;
 
@@ -59,16 +68,46 @@ function CompletedOrderSummaryRow({ summary }) {
     shippingAmount = 0;
   }
 
+  //   const [orderID] = useLocalStorageState('', 'orderID');
+
+  const { orderID } = useOrderId();
+
+  const orderLink = `http://localhost:5173/order-completed/${orderID}`;
+  console.log(orderLink);
+
+  const checkoutCart = () => {
+    const phoneNumber = '+2348130909020'; // Your WhatsApp number
+    const cartDetails = cartItems
+      .map(
+        (
+          item
+        ) => `*${item.quantity}x* ${item.newCartItemName} = *₦${item.newCartItemPrice}*
+     `
+      )
+      .join('\n');
+
+    const message = encodeURIComponent(
+      `Hello, I would like to order the following items:\n\n${cartDetails}\n\nCart Total: *₦${formatNumber(
+        totalPrice + amount
+      )}*\n\nCustomer: Praises +2348130909020\n\nPayment Receipt: LINK_TO_PAYMENT-RECEIPT\n\nOrder Link: ${orderLink}`
+    );
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    // Open the URL to trigger WhatsApp with the pre-filled message
+    window.open(whatsappURL, '_blank');
+  };
+
   return (
     <Table.Row istotalrow="istotalrow">
       <Group>
         <Title>Order Number</Title>
-        <div>#1234567890</div>
+        <div>#{orderID}</div>
       </Group>
 
       <Group>
         <Title>Date</Title>
-        <div>Aug 10, 2024</div>
+        <div>{getDate()}</div>
       </Group>
 
       <Group>
@@ -94,6 +133,15 @@ function CompletedOrderSummaryRow({ summary }) {
           View Order Details
         </StyledButton>
       </CheckoutBtn>
+      <WhatsappBtn>
+        <Button
+          variation="secondary"
+          size="large"
+          onClick={() => checkoutCart()}
+        >
+          Send to whatsapp <FaWhatsapp />{' '}
+        </Button>
+      </WhatsappBtn>
     </Table.Row>
   );
 }
