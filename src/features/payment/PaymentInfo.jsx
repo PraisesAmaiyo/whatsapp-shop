@@ -11,6 +11,7 @@ import FileInput from '../../ui/FileInput';
 import { useShipping } from '../../context/ShippingContext';
 import { useLocalStorageState } from '../../hooks/useLocalStorageState';
 import { useEffect } from 'react';
+import { useOrderId } from '../../context/OrderIdContext';
 
 const AccountDetails = styled.div`
   display: flex;
@@ -61,19 +62,24 @@ function PaymentInfo() {
 
   const { shippingDetails } = useShipping();
   const { amount } = shippingDetails;
+  const { getOrderID, setOrderID } = useOrderId();
 
-  const orderID = generateOrderID(6); // Generate the order ID
+  useEffect(() => {
+    // Check if orderID exists
+    const existingOrderID = getOrderID();
+    if (!existingOrderID) {
+      // Generate and set a new order ID if it doesn't exist
+      const newOrderID = generateOrderID(6);
+      setOrderID(newOrderID);
+    }
+  }, [getOrderID, setOrderID]);
 
-  // Save the orderID to localStorage using the hook
-  const [storedOrderID, setStoredOrderID] = useLocalStorageState(
-    orderID,
-    'orderID'
-  );
-
-  // Optional: Log or use storedOrderID if needed
-  console.log(storedOrderID);
+  const orderID = getOrderID();
 
   const orderLink = `http://localhost:5173/order-completed/${orderID}`;
+
+  console.log(orderID);
+  console.log(orderLink);
 
   const sendOrderConfirmationEmail = (
     orderDetails,

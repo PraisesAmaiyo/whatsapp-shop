@@ -1,34 +1,31 @@
-import { createContext, useContext, useEffect } from 'react';
-import { useLocalStorageState } from '../hooks/useLocalStorageState';
+import { createContext, useContext } from 'react';
 
 // Create context
 const OrderIdContext = createContext();
 
 // Provide the context
 export const OrderIdProvider = ({ children }) => {
-  const [orderID, setOrderID] = useLocalStorageState([], 'orderID');
-  //   const [orderID, setOrderID] = useLocalStorageState([], 'orderID');
+  const getOrderID = () => {
+    const orderID = localStorage.getItem('orderID');
+    return orderID ? orderID.replace(/"/g, '').trim() : null;
+  };
 
-  // Sync orderID with localStorage whenever it changes
-  useEffect(() => {
-    if (orderID) {
-      localStorage.setItem('orderID', orderID);
-    }
-  }, [orderID]);
+  const setOrderID = (id) => {
+    localStorage.setItem('orderID', id);
+  };
 
   return (
-    <OrderIdContext.Provider value={{ orderID, setOrderID }}>
+    <OrderIdContext.Provider value={{ getOrderID, setOrderID }}>
       {children}
     </OrderIdContext.Provider>
   );
 };
 
 // Custom hook to access the context
-
 function useOrderId() {
   const context = useContext(OrderIdContext);
   if (context === undefined)
-    throw new Error('OrderIdContext was used outside of ShippingProvider');
+    throw new Error('OrderIdContext was used outside of OrderIdProvider');
 
   return context;
 }

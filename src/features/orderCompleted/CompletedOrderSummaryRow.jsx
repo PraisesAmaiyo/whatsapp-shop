@@ -68,9 +68,9 @@ function CompletedOrderSummaryRow({ summary }) {
     shippingAmount = 0;
   }
 
-  //   const [orderID] = useLocalStorageState('', 'orderID');
+  const { getOrderID } = useOrderId();
 
-  const { orderID } = useOrderId();
+  const orderID = getOrderID();
 
   const orderLink = `http://localhost:5173/order-completed/${orderID}`;
   console.log(orderLink);
