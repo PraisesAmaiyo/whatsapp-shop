@@ -73,7 +73,6 @@ function CompletedOrderSummaryRow({ summary }) {
   const orderID = getOrderID();
 
   const orderLink = `http://localhost:5173/order-completed/${orderID}`;
-  console.log(orderLink);
 
   const checkoutCart = () => {
     const phoneNumber = '+2348130909020'; // Your WhatsApp number

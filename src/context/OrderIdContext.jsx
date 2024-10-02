@@ -1,9 +1,7 @@
 import { createContext, useContext } from 'react';
 
-// Create context
 const OrderIdContext = createContext();
 
-// Provide the context
 export const OrderIdProvider = ({ children }) => {
   const getOrderID = () => {
     const orderID = localStorage.getItem('orderID');
@@ -21,7 +19,6 @@ export const OrderIdProvider = ({ children }) => {
   );
 };
 
-// Custom hook to access the context
 function useOrderId() {
   const context = useContext(OrderIdContext);
   if (context === undefined)

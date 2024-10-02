@@ -10,8 +10,9 @@ import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import { useShipping } from '../../context/ShippingContext';
 import { useLocalStorageState } from '../../hooks/useLocalStorageState';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useOrderId } from '../../context/OrderIdContext';
+import { createOrder } from '../../services/ApiProducts';
 
 const AccountDetails = styled.div`
   display: flex;
@@ -58,10 +59,11 @@ const ButtonContainer = styled.div`
 
 function PaymentInfo() {
   const navigate = useNavigate();
-  const { totalPrice, cartItems } = useAddItemToCart();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { totalPrice, cartItems, setCartItems } = useAddItemToCart();
 
   const { shippingDetails } = useShipping();
-  const { amount } = shippingDetails;
+  const { amount: shippingFee } = shippingDetails;
   const { getOrderID, setOrderID } = useOrderId();
 
   useEffect(() => {
@@ -77,9 +79,6 @@ function PaymentInfo() {
   const orderID = getOrderID();
 
   const orderLink = `http://localhost:5173/order-completed/${orderID}`;
-
-  console.log(orderID);
-  console.log(orderLink);
 
   const sendOrderConfirmationEmail = (
     orderDetails,
@@ -159,12 +158,41 @@ function PaymentInfo() {
       });
   };
 
+  async function handlePaymentSubmission() {
+    const orderData = {
+      orderID,
+      cartItems,
+      totalPrice,
+      shippingFee,
+      // Add other relevant details
+    };
+    setIsSubmitting(true);
+
+    if (cartItems.length > 0) {
+      try {
+        console.log(orderData);
+        const createdOrder = await createOrder(orderData);
+
+        if (createdOrder) {
+          //  localStorage.removeItem('cartItems');
+          //  setCartItems([]);
+          navigate('/order-completed');
+          setIsSubmitting(false);
+        }
+      } catch (error) {
+        console.error('Failed to create order:', error);
+      }
+    } else {
+      console.error('Cart is empty, cannot complete payment.');
+    }
+  }
+
   return (
     <>
       <Heading as="h2">
         Copy the account number and pay the total of
         <span className="naira-sign">
-          ₦{formatNumber(totalPrice + amount)}{' '}
+          ₦{formatNumber(totalPrice + shippingFee)}
         </span>
         to the account below.
       </Heading>
@@ -190,12 +218,10 @@ function PaymentInfo() {
         <Button
           variation="secondary"
           size="large"
-          onClick={() => {
-            // sendOrderConfirmationEmail();
-            navigate('/order-completed');
-          }}
+          disabled={isSubmitting}
+          onClick={() => handlePaymentSubmission()}
         >
-          Confirm Payment
+          {isSubmitting ? 'Placing order....' : ' Confirm Payment'}
         </Button>
       </ButtonContainer>
     </>

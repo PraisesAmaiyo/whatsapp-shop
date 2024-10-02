@@ -72,3 +72,24 @@ export async function getSimilarItems() {
     throw error;
   }
 }
+
+export async function createOrder(newOrder) {
+  try {
+    const res = await fetch(`${API_URL}/orders`, {
+      method: 'POST',
+      body: JSON.stringify(newOrder),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) throw Error('Order creation failed');
+    const data = await res.json();
+
+    console.log(data);
+    console.log(res);
+    return data;
+  } catch {
+    throw Error('Failed creating your order');
+  }
+}
