@@ -13,7 +13,7 @@ function PageHeader() {
   const urlLocation = useLocation();
   const { id } = useParams();
 
-  const isOrderCompletePage = urlLocation.pathname === '/order-completed';
+  const isOrderCompletePage = id && urlLocation.pathname.startsWith('/order');
   const orderCompletePageText = isOrderCompletePage ? 'Order Completed' : '';
 
   const isProductPage = urlLocation.pathname === '/products';

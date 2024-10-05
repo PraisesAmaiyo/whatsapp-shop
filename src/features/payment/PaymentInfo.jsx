@@ -9,10 +9,11 @@ import Heading from '../../ui/Heading';
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import { useShipping } from '../../context/ShippingContext';
-import { useLocalStorageState } from '../../hooks/useLocalStorageState';
 import { useEffect, useState } from 'react';
 import { useOrderId } from '../../context/OrderIdContext';
 import { createOrder } from '../../services/ApiProducts';
+import toast from 'react-hot-toast';
+import SpinnerMini from '../../ui/SpinnerMini';
 
 const AccountDetails = styled.div`
   display: flex;
@@ -65,20 +66,20 @@ function PaymentInfo() {
   const { shippingDetails } = useShipping();
   const { amount: shippingFee } = shippingDetails;
   const { getOrderID, setOrderID } = useOrderId();
+  const [orderID, setOrderIDState] = useState(null);
 
   useEffect(() => {
-    // Check if orderID exists
     const existingOrderID = getOrderID();
     if (!existingOrderID) {
-      // Generate and set a new order ID if it doesn't exist
       const newOrderID = generateOrderID(6);
       setOrderID(newOrderID);
+      setOrderIDState(newOrderID);
     }
   }, [getOrderID, setOrderID]);
 
-  const orderID = getOrderID();
+  //   const orderID = getOrderID();
 
-  const orderLink = `http://localhost:5173/order-completed/${orderID}`;
+  const orderLink = `http://localhost:5173/order/${orderID}`;
 
   const sendOrderConfirmationEmail = (
     orderDetails,
@@ -164,7 +165,7 @@ function PaymentInfo() {
       cartItems,
       totalPrice,
       shippingFee,
-      // Add other relevant details
+      // more to be details added soon
     };
     setIsSubmitting(true);
 
@@ -174,26 +175,36 @@ function PaymentInfo() {
         const createdOrder = await createOrder(orderData);
 
         if (createdOrder) {
-          //  localStorage.removeItem('cartItems');
-          //  setCartItems([]);
-          navigate('/order-completed');
-          setIsSubmitting(false);
+          sendOrderConfirmationEmail();
+          toast.success(`Order ${orderID} placed successfully!`);
+
+          localStorage.removeItem('cartItems');
+          setCartItems([]);
+
+          //  sessionStorage.setItem('lastOrderID', orderID);
+          localStorage.removeItem('orderID');
+          navigate(`/order/${orderID}`);
         }
       } catch (error) {
+        toast.error('Failed to place order. Please try again.');
         console.error('Failed to create order:', error);
+      } finally {
+        setIsSubmitting(false);
       }
     } else {
       console.error('Cart is empty, cannot complete payment.');
+      toast.error('Cart is empty. Please add items before proceeding.');
+      setIsSubmitting(false);
     }
   }
 
   return (
     <>
       <Heading as="h2">
-        Copy the account number and pay the total of
+        Copy the account number and pay the total of{' '}
         <span className="naira-sign">
           ₦{formatNumber(totalPrice + shippingFee)}
-        </span>
+        </span>{' '}
         to the account below.
       </Heading>
       <Heading as="h2">
@@ -221,7 +232,13 @@ function PaymentInfo() {
           disabled={isSubmitting}
           onClick={() => handlePaymentSubmission()}
         >
-          {isSubmitting ? 'Placing order....' : ' Confirm Payment'}
+          {isSubmitting ? (
+            <>
+              Placing order... <SpinnerMini />
+            </>
+          ) : (
+            'Confirm Payment'
+          )}
         </Button>
       </ButtonContainer>
     </>

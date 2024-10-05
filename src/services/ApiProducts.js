@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 const API_URL = 'https://whatsapp-shop-api.onrender.com';
 
 export async function getFeaturedCategories() {
@@ -91,5 +93,19 @@ export async function createOrder(newOrder) {
     return data;
   } catch {
     throw Error('Failed creating your order');
+  }
+}
+
+export async function getOrder(id) {
+  try {
+    const response = await fetch(`${API_URL}/orders?orderID=${id}`);
+    if (!response.ok) {
+      throw Error(`Couldn't find order #${id}`);
+    }
+    return await response.json();
+  } catch (error) {
+    toast.error('Error getting order. Confirm order number or check network');
+    console.error('Error fetching data:', error);
+    throw error;
   }
 }

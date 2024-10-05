@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Heading from '../../ui/Heading';
 
-const TextInfro = styled.div`
+const TextInfo = styled.div`
   text-align: left;
   margin: 4rem auto;
   width: 70%;
@@ -26,7 +26,7 @@ const StyledHeading = styled(Heading)`
 
 function OrderStatusText() {
   return (
-    <TextInfro>
+    <TextInfo>
       <Heading as="h1">Order Status</Heading>
 
       <StyledHeading as="h3">
@@ -48,7 +48,7 @@ function OrderStatusText() {
       <StyledHeading as="h3">
         Phone No: <a href="tel:+2348130909020">+2348130909020</a>
       </StyledHeading>
-    </TextInfro>
+    </TextInfo>
   );
 }
 

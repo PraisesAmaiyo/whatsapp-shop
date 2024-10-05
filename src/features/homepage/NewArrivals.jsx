@@ -181,7 +181,6 @@ function NewArrivals() {
       try {
         const newArrivals = await getNewArrivals();
 
-        console.log(newArrivals);
 
         setNewArrivalProducts(newArrivals);
       } catch (err) {

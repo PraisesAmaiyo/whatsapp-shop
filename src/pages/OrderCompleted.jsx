@@ -9,6 +9,7 @@ import PageHeader from '../ui/PageHeader';
 import OrderCompletedInfo from '../features/orderCompleted/OrderCompletedInfo';
 import CompletedOrderSummary from '../features/orderCompleted/CompletedOrderSummary';
 import OrderStatusText from '../features/orderCompleted/OrderStatusText';
+import OrderItems from '../features/orderCompleted/OrderItems';
 
 const Container = styled.div`
   width: 100%;
@@ -45,6 +46,7 @@ function OrderCompleted() {
         <Container>
           <OrderCompletedInfo />
           <CompletedOrderSummary />
+          <OrderItems />
           <OrderStatusText />
           <Benefits />
         </Container>

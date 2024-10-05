@@ -3,13 +3,11 @@ import styled from 'styled-components';
 import Table from '../../ui/Table';
 import { formatNumber } from '../../utils/helpers';
 import Button from '../../ui/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useShipping } from '../../context/ShippingContext';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { FaWhatsapp } from 'react-icons/fa';
 import { getDate } from '../../utils/helpers';
-// import { useLocalStorageState } from '../../hooks/useLocalStorageState';
-import { useOrderId } from '../../context/OrderIdContext';
 
 const Group = styled.div`
   display: grid;
@@ -68,11 +66,10 @@ function CompletedOrderSummaryRow({ summary }) {
     shippingAmount = 0;
   }
 
-  const { getOrderID } = useOrderId();
+  const { id: orderID } = useParams();
+  //   const lastOrderID = sessionStorage.getItem('lastOrderID') || orderID;
 
-  const orderID = getOrderID();
-
-  const orderLink = `http://localhost:5173/order-completed/${orderID}`;
+  const orderLink = `http://localhost:5173/order/${orderID}`;
 
   const checkoutCart = () => {
     const phoneNumber = '+2348130909020'; // Your WhatsApp number
@@ -116,6 +113,14 @@ function CompletedOrderSummaryRow({ summary }) {
       </Group>
 
       <TotalRow>
+        <Title>Shipping Fee</Title>
+        <div>
+          <span className="naira-sign">₦</span>
+          {formatNumber(shippingAmount)}.00
+        </div>
+      </TotalRow>
+
+      <TotalRow>
         <Title>Total</Title>
         <div>
           <span className="naira-sign">₦</span>
@@ -127,11 +132,12 @@ function CompletedOrderSummaryRow({ summary }) {
         <StyledButton
           variation="primary"
           size="large"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/products')}
         >
-          View Order Details
+          Continue Shopping
         </StyledButton>
       </CheckoutBtn>
+
       <WhatsappBtn>
         <Button
           variation="secondary"

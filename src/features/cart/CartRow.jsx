@@ -47,6 +47,10 @@ const Price = styled.div`
   font-weight: 600;
 `;
 
+const Quantity = styled.div`
+  font-weight: 600;
+`;
+
 const SubTotal = styled.div`
   font-weight: 600;
 `;

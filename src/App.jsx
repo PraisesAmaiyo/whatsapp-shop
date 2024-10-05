@@ -25,6 +25,7 @@ import Products from './pages/Products';
 import { useEffect, useState } from 'react';
 import SpinnerLarge from './ui/SpinnerLarge';
 import { OrderIdProvider } from './context/OrderIdContext';
+import { FetchOrderProvider } from '../src/context/FetchOrderContext';
 
 const router = createBrowserRouter([
   {
@@ -62,8 +63,12 @@ const router = createBrowserRouter([
         element: <Payment />,
       },
       {
-        path: '/order-completed',
-        element: <OrderCompleted />,
+        path: '/order/:id',
+        element: (
+          <FetchOrderProvider>
+            <OrderCompleted />
+          </FetchOrderProvider>
+        ),
       },
       {
         path: '/contact',
