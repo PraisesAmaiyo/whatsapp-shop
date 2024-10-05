@@ -37,22 +37,24 @@ const WhiteWrapper = styled.div`
 `;
 
 function OrderCompleted() {
-  const { isLoading, error } = useFetchOrder();
+  const { isLoading, error, order } = useFetchOrder();
 
   return (
     <>
       <GradientWrapper>
         <Container>
           <Header />
-          {isLoading ? '' : <PageHeader />}
+          {!isLoading && order && <PageHeader />}
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
           {isLoading ? (
             <Spinner />
-          ) : error === null || error ? (
+          ) : error ? (
             <ErrorBox errorName={'Order'} />
+          ) : !order ? (
+            <ErrorBox errorName={'Order Not Found'} />
           ) : (
             <>
               <OrderCompletedInfo />

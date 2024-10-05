@@ -25,7 +25,7 @@ export const FetchOrderProvider = ({ children }) => {
     };
 
     if (orderID) fetchData();
-  }, [order, orderID]);
+  }, [orderID]);
 
   return (
     <FetchOrderContext.Provider value={{ order, isLoading, error }}>
