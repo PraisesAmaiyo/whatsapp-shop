@@ -6,24 +6,29 @@ const FetchOrderContext = createContext();
 
 export const FetchOrderProvider = ({ children }) => {
   const [order, setOrder] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const { id: orderID } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Hello', orderID);
         const receivedOrder = await getOrder(orderID);
 
-        console.log(receivedOrder);
         setOrder(receivedOrder[0]);
-      } catch (error) {}
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     if (orderID) fetchData();
-  }, [orderID]);
+  }, [order, orderID]);
 
   return (
-    <FetchOrderContext.Provider value={{ order }}>
+    <FetchOrderContext.Provider value={{ order, isLoading, error }}>
       {children}
     </FetchOrderContext.Provider>
   );

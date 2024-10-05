@@ -8,7 +8,6 @@ import {
 import toast from 'react-hot-toast';
 
 import { formatNumber } from '../../utils/helpers';
-import { useMoveBack } from '../../hooks/useMoveBack';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 
 import Row from '../../ui/Row';
@@ -25,6 +24,7 @@ import {
 } from '../../services/ApiProducts';
 
 import Spinner from '../../ui/Spinner';
+import ErrorBox from '../../ui/ErrorBox';
 
 const StyledProductInfoContainer = styled.section`
   padding: 4rem 0;
@@ -147,32 +147,6 @@ const ProductSubInfo = styled.div`
   margin-top: 6rem;
 `;
 
-const Box = styled.div`
-  /* box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
-  padding: 4.8rem;
-  flex: 0 1 96rem;
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & h1 {
-    margin-bottom: 3.2rem;
-  }
-`;
-
-// export async function loader() {
-//   const menu = await getMenu();
-
-//   console.log(menu);
-//   return menu;
-// }
-
 function ProductInfo() {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [newArrivalProducts, setNewArrivalProducts] = useState([]);
@@ -186,7 +160,6 @@ function ProductInfo() {
 
   //   const navigation = useNavigation();
   const navigate = useNavigate();
-  const moveBack = useMoveBack();
   const { id } = useParams();
 
   //   const isLoading = navigation.state === 'loading';
@@ -223,16 +196,7 @@ function ProductInfo() {
   if (!isLoading && !product) {
     return (
       <StyledProductNotFound>
-        <Box>
-          <Heading as="h1">
-            The Product you are looking for could not be found 😢
-          </Heading>
-          <div>
-            <Button onClick={moveBack} size="large">
-              &larr; Go back
-            </Button>
-          </div>
-        </Box>
+        <ErrorBox errorName={'Product'} />
       </StyledProductNotFound>
     );
   }

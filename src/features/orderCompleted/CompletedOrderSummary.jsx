@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useAddItemToCart } from '../../context/AddItemToCartContext';
+
 import Table from '../../ui/Table';
 import CompletedOrderSummaryRow from './CompletedOrderSummaryRow';
-import { useFetchOrder } from '../../context/FetchOrderContext';
 import Spinner from '../../ui/Spinner';
+import { useFetchOrder } from '../../context/FetchOrderContext';
 
 const Container = styled.div`
   margin: 0 auto;

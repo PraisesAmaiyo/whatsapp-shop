@@ -61,19 +61,27 @@ const ButtonContainer = styled.div`
 function PaymentInfo() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderID, setOrderIDState] = useState(null);
   const { totalPrice, cartItems, setCartItems } = useAddItemToCart();
 
   const { shippingDetails } = useShipping();
-  const { amount: shippingFee } = shippingDetails;
+  const { amount: shippingFee, location: shippingLocation } = shippingDetails;
   const { getOrderID, setOrderID } = useOrderId();
-  const [orderID, setOrderIDState] = useState(null);
+
+  console.log(orderID);
 
   useEffect(() => {
     const existingOrderID = getOrderID();
+    console.log('Existing orderID:', existingOrderID);
+
     if (!existingOrderID) {
       const newOrderID = generateOrderID(6);
       setOrderID(newOrderID);
       setOrderIDState(newOrderID);
+      console.log('New orderID generated:', newOrderID);
+    } else {
+      setOrderIDState(existingOrderID);
+      console.log('Order ID already exists:', existingOrderID);
     }
   }, [getOrderID, setOrderID]);
 
@@ -123,12 +131,13 @@ function PaymentInfo() {
       `;
 
     const templateParams = {
-      // order_summary: orderDetails,
       // customer_name: customerDetails.name,
       // customer_email: customerDetails.email,
       // customer_phone: customerDetails.phone,
       // payment_screenshot: paymentScreenshot,
       order_summary: orderSummaryHTML,
+      shipping_amount: shippingFee,
+      shipping_location: shippingLocation,
       customer_name: 'Praises Amaiyo',
       customer_email: 'amaiyo.praises@gmail.com',
       customer_phone: '+2347057540749',
@@ -175,11 +184,11 @@ function PaymentInfo() {
         const createdOrder = await createOrder(orderData);
 
         if (createdOrder) {
-          sendOrderConfirmationEmail();
+          //  sendOrderConfirmationEmail();
           toast.success(`Order ${orderID} placed successfully!`);
 
-          localStorage.removeItem('cartItems');
-          setCartItems([]);
+          //  localStorage.removeItem('cartItems');
+          //  setCartItems([]);
 
           //  sessionStorage.setItem('lastOrderID', orderID);
           localStorage.removeItem('orderID');

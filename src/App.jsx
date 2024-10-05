@@ -25,7 +25,7 @@ import Products from './pages/Products';
 import { useEffect, useState } from 'react';
 import SpinnerLarge from './ui/SpinnerLarge';
 import { OrderIdProvider } from './context/OrderIdContext';
-import { FetchOrderProvider } from '../src/context/FetchOrderContext';
+import { FetchOrderProvider } from './context/FetchOrderContext';
 
 const router = createBrowserRouter([
   {

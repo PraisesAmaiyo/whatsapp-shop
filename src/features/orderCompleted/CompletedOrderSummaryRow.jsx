@@ -72,7 +72,7 @@ function CompletedOrderSummaryRow({ summary }) {
   const orderLink = `http://localhost:5173/order/${orderID}`;
 
   const checkoutCart = () => {
-    const phoneNumber = '+2348130909020'; // Your WhatsApp number
+    const phoneNumber = '+2348130909020'; // WhatsApp number
     const cartDetails = cartItems
       .map(
         (

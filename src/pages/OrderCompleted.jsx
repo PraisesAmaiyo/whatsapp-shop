@@ -10,6 +10,9 @@ import OrderCompletedInfo from '../features/orderCompleted/OrderCompletedInfo';
 import CompletedOrderSummary from '../features/orderCompleted/CompletedOrderSummary';
 import OrderStatusText from '../features/orderCompleted/OrderStatusText';
 import OrderItems from '../features/orderCompleted/OrderItems';
+import { useFetchOrder } from '../context/FetchOrderContext';
+import Spinner from '../ui/Spinner';
+import ErrorBox from '../ui/ErrorBox';
 
 const Container = styled.div`
   width: 100%;
@@ -34,21 +37,31 @@ const WhiteWrapper = styled.div`
 `;
 
 function OrderCompleted() {
+  const { isLoading, error } = useFetchOrder();
+
   return (
     <>
       <GradientWrapper>
         <Container>
           <Header />
-          <PageHeader />
+          {isLoading ? '' : <PageHeader />}
         </Container>
       </GradientWrapper>
       <WhiteWrapper>
         <Container>
-          <OrderCompletedInfo />
-          <CompletedOrderSummary />
-          <OrderItems />
-          <OrderStatusText />
-          <Benefits />
+          {isLoading ? (
+            <Spinner />
+          ) : error === null || error ? (
+            <ErrorBox errorName={'Order'} />
+          ) : (
+            <>
+              <OrderCompletedInfo />
+              <CompletedOrderSummary />
+              <OrderItems />
+              <OrderStatusText />
+              <Benefits />
+            </>
+          )}
         </Container>
         <Footer />
       </WhiteWrapper>

@@ -10,9 +10,11 @@ const Container = styled.div`
 `;
 
 function OrderItems() {
-  const { order } = useFetchOrder();
+  const { order, isLoading, error } = useFetchOrder();
 
-  if (!order) {
+  console.log(order, isLoading, error);
+
+  if (isLoading) {
     return <Spinner />;
   }
 
