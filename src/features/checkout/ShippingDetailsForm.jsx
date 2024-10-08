@@ -34,7 +34,7 @@ const CheckboxGroup = styled.div`
 
 const shippingLocations = [
   {
-    location: 'Customer',
+    location: 'Customer (Warri)',
     amount: 'Free',
   },
   {

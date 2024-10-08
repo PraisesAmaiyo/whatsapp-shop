@@ -7,7 +7,14 @@ export function formatNumber(num) {
 }
 
 export function getDate() {
-  const date = new Date().toLocaleDateString('en-GB');
+  const date = new Date().toLocaleString('en-GB', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
   return date;
 }
 

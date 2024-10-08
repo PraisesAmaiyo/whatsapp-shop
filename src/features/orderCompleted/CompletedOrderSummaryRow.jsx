@@ -8,6 +8,7 @@ import { useShipping } from '../../context/ShippingContext';
 import { useAddItemToCart } from '../../context/AddItemToCartContext';
 import { FaWhatsapp } from 'react-icons/fa';
 import { getDate } from '../../utils/helpers';
+import { useFetchOrder } from '../../context/FetchOrderContext';
 
 const Group = styled.div`
   display: grid;
@@ -55,19 +56,11 @@ const StyledButton = styled(Button)`
 
 function CompletedOrderSummaryRow({ summary }) {
   const navigate = useNavigate();
-  const { totalPrice, cartItems } = useAddItemToCart();
-  const { shippingDetails } = useShipping();
-  const { amount, location } = shippingDetails;
-  const { subtotal } = summary;
 
-  let shippingAmount = amount;
+  const { order } = useFetchOrder();
 
-  if (location === 'Customer') {
-    shippingAmount = 0;
-  }
-
-  const { id: orderID } = useParams();
-  //   const lastOrderID = sessionStorage.getItem('lastOrderID') || orderID;
+  const { totalPrice, cartItems, orderID, shippingFee } = order;
+  console.log('order', order);
 
   const orderLink = `http://localhost:5173/order/${orderID}`;
 
@@ -84,7 +77,7 @@ function CompletedOrderSummaryRow({ summary }) {
 
     const message = encodeURIComponent(
       `Hello, I would like to order the following items:\n\n${cartDetails}\n\nCart Total: *₦${formatNumber(
-        totalPrice + amount
+        totalPrice + shippingFee
       )}*\n\nCustomer: Praises +2348130909020\n\nPayment Receipt: LINK_TO_PAYMENT-RECEIPT\n\nOrder Link: ${orderLink}`
     );
 
@@ -116,7 +109,7 @@ function CompletedOrderSummaryRow({ summary }) {
         <Title>Shipping Fee</Title>
         <div>
           <span className="naira-sign">₦</span>
-          {formatNumber(shippingAmount)}.00
+          {formatNumber(shippingFee)}.00
         </div>
       </TotalRow>
 
@@ -124,7 +117,7 @@ function CompletedOrderSummaryRow({ summary }) {
         <Title>Total</Title>
         <div>
           <span className="naira-sign">₦</span>
-          {formatNumber(subtotal + shippingAmount)}.00
+          {formatNumber(totalPrice + shippingFee)}.00
         </div>
       </TotalRow>
 

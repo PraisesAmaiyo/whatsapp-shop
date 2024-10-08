@@ -8,7 +8,7 @@ const Box = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
-  margin: 0 auto;
+  margin: 3rem auto;
 
   padding: 4.8rem;
   flex: 0 1 96rem;

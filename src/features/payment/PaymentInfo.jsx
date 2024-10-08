@@ -68,20 +68,15 @@ function PaymentInfo() {
   const { amount: shippingFee, location: shippingLocation } = shippingDetails;
   const { getOrderID, setOrderID } = useOrderId();
 
-  console.log(orderID);
-
   useEffect(() => {
     const existingOrderID = getOrderID();
-    console.log('Existing orderID:', existingOrderID);
 
     if (!existingOrderID) {
       const newOrderID = generateOrderID(6);
       setOrderID(newOrderID);
       setOrderIDState(newOrderID);
-      console.log('New orderID generated:', newOrderID);
     } else {
       setOrderIDState(existingOrderID);
-      console.log('Order ID already exists:', existingOrderID);
     }
   }, [getOrderID, setOrderID]);
 
@@ -95,77 +90,90 @@ function PaymentInfo() {
     paymentScreenshot
   ) => {
     const orderSummaryHTML = `
-        <table style="width: 100%; border-collapse: collapse;">
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Quantity</th>
-              <th>Price (₦)</th>
-              <th>Total Price (₦)</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${cartItems
-              .map(
-                (item) => `
-                <tr>
-                <td>
-                   <div style="display: flex; align-items: center; gap: 5px;">
-                      <img src="${
-                        item.newCartItemImage
-                      }" alt="Item Image" style="max-width: 40px; height: auto;" />
-                      <p style="font-size: 13px; font-weight: bold; margin: auto 5px">${
-                        item.newCartItemName
-                      }</p>
-                   </div>
-                </td>
-
-                    <td>${item.quantity}</td>
-                    <td>${formatNumber(item.newCartItemPrice)}</td>
-                    <td>${formatNumber(item.totalItemPrice)}</td>
-                  </tr>`
-              )
-              .join('')}
-          </tbody>
-        </table>
-      `;
+   <table style="width: 100%; border-collapse: collapse;">
+     <thead>
+       <tr>
+         <th style="border: 2px solid #dddddd; padding: 8px; text-align: left;">Item Name</th>
+         <th style="border: 2px solid #dddddd; padding: 8px; text-align: left;">Quantity</th>
+         <th style="border: 2px solid #dddddd; padding: 8px; text-align: left;">Price (₦)</th>
+         <th style="border: 2px solid #dddddd; padding: 8px; text-align: left;">Total Price (₦)</th>
+       </tr>
+     </thead>
+     <tbody>
+       ${cartItems
+         .map(
+           (item) => `
+             <tr>
+               <td style="border: 2px solid #dddddd; padding: 8px;">
+                 <div style="display: flex; align-items: center; gap: 5px;">
+                   <img src="${
+                     item.newCartItemImage
+                   }" alt="Item Image" style="max-width: 40px; height: auto; display: block;" />
+                   <p style="font-size: 13px; font-weight: bold; margin: auto 5px;">${
+                     item.newCartItemName
+                   }</p>
+                 </div>
+               </td>
+               <td style="border: 2px solid #dddddd; padding: 8px;">${
+                 item.quantity
+               }</td>
+               <td style="border: 2px solid #dddddd; padding: 8px;">${formatNumber(
+                 item.newCartItemPrice
+               )}</td>
+               <td style="border: 2px solid #dddddd; padding: 8px;">${formatNumber(
+                 item.totalItemPrice
+               )}</td>
+             </tr>`
+         )
+         .join('')}
+     </tbody>
+   </table>
+   `;
 
     const templateParams = {
       // customer_name: customerDetails.name,
       // customer_email: customerDetails.email,
       // customer_phone: customerDetails.phone,
       // payment_screenshot: paymentScreenshot,
-      order_summary: orderSummaryHTML,
-      shipping_amount: shippingFee,
-      shipping_location: shippingLocation,
       customer_name: 'Praises Amaiyo',
       customer_email: 'amaiyo.praises@gmail.com',
       customer_phone: '+2347057540749',
+      order_summary: orderSummaryHTML,
+      shipping_amount: formatNumber(shippingFee),
+      shipping_location: shippingLocation,
       order_link: orderLink,
-      total_price: formatNumber(totalPrice),
+      cart_total: formatNumber(totalPrice),
+      total_price: formatNumber(totalPrice + shippingFee),
       orderID: orderID,
-      order_date: new Date().toLocaleDateString(),
+      order_date: new Date().toLocaleString('en-GB', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      }),
       payment_screenshot:
         'https://media.istockphoto.com/id/1169144637/vector/atm-bill-in-slot-vector-realistic-illustrations-set.jpg?s=612x612&w=0&k=20&c=lOFwWer_E14As5LzlJCAHNc_Y0Ee3Kx50-yg0IxBVVM=',
     };
 
-    emailjs
-      .send(
-        'service_7mqikbg',
-        'template_4kintgm',
-        templateParams,
-        'Pst9J84YbTStWUs0M',
+    //  emailjs
+    //    .send(
+    //      'service_7mqikbg',
+    //      'template_4kintgm',
+    //      templateParams,
+    //      'Pst9J84YbTStWUs0M',
 
-        {
-          is_html: true,
-        }
-      )
-      .then((response) => {
-        console.log('Email sent successfully!', response.status, response.text);
-      })
-      .catch((err) => {
-        console.log('Failed to send email:', err);
-      });
+    //      {
+    //        is_html: true,
+    //      }
+    //    )
+    //    .then((response) => {
+    //      console.log('Email sent successfully!', response.status, response.text);
+    //    })
+    //    .catch((err) => {
+    //      console.log('Failed to send email:', err);
+    //    });
   };
 
   async function handlePaymentSubmission() {
@@ -184,7 +192,7 @@ function PaymentInfo() {
         const createdOrder = await createOrder(orderData);
 
         if (createdOrder) {
-          //  sendOrderConfirmationEmail();
+          sendOrderConfirmationEmail();
           toast.success(`Order ${orderID} placed successfully!`);
 
           //  localStorage.removeItem('cartItems');

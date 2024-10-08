@@ -1,12 +1,16 @@
 import { createContext, useContext, useState } from 'react';
+import { useLocalStorageState } from '../hooks/useLocalStorageState';
 
 const ShippingContext = createContext();
 
 export const ShippingProvider = ({ children }) => {
-  const [shippingDetails, setShippingDetails] = useState({
-    location: null,
-    amount: null,
-  });
+  const [shippingDetails, setShippingDetails] = useLocalStorageState(
+    {
+      location: null,
+      amount: null,
+    },
+    'shippingDetails'
+  );
 
   const updateShippingDetails = (location, amount) => {
     setShippingDetails({ location, amount });
