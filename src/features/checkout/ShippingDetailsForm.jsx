@@ -75,11 +75,13 @@ const shippingLocations = [
   },
 ];
 
-function Shipping() {
+function Shipping({ register, errors }) {
   const { shippingDetails, updateShippingDetails } = useShipping();
   const [selectedLocation, setSelectedLocation] = useState(
     shippingDetails.location
   );
+
+  console.log(selectedLocation);
 
   const handleCheckboxChange = (location, amount) => {
     const newLocation = selectedLocation === location ? null : location;
@@ -111,6 +113,13 @@ function Shipping() {
               checked={selectedLocation === location}
               onChange={() => handleCheckboxChange(location, amount)}
               id={location}
+              {...register('shippingLocations', {
+                required: 'Shipping location is required',
+                validate: (value) =>
+                  value === location
+                    ? true
+                    : 'Please select a valid shipping location',
+              })}
             >
               <CheckboxGroup>
                 {location === 'Customer' ? (
@@ -132,6 +141,9 @@ function Shipping() {
                 </strong>
               </CheckboxGroup>
             </Checkbox>
+            {errors.shippingLocations && setSelectedLocation !== null && (
+              <p style={{ color: 'red' }}>{errors.shippingLocations.message}</p>
+            )}
           </Box>
         );
       })}

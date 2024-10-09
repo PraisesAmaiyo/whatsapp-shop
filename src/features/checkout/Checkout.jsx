@@ -6,6 +6,7 @@ import ShippingDetailsForm from './ShippingDetailsForm';
 import Row from '../../ui/Row';
 import CartSummary from '../cart/CartSummary';
 import CartItems from '../cart/CartItems';
+import { useForm } from 'react-hook-form';
 
 const Header = styled.div`
   padding: 1rem;
@@ -25,14 +26,22 @@ const StyledCartSummary = styled.div`
 `;
 
 function Checkout() {
+  const { register, handleSubmit, formState, getValues } = useForm();
+
+  const { errors } = formState;
+
+  function onSubmit(data) {
+    console.log('Form Submitted:', data);
+  }
+
   return (
     <>
       <Header>
         <span>Billing Details</span>
       </Header>
       <Row>
-        <BillingDetailsForm />
-        <ShippingDetailsForm />
+        <BillingDetailsForm register={register} errors={errors} />
+        <ShippingDetailsForm register={register} errors={errors} />
 
         <Header>
           <span>Cart Summary</span>
@@ -40,7 +49,7 @@ function Checkout() {
 
         <StyledCartSummary>
           <CartItems />
-          <CartSummary />
+          <CartSummary onProceed={handleSubmit(onSubmit)} />
         </StyledCartSummary>
       </Row>
     </>

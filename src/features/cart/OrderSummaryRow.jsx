@@ -34,7 +34,7 @@ const CheckoutBtn = styled.div`
   padding: 2rem;
 `;
 
-function OrderSummaryRow({ summary }) {
+function OrderSummaryRow({ summary, onProceed }) {
   const navigate = useNavigate();
   const urlLocation = useLocation();
 
@@ -52,6 +52,11 @@ function OrderSummaryRow({ summary }) {
 
   if (location === 'Customer') {
     shippingAmount = 0;
+  }
+
+  function handleSubmit() {
+    onProceed();
+    //  navigate(navigatePath);
   }
 
   return (
@@ -85,11 +90,7 @@ function OrderSummaryRow({ summary }) {
       </TotalRow>
 
       <CheckoutBtn>
-        <Button
-          variation="primary"
-          size="large"
-          onClick={() => navigate(navigatePath)}
-        >
+        <Button variation="primary" size="large" onClick={() => handleSubmit()}>
           {buttonText}
         </Button>
       </CheckoutBtn>

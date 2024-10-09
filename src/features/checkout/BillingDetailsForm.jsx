@@ -3,6 +3,7 @@ import Form from '../../ui/Form';
 import FormRowVertical from '../../ui/FormRowVertical';
 import Input from '../../ui/Input';
 import CountryStateCity from '../../ui/CountryStateCity';
+import { useForm } from 'react-hook-form';
 
 const InputGroup = styled.div`
   display: flex;
@@ -10,31 +11,70 @@ const InputGroup = styled.div`
   width: 100%;
 `;
 
-function BillingDetailsForm() {
+const isValidPhone = (str) =>
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str
+  );
+
+function BillingDetailsForm({ register, errors }) {
   return (
     <Form>
       <InputGroup>
-        <FormRowVertical label="First Name">
-          <Input type="name" id="firstname" />
+        <FormRowVertical label="First Name" error={errors?.firstname?.message}>
+          <Input
+            type="text"
+            id="firstname"
+            {...register('firstname', {
+              required: 'This field is required',
+            })}
+          />
         </FormRowVertical>
 
-        <FormRowVertical label="Last Name">
-          <Input type="name" id="lastname" />
+        <FormRowVertical label="Last Name" error={errors?.lastname?.message}>
+          <Input
+            type="text"
+            id="lastname"
+            error={errors?.lastname?.message}
+            {...register('lastname', {
+              required: 'This field is required',
+            })}
+          />
         </FormRowVertical>
       </InputGroup>
 
       <InputGroup>
-        <FormRowVertical label="Phone Number">
-          <Input type="phonenumber" id="phonenumber" />
+        <FormRowVertical
+          label="Phone Number"
+          error={errors?.phonenumber?.message}
+        >
+          <Input
+            type="tel"
+            id="phonenumber"
+            {...register('phonenumber', {
+              required: 'This field is required',
+            })}
+          />
         </FormRowVertical>
 
-        <FormRowVertical label="Email Address">
-          <Input type="email" id="email" />
+        <FormRowVertical label="Email Address" error={errors?.email?.message}>
+          <Input
+            type="email"
+            id="email"
+            {...register('email', {
+              required: 'This field is required',
+            })}
+          />
         </FormRowVertical>
       </InputGroup>
 
-      <FormRowVertical label="Address">
-        <Input type="address" id="address" />
+      <FormRowVertical label="Address" error={errors?.address?.message}>
+        <Input
+          type="address"
+          id="address"
+          {...register('address', {
+            required: 'This field is required',
+          })}
+        />
       </FormRowVertical>
 
       <CountryStateCity />
