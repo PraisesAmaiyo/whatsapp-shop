@@ -195,8 +195,9 @@ function PaymentInfo() {
           sendOrderConfirmationEmail();
           toast.success(`Order ${orderID} placed successfully!`);
 
-          //  localStorage.removeItem('cartItems');
-          //  setCartItems([]);
+          localStorage.removeItem('shippingDetails');
+          localStorage.removeItem('cartItems');
+          setCartItems([]);
 
           //  sessionStorage.setItem('lastOrderID', orderID);
           localStorage.removeItem('orderID');

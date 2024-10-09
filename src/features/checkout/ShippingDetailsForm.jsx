@@ -46,6 +46,10 @@ const shippingLocations = [
     amount: 1500,
   },
   {
+    location: 'Warri',
+    amount: 1000,
+  },
+  {
     location: 'Ughelli',
     amount: 1000,
   },

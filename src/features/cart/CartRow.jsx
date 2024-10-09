@@ -82,6 +82,15 @@ const DeleteItem = styled.div`
 function CartRow({ cartItem }) {
   const { updateItemQuantity } = useAddItemToCart();
 
+  if (!cartItem) {
+    console.log('object');
+    return (
+      <>
+        <p>No Cart Item, return to shopping</p>
+      </>
+    );
+  }
+
   function handleQuantityChange(newQuantity) {
     updateItemQuantity(cartItem.id, newQuantity);
   }

@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import styled from 'styled-components';
+import Button from './Button';
 
 const StyledTable = styled.div`
   height: min-content;
@@ -89,7 +90,13 @@ function Row({ children, istotalrow }) {
 }
 
 function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+  if (!data.length)
+    if (!Array.isArray(data) || data.length === 0)
+      return (
+        <>
+          <Empty>No data to show at the moment</Empty>;
+        </>
+      );
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
